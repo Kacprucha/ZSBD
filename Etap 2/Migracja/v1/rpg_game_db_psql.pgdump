@@ -1,0 +1,3687 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict gwceHH3n8gxV4EiUrBigTNKHkzHU15rnCXKPp83Tbx5GueLjSO7dSNKnkL79JWI
+
+-- Dumped from database version 16.10 (Debian 16.10-1.pgdg13+1)
+-- Dumped by pg_dump version 16.10 (Debian 16.10-1.pgdg13+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: pg_cron; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_cron WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION pg_cron; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_cron IS 'Job scheduler for PostgreSQL';
+
+
+--
+-- Name: game_data; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA game_data;
+
+
+--
+-- Name: fn_autolevelup(); Type: FUNCTION; Schema: game_data; Owner: -
+--
+
+CREATE FUNCTION game_data.fn_autolevelup() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_exp_needed_for_next_level INT;
+BEGIN
+    IF NEW.Experience > OLD.Experience THEN
+        v_exp_needed_for_next_level := NEW.Level * 1000;
+
+        WHILE NEW.Experience >= v_exp_needed_for_next_level LOOP
+            NEW.Level := NEW.Level + 1;
+            NEW.Experience := NEW.Experience - v_exp_needed_for_next_level;
+            NEW.MaxHitPoints := NEW.MaxHitPoints + 10;
+            NEW.MaxMana := NEW.MaxMana + 5;
+
+            RAISE NOTICE 'Character % lvel-up to % level!', NEW.Name, NEW.Level;
+
+            v_exp_needed_for_next_level := NEW.Level * 1000;
+        END LOOP;
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+
+--
+-- Name: fn_calculatecharacterpower(character varying); Type: FUNCTION; Schema: game_data; Owner: -
+--
+
+CREATE FUNCTION game_data.fn_calculatecharacterpower(p_character_name character varying) RETURNS integer
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_power_level INT := 0;
+    v_base_stats_power INT := 0;
+    v_item_bonuses_power INT := 0;
+    v_character_level INT;
+    v_race_bonus INT;
+BEGIN
+    SELECT
+        c.Level,
+        (SELECT SUM(r.FightBonus + r.MagicBonus)
+         FROM game_data.Race_Character rc
+         JOIN game_data.Race r ON rc.Race_Name = r.Name
+         WHERE rc.Character_Name = c.Name)
+    INTO
+        v_character_level,
+        v_race_bonus
+    FROM
+        game_data.Character c
+    WHERE
+        c.Name = p_character_name;
+
+    v_base_stats_power := (v_character_level * 10) + (v_race_bonus * 5);
+
+    SELECT COALESCE(SUM(i.AtackBonus + i.DefenceBonus + i.MagicBonus), 0)
+    INTO v_item_bonuses_power
+    FROM game_data.Iteam_Character ic
+    JOIN game_data.Iteam i ON ic.Iteam_IteamID = i.IteamID
+    WHERE ic.Character_Name = p_character_name;
+
+    v_power_level := v_base_stats_power + v_item_bonuses_power;
+
+    RETURN v_power_level;
+END;
+$$;
+
+
+--
+-- Name: fn_cancharacterjoinguild(character varying, character varying); Type: FUNCTION; Schema: game_data; Owner: -
+--
+
+CREATE FUNCTION game_data.fn_cancharacterjoinguild(p_character_name character varying, p_guild_name character varying) RETURNS boolean
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_character_level INT;
+    v_min_guild_level INT;
+BEGIN
+    SELECT Level INTO v_character_level
+    FROM Character WHERE Name = p_character_name;
+
+    SELECT MinLevel INTO v_min_guild_level
+    FROM Guild WHERE Name = p_guild_name;
+
+    RETURN v_character_level >= v_min_guild_level;
+END;
+$$;
+
+
+--
+-- Name: fn_checkguildlevel(); Type: FUNCTION; Schema: game_data; Owner: -
+--
+
+CREATE FUNCTION game_data.fn_checkguildlevel() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_char_level INT;
+    v_guild_min_level INT;
+BEGIN
+    SELECT Level INTO v_char_level FROM Character WHERE Name = NEW.Character_Name;
+    SELECT MinLevel INTO v_guild_min_level FROM Guild WHERE Name = NEW.Guild_Name;
+
+    IF v_char_level < v_guild_min_level THEN
+        RAISE EXCEPTION 'Character "%" (Level: %) canot join guild "%", the minimum level to join it is: %.',
+            NEW.Character_Name, v_char_level, NEW.Guild_Name, v_guild_min_level;
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+
+--
+-- Name: fn_checkinventorylimit(); Type: FUNCTION; Schema: game_data; Owner: -
+--
+
+CREATE FUNCTION game_data.fn_checkinventorylimit() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_item_count INT;
+    v_limit INT := 50;
+BEGIN
+    SELECT COUNT(*) INTO v_item_count
+    FROM Iteam_Character WHERE Character_Name = NEW.Character_Name;
+
+    IF v_item_count >= v_limit THEN
+        RAISE EXCEPTION 'Canot equip iteam. Equipment of character "%" is full (Iteams limit: % ).', NEW.Character_Name, v_limit;
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+
+--
+-- Name: fn_getcharacterwinrate(character varying); Type: FUNCTION; Schema: game_data; Owner: -
+--
+
+CREATE FUNCTION game_data.fn_getcharacterwinrate(p_character_name character varying) RETURNS numeric
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_total_fights INT;
+    v_victories INT;
+BEGIN
+    SELECT COUNT(*) INTO v_total_fights FROM game_data.CombatLog WHERE Character_Name = p_character_name;
+
+    IF v_total_fights = 0 THEN
+        RETURN 0.00;
+    END IF;
+
+    SELECT COUNT(*) INTO v_victories FROM game_data.CombatLog WHERE Character_Name = p_character_name AND Victory = TRUE;
+
+    RETURN (v_victories::NUMERIC * 100.0 / v_total_fights)::NUMERIC(5, 2);
+END;
+$$;
+
+
+--
+-- Name: fn_getguildmembershipduration(character varying); Type: FUNCTION; Schema: game_data; Owner: -
+--
+
+CREATE FUNCTION game_data.fn_getguildmembershipduration(p_character_name character varying) RETURNS interval
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_duration INTERVAL;
+BEGIN
+    SELECT NOW() - JoinedAt
+    INTO v_duration
+    FROM game_data.GuildMember
+    WHERE Character_Name = p_character_name;
+
+    RETURN v_duration;
+END;
+$$;
+
+
+--
+-- Name: fn_grantcombatrewards(); Type: FUNCTION; Schema: game_data; Owner: -
+--
+
+CREATE FUNCTION game_data.fn_grantcombatrewards() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_monster_name VARCHAR;
+    v_gold_drop INT;
+    v_exp_drop INT;
+BEGIN
+    IF NEW.Victory = TRUE THEN
+        SELECT Name, GoldDrop, ExpDrop INTO v_monster_name, v_gold_drop, v_exp_drop
+        FROM Monster WHERE MonsterID = NEW.Monster_MonsterID;
+
+        UPDATE Character
+        SET Gold = Gold + v_gold_drop,
+            Experience = Experience + v_exp_drop
+        WHERE Name = NEW.Character_Name;
+
+        RAISE NOTICE 'Character % gained % gold and % EXP for slaying %.', NEW.Character_Name, v_gold_drop, v_exp_drop, v_monster_name;
+    END IF;
+
+    RETURN NULL; 
+END;
+$$;
+
+
+--
+-- Name: sp_addcharactertoguild(character varying, character varying); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_addcharactertoguild(IN p_character_name character varying, IN p_guild_name character varying)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_member_status_id INT;
+BEGIN
+    IF NOT fn_CanCharacterJoinGuild(p_character_name, p_guild_name) THEN
+        RAISE EXCEPTION 'Character "%" does not meet the requirements to join guild "%".', p_character_name, p_guild_name;
+    END IF;
+
+    SELECT MemberStatusID INTO v_member_status_id FROM MemberStatus WHERE MemberStatus = 'Member';
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Member status "Member" for some reason does not exist in the database.';
+    END IF;
+
+    INSERT INTO GuildMember(Character_Name, Guild_Name, MemberStatus_StatusID, IsBand)
+    VALUES (p_character_name, p_guild_name, v_member_status_id, FALSE);
+
+    RAISE NOTICE 'Character "%" has been successfully added to guild "%".', p_character_name, p_guild_name;
+END;
+$$;
+
+
+--
+-- Name: sp_addclasstocharacter(character varying, character varying); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_addclasstocharacter(IN p_character_name character varying, IN p_new_class_name character varying)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_character_exists BOOLEAN;
+    v_class_exists BOOLEAN;
+BEGIN
+    SELECT EXISTS(SELECT 1 FROM Character WHERE Name = p_character_name) INTO v_character_exists;
+    SELECT EXISTS(SELECT 1 FROM Class WHERE Name = p_new_class_name) INTO v_class_exists;
+
+    IF NOT v_character_exists THEN
+        RAISE EXCEPTION 'Character with name "%" does not exist.', p_character_name;
+    END IF;
+
+    IF NOT v_class_exists THEN
+        RAISE EXCEPTION 'Class with name "%" does not exist.', p_new_class_name;
+    END IF;
+
+    PERFORM 1 FROM Character_Class 
+    WHERE Character_Name = p_character_name AND Class_Name = p_new_class_name;
+    IF FOUND THEN
+        RAISE WARNING 'Character "%" already has class "%". No action taken.', p_character_name, p_new_class_name;
+        RETURN;
+    END IF;
+
+    INSERT INTO Character_Class (Character_Name, Class_Name)
+    VALUES (p_character_name, p_new_class_name)
+    ON CONFLICT (Character_Name, Class_Name) DO NOTHING;
+
+    RAISE NOTICE 'Class "%" has been successfully added to character "%".', p_new_class_name, p_character_name;
+END;
+$$;
+
+
+--
+-- Name: sp_addnewitem(character varying, character varying, integer, integer, integer, integer, integer, integer, integer); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_addnewitem(IN p_name character varying, IN p_description character varying, IN p_category_id integer, IN p_rarity_id integer, IN p_price integer, IN p_retail_price integer, IN p_atack_bonus integer DEFAULT 0, IN p_defence_bonus integer DEFAULT 0, IN p_magic_bonus integer DEFAULT 0)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_price <= p_retail_price THEN
+        RAISE EXCEPTION 'Error in business logic: Price (%) must be greater than Retail Price (%).', p_price, p_retail_price;
+    END IF;
+
+    INSERT INTO Iteam (Name, Description, ItemType_CategoryID, Rarity_RarityID, Price, RetailPrice, AtackBonus, DefenceBonus, MagicBonus)
+    VALUES (
+        p_name,
+        p_description,
+        p_category_id,
+        p_rarity_id,
+        p_price,
+        p_retail_price,
+        p_atack_bonus,
+        p_defence_bonus,
+        p_magic_bonus
+    );
+
+    RAISE NOTICE 'New item "%" has been added successfully.', p_name;
+END;
+$$;
+
+
+--
+-- Name: sp_addracetocharacter(character varying, character varying); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_addracetocharacter(IN p_character_name character varying, IN p_new_race_name character varying)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_character_exists BOOLEAN;
+    v_race_exists BOOLEAN;
+BEGIN
+    SELECT EXISTS(SELECT 1 FROM Character WHERE Name = p_character_name) INTO v_character_exists;
+    SELECT EXISTS(SELECT 1 FROM Race WHERE Name = p_new_race_name) INTO v_race_exists;
+
+    IF NOT v_character_exists THEN
+        RAISE EXCEPTION 'Character with name "%" does not exist.', p_character_name;
+    END IF;
+
+    IF NOT v_race_exists THEN
+        RAISE EXCEPTION 'Race with name "%" does not exist.', p_new_race_name;
+    END IF;
+
+    PERFORM 1 FROM Race_Character 
+    WHERE Character_Name = p_character_name AND Race_Name = p_new_race_name;
+    IF FOUND THEN
+        RAISE EXCEPTION 'Character "%" already has race heritage "%".', p_character_name, p_new_race_name;
+    END IF;
+
+    INSERT INTO Race_Character (Race_Name, Character_Name)
+    VALUES (p_new_race_name, p_character_name)
+    ON CONFLICT (Race_Name, Character_Name) DO NOTHING;
+
+    RAISE NOTICE 'Race heritage "%" has been successfully added to character "%".', p_new_race_name, p_character_name;
+END;
+$$;
+
+
+--
+-- Name: sp_admingiveitem(character varying, integer, integer); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_admingiveitem(IN p_character_name character varying, IN p_item_id integer, IN p_quantity integer DEFAULT 1)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    i INT;
+BEGIN
+    PERFORM 1 FROM Iteam WHERE IteamID = p_item_id;
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Item with ID % does not exist.', p_item_id;
+    END IF;
+
+    PERFORM 1 FROM Character WHERE Name = p_character_name;
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Character with name "%" does not exist.', p_character_name;
+    END IF;
+
+    FOR i IN 1..p_quantity LOOP
+        INSERT INTO Iteam_Character(Character_Name, Iteam_IteamID)
+        VALUES (p_character_name, p_item_id);
+    END LOOP;
+
+    RAISE NOTICE 'Gave % of item ID % to character "%".', p_quantity, p_item_id, p_character_name;
+END;
+$$;
+
+
+--
+-- Name: sp_assignmonstertolocation(integer, integer); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_assignmonstertolocation(IN p_monster_id integer, IN p_location_id integer)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_monster_exists BOOLEAN;
+    v_location_exists BOOLEAN;
+BEGIN
+    SELECT EXISTS(SELECT 1 FROM Monster WHERE MonsterID = p_monster_id) INTO v_monster_exists;
+    SELECT EXISTS(SELECT 1 FROM Location WHERE LocationID = p_location_id) INTO v_location_exists;
+
+    IF NOT v_monster_exists THEN
+        RAISE EXCEPTION 'Monster of ID % does not exist.', p_monster_id;
+    END IF;
+
+    IF NOT v_location_exists THEN
+        RAISE EXCEPTION 'Location of ID % does not exist.', p_location_id;
+    END IF;
+
+    INSERT INTO Monster_Location (Monster_MonsterID, Location_LocationID)
+    VALUES (p_monster_id, p_location_id)
+    ON CONFLICT (Monster_MonsterID, Location_LocationID) DO NOTHING;
+
+    RAISE NOTICE 'Monster with ID % has been assigned to location with ID %.', p_monster_id, p_location_id;
+END;
+$$;
+
+
+--
+-- Name: sp_completequest(character varying, integer); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_completequest(IN p_character_name character varying, IN p_quest_id integer)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_questlog_id INT;
+    v_current_status_name VARCHAR;
+    v_gold_reward INT;
+    v_exp_reward INT := 100;
+    v_reward_item_id INT;
+BEGIN
+    PERFORM Name FROM Character WHERE Name = p_character_name;
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Character "%" does not exist.', p_character_name;
+    END IF;
+
+    PERFORM QuestID FROM Quest WHERE QuestID = p_quest_id;
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Quest with ID % does not exist.', p_quest_id;
+    END IF;
+
+    SELECT
+        ql.QuestLogID,
+        qs.StatusName
+    INTO
+        v_questlog_id,
+        v_current_status_name
+    FROM QuestLog ql
+    JOIN QuestStatus qs ON ql.QuestStatus_StatusID = qs.StatusID
+    WHERE ql.Character_Name = p_character_name AND ql.Quest_QuestID = p_quest_id
+    ORDER BY ql.StartTime DESC 
+    LIMIT 1;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Character "%" never atempted quest with ID % or quest log entry not found.', p_character_name, p_quest_id;
+    END IF;
+
+    IF v_current_status_name <> 'In_Progress' THEN
+        RAISE EXCEPTION 'Cannot complete quest with ID % for character "%". Current status is "%", expected "In_Progress".', p_quest_id, p_character_name, v_current_status_name;
+    END IF;
+
+    SELECT GoldReward, Iteam_IteamID
+    INTO v_gold_reward, v_reward_item_id
+    FROM Quest
+    WHERE QuestID = p_quest_id;
+
+    UPDATE QuestLog
+    SET
+        QuestStatus_StatusID = (SELECT StatusID FROM QuestStatus WHERE StatusName = 'Completed'),
+        EndTime = NOW()
+    WHERE QuestLogID = v_questlog_id;
+
+    UPDATE Character
+    SET
+        Gold = Gold + v_gold_reward,
+        Experience = Experience + v_exp_reward
+    WHERE Name = p_character_name;
+
+    IF v_reward_item_id IS NOT NULL THEN
+        INSERT INTO Iteam_Character (Character_Name, Iteam_IteamID)
+        VALUES (p_character_name, v_reward_item_id);
+    END IF;
+
+    RAISE NOTICE 'Character "%" has successfully completed quest with ID %. Rewards: % gold, % experience, item ID: %.',
+        p_character_name, p_quest_id, v_gold_reward, v_exp_reward,
+        COALESCE(v_reward_item_id::TEXT, 'None');
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE WARNING 'An error occurred while completing the quest for character "%".', p_character_name;
+        RAISE WARNING 'SQLSTATE: %, Message: %', SQLSTATE, SQLERRM;
+END;
+$$;
+
+
+--
+-- Name: sp_createcharacter(character varying, character varying, character varying[], character varying); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_createcharacter(IN p_player_username character varying, IN p_character_name character varying, IN p_race_names character varying[], IN p_class_name character varying)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_base_health INT;
+    v_base_mana INT;
+    v_race_name VARCHAR;
+BEGIN
+    PERFORM Name FROM game_data.Character WHERE Name = p_character_name;
+    IF FOUND THEN
+        RAISE EXCEPTION 'Character "%" already exists. Choose a different name.', p_character_name;
+    END IF;
+
+    SELECT BaseHealth, BaseMana INTO v_base_health, v_base_mana FROM game_data.Class WHERE Name = p_class_name;
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Class "%" not not exist. Cannot create character.', p_class_name;
+    END IF;
+
+    IF cardinality(p_race_names) = 0 THEN
+        RAISE EXCEPTION 'At least one race must be specified to create a character.';
+    END IF;
+
+    FOREACH v_race_name IN ARRAY p_race_names
+    LOOP
+        IF NOT EXISTS (SELECT 1 FROM game_data.Race WHERE Name = v_race_name) THEN
+            RAISE EXCEPTION 'Race "%" does not exist. Cannot create character with invalid races.', v_race_name;
+        END IF;
+    END LOOP;
+
+    INSERT INTO game_data.Character (Name, IsNPC, Level, MaxHitPoints, MaxMana, Gold, Experience, Player_Userame)
+    VALUES (
+        p_character_name,
+        FALSE,          
+        1,              
+        v_base_health,  
+        v_base_mana,    
+        50,             
+        0,              
+        p_player_username
+    );
+
+    INSERT INTO game_data.Character_Class (Character_Name, Class_Name)
+    VALUES (p_character_name, p_class_name);
+
+    FOREACH v_race_name IN ARRAY p_race_names
+    LOOP
+        INSERT INTO game_data.Race_Character (Race_Name, Character_Name)
+        VALUES (v_race_name, p_character_name);
+    END LOOP;
+
+    RAISE NOTICE 'Character % was successfully created for player %.', p_character_name, p_player_username;
+END;
+$$;
+
+
+--
+-- Name: sp_createclass(character varying, character varying, integer, integer); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_createclass(IN p_name character varying, IN p_description character varying, IN p_base_health integer, IN p_base_mana integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_base_health <= 0 OR p_base_mana < 0 THEN
+        RAISE EXCEPTION 'Base health must be positive and base mana cannot be negative.';
+    END IF;
+
+    PERFORM 1 FROM Class WHERE Name = p_name;
+    IF FOUND THEN
+        RAISE EXCEPTION 'Class with the name "%" already exists. No action taken.', p_name;
+    END IF;
+
+    INSERT INTO Class (Name, Description, BaseHealth, BaseMana)
+    VALUES (p_name, p_description, p_base_health, p_base_mana)
+    ON CONFLICT (Name) DO NOTHING;
+
+    RAISE NOTICE 'Class "%" has been successfully created.', p_name;
+END;
+$$;
+
+
+--
+-- Name: sp_createguild(character varying, character varying, integer); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_createguild(IN p_guild_name character varying, IN p_leader_name character varying, IN p_min_level integer)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_leader_exists INT;
+    v_leader_in_guild INT;
+    v_member_status_id INT;
+BEGIN
+    SELECT COUNT(*) INTO v_leader_exists FROM Character WHERE Name = p_leader_name AND IsNPC = FALSE;
+    IF v_leader_exists = 0 THEN
+        RAISE EXCEPTION 'Character "%" does not exist or is an NPC and cannot lead a guild.', p_leader_name;
+    END IF;
+
+    SELECT COUNT(*) INTO v_leader_in_guild FROM GuildMember WHERE Character_Name = p_leader_name;
+    IF v_leader_in_guild > 0 THEN
+        RAISE EXCEPTION 'Character "%" is already a member of a guild and cannot lead another guild.', p_leader_name;
+    END IF;
+
+    INSERT INTO Guild (Name, Leader_Name, MinLevel)
+    VALUES (p_guild_name, p_leader_name, p_min_level);
+
+    SELECT MemberStatusID INTO v_member_status_id FROM MemberStatus WHERE MemberStatus = 'Leader';
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Member status "Leader" some how does not exist in the database.';
+    END IF;
+
+    INSERT INTO GuildMember (Character_Name, Guild_Name, MemberStatus_StatusID, IsBand, Contribution)
+    VALUES (p_leader_name, p_guild_name, v_member_status_id, FALSE, 0);
+
+    RAISE NOTICE 'Guild "%" has been successfully created with leader "%".', p_guild_name, p_leader_name;
+END;
+$$;
+
+
+--
+-- Name: sp_createmonster(character varying, integer, integer, integer, integer, integer, integer); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_createmonster(IN p_name character varying, IN p_level integer, IN p_hit_points integer, IN p_attack integer, IN p_defence integer, IN p_exp_drop integer DEFAULT 0, IN p_gold_drop integer DEFAULT 0)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_level < 1 OR p_level > 100 THEN
+        RAISE EXCEPTION 'Level of the monster must be between 1 and 100.';
+    END IF;
+
+    IF p_hit_points <= 0 OR p_attack < 0 OR p_defence < 0 THEN
+        RAISE EXCEPTION 'Statistics (Hit Points, Attack, Defence) must be positive values.';
+    END IF;
+
+    IF EXISTS (SELECT 1 FROM Monster WHERE Name = p_name) THEN
+        RAISE EXCEPTION 'Monster with the name "%" already exists.', p_name;
+    END IF;
+
+    INSERT INTO Monster (Name, Level, HitPoints, Atack, Defence, ExpDrop, GoldDrop)
+    VALUES (p_name, p_level, p_hit_points, p_attack, p_defence, p_exp_drop, p_gold_drop);
+
+    RAISE NOTICE 'Monster "%" of level % has been successfully created.', p_name, p_level;
+END;
+$$;
+
+
+--
+-- Name: sp_createnpc(character varying, character varying, character varying, integer, integer, integer, integer, integer, integer[]); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_createnpc(IN p_character_name character varying, IN p_race_name character varying, IN p_class_name character varying, IN p_health integer DEFAULT 0, IN p_mana integer DEFAULT 0, IN p_level integer DEFAULT 1, IN p_gold integer DEFAULT 50, IN p_experience integer DEFAULT 0, IN p_iteams integer[] DEFAULT ARRAY[]::integer[])
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_base_health INT;
+    v_base_mana INT;
+    v_iteam_id INT;
+    v_item_count INT;
+BEGIN
+    PERFORM Name FROM Character WHERE Name = p_character_name;
+    IF FOUND THEN
+        RAISE EXCEPTION 'Character "%" already exists. Choose a different name.', p_character_name;
+    END IF;
+
+    SELECT BaseHealth, BaseMana INTO v_base_health, v_base_mana FROM Class WHERE Name = p_class_name;
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Class "%" not not exist. Cannot create character.', p_class_name;
+    END IF;
+
+    IF cardinality(p_iteams) > 0 THEN
+        SELECT COUNT(*) INTO v_item_count FROM Iteam WHERE IteamID = ANY(p_iteams);
+        IF v_item_count <> cardinality(p_iteams) THEN
+            RAISE EXCEPTION 'One or more items in the provided list do not exist. Cannot create character with invalid items.';
+        END IF;
+    END IF;
+
+    IF p_health >= v_base_health THEN
+        v_base_health := p_health;
+    END IF;
+
+    IF p_mana >= v_base_mana THEN
+        v_base_mana := p_mana;
+    END IF;
+
+    INSERT INTO Character (Name, IsNPC, Level, MaxHitPoints, MaxMana, Gold, Experience, Player_Userame)
+    VALUES (
+        p_character_name,
+        TRUE,          
+        p_level,              
+        v_base_health,  
+        v_base_mana,    
+        p_gold,             
+        p_experience,              
+        NULL
+    );
+
+    INSERT INTO Race_Character (Race_Name, Character_Name)
+    VALUES (p_race_name, p_character_name);
+
+    INSERT INTO Character_Class (Character_Name, Class_Name)
+    VALUES (p_character_name, p_class_name);
+
+    FOREACH v_iteam_id IN ARRAY p_iteams LOOP
+        INSERT INTO Iteam_Character (Iteam_IteamID, Character_Name)
+        VALUES (v_iteam_id, p_character_name);
+    END LOOP;
+
+    RAISE NOTICE 'NPC % was successfully created.', p_character_name;
+END;
+$$;
+
+
+--
+-- Name: sp_createquest(character varying, character varying, character varying, integer, character varying, character varying); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_createquest(IN p_name character varying, IN p_description character varying, IN p_giver character varying, IN p_gold_reward integer, IN p_location_name character varying, IN p_reward_item_name character varying DEFAULT NULL::character varying)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_location_id INT;
+    v_item_id INT;
+BEGIN
+    SELECT LocationID INTO v_location_id FROM Location WHERE Name = p_location_name;
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Location of the name "%" does not exist.', p_location_name;
+    END IF;
+
+    IF p_reward_item_name IS NOT NULL THEN
+        SELECT IteamID INTO v_item_id FROM Iteam WHERE Name = p_reward_item_name;
+        IF NOT FOUND THEN
+            RAISE EXCEPTION 'Iteam of the name "%" does not exist.', p_reward_item_name;
+        END IF;
+    END IF;
+
+    INSERT INTO Quest(Name, Description, Giver, GoldReward, Location_LocationID, Iteam_IteamID)
+    VALUES (p_name, p_description, p_giver, p_gold_reward, v_location_id, v_item_id);
+
+    RAISE NOTICE 'Quest "%" has been successfully created.', p_name;
+END;
+$$;
+
+
+--
+-- Name: sp_createrace(character varying, character varying, integer, integer); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_createrace(IN p_name character varying, IN p_description character varying, IN p_fight_bonus integer, IN p_magic_bonus integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_fight_bonus < 0 OR p_magic_bonus < 0 THEN
+        RAISE EXCEPTION 'Fight bonus and magic bonus cannot be negative.';
+    END IF;
+
+    PERFORM 1 FROM Race WHERE Name = p_name;
+    IF FOUND THEN
+        RAISE EXCEPTION 'Race with the name "%" already exists. No action taken.', p_name;
+    END IF;
+
+    INSERT INTO Race (Name, Description, FightBonus, MagicBonus)
+    VALUES (p_name, p_description, p_fight_bonus, p_magic_bonus)
+    ON CONFLICT (Name) DO NOTHING;
+
+    RAISE NOTICE 'Race "%" has been successfully created.', p_name;
+END;
+$$;
+
+
+--
+-- Name: sp_createskill(character varying, character varying, integer, integer, integer); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_createskill(IN p_name character varying, IN p_description character varying, IN p_damage integer DEFAULT 0, IN p_cooldown integer DEFAULT 0, IN p_mana_cost integer DEFAULT 0)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_damage < 0 OR p_cooldown < 0 OR p_mana_cost < 0 THEN
+        RAISE EXCEPTION 'Skill attributes cannot be negative.';
+    END IF;
+
+    PERFORM 1 FROM Skill WHERE Name = p_name;
+    IF FOUND THEN
+        RAISE EXCEPTION 'Skill with the name "%" already exists. No action taken.', p_name;
+    END IF;
+
+    INSERT INTO Skill (Name, Description, Damage, CoolDown, ManaCost)
+    VALUES (p_name, p_description, p_damage, p_cooldown, p_mana_cost);
+
+    RAISE NOTICE 'Skill "%" has been successfully created.', p_name;
+END;
+$$;
+
+
+--
+-- Name: sp_learnskill(character varying, integer); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_learnskill(IN p_character_name character varying, IN p_skill_id integer)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_cant_learn BOOLEAN := FALSE;
+    v_skill_name VARCHAR;
+BEGIN
+    SELECT EXISTS (
+        SELECT 1 
+        FROM Class_Skill cs 
+        WHERE cs.Skill_SkillID = p_skill_id AND cs.Class_Name NOT IN (
+            SELECT Class_Name 
+            FROM Character_Class 
+            WHERE Character_Name = p_character_name
+        ) 
+    )
+    AND NOT EXISTS (
+        SELECT 1 
+        FROM Class_Skill cs JOIN Character_Class cc ON cs.Class_Name = cc.Class_Name 
+        WHERE cc.Character_Name = p_character_name AND cs.Skill_SkillID = p_skill_id
+    )
+    INTO v_cant_learn;
+
+
+    IF v_cant_learn THEN
+        RAISE EXCEPTION 'Character "%" canot learn skill that is associated with classes they do not belong to.', p_character_name;
+    END IF;
+
+    SELECT Name FROM Skill WHERE SkillID = p_skill_id INTO v_skill_name;
+
+    PERFORM 1 FROM Skill_Character
+    WHERE Character_Name=p_character_name AND Skill_SkillID=p_skill_id;
+    IF FOUND THEN
+        RAISE EXCEPTION 'Character "%" already knows skill %.', p_character_name, v_skill_name;
+
+    END IF;
+
+    INSERT INTO Skill_Character(Skill_SkillID, Character_Name)
+    VALUES (p_skill_id, p_character_name)
+    ON CONFLICT (Skill_SkillID, Character_Name) DO NOTHING;
+
+    RAISE NOTICE 'Character "%" has successfully learned skill %.', p_character_name, v_skill_name;
+END;
+$$;
+
+
+--
+-- Name: sp_registerplayer(character varying, character varying, character varying); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_registerplayer(IN p_username character varying, IN p_email character varying, IN p_password_text character varying)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_active_status_id INT;
+BEGIN
+    PERFORM Username FROM Player WHERE Username = p_username;
+    IF FOUND THEN
+        RAISE EXCEPTION 'Username "%" is already taken. Choose a different username.', p_username;
+    END IF;
+
+    SELECT StatusID INTO v_active_status_id FROM AccountStatus WHERE StatusName = 'Active';
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Somehow, the "Active" account status does not exist. Cannot register new player.';
+    END IF;
+
+    INSERT INTO Player (Username, Email, Password_hash, AccountStatus_StatusID)
+    VALUES (p_username, p_email, convert_to(p_password_text, 'UTF8'), v_active_status_id);
+
+    RAISE NOTICE 'Player "%" has been successfully registered.', p_username;
+END;
+$$;
+
+
+--
+-- Name: sp_runweeklymaintenance(); Type: PROCEDURE; Schema: game_data; Owner: -
+--
+
+CREATE PROCEDURE game_data.sp_runweeklymaintenance()
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    v_rows_archived INT;
+    v_top_player_1 VARCHAR;
+    v_top_player_2 VARCHAR;
+    v_top_player_3 VARCHAR;
+    v_top_players_array VARCHAR[]; 
+    v_reward_amount INT := 500;
+    v_summary TEXT;
+    v_execution_id UUID := gen_random_uuid();
+BEGIN
+    v_execution_id := gen_random_uuid();
+
+    INSERT INTO game_data.ProcedureExecutionLog (ExecutionID, ProcedureName, LogLevel_LogLevelID, Message)
+    VALUES (v_execution_id, 'sp_RunWeeklyMaintenance', 1, 'Beginigng weekly maintenance');
+
+    RAISE NOTICE 'Archivising old logs form CombatLog and analizing character activity...';
+
+    WITH moved_rows AS (
+        DELETE FROM game_data.CombatLog
+        WHERE CombatLogID IN (SELECT CombatLogID FROM game_data.CombatLog ORDER BY CombatLogID ASC LIMIT 100000)
+        RETURNING * 
+    ),
+    archived_data AS (
+        INSERT INTO game_data.CombatLog_Archive SELECT * FROM moved_rows
+        RETURNING * 
+    ),
+    activity_analysis AS (
+        SELECT Character_Name, COUNT(*) AS fight_count
+        FROM archived_data
+        GROUP BY Character_Name
+        ORDER BY fight_count DESC
+        LIMIT 3
+    )
+    SELECT ARRAY_AGG(Character_Name)
+    INTO v_top_players_array
+    FROM activity_analysis;
+
+    IF v_top_players_array IS NOT NULL THEN
+        v_top_player_1 := v_top_players_array[1];
+        v_top_player_2 := v_top_players_array[2];
+        v_top_player_3 := v_top_players_array[3];
+    END IF;
+
+    SELECT COUNT(*) INTO v_rows_archived FROM game_data.CombatLog_Archive WHERE CombatLogID > (SELECT COALESCE(MAX(CombatLogID), 0) FROM game_data.CombatLog_Archive) - 100000;
+
+    INSERT INTO game_data.ProcedureExecutionLog (ExecutionID, ProcedureName, LogLevel_LogLevelID, Message)
+    VALUES (v_execution_id, 'sp_RunWeeklyMaintenance', 1, format('Archivised %s rows form CombatLog.', v_rows_archived));
+
+    RAISE NOTICE 'Rewarding charaxter based on analysis of archived data...';
+    IF v_top_player_1 IS NOT NULL THEN
+        UPDATE game_data.Character SET Gold = Gold + v_reward_amount WHERE Name = v_top_player_1;
+    END IF;
+    IF v_top_player_2 IS NOT NULL THEN
+        UPDATE game_data.Character SET Gold = Gold + v_reward_amount WHERE Name = v_top_player_2;
+    END IF;
+    IF v_top_player_3 IS NOT NULL THEN
+        UPDATE game_data.Character SET Gold = Gold + v_reward_amount WHERE Name = v_top_player_3;
+    END IF;
+
+    RAISE NOTICE 'Resetting weekly guild Contribution...';
+    UPDATE game_data.GuildMember SET Contribution = 0;
+    
+    v_summary := format('Completed successfully. Approximately %s rows archived. Players awarded based on archived data: %s, %s, %s.',
+                        v_rows_archived,
+                        COALESCE(v_top_player_1, 'N/A'),
+                        COALESCE(v_top_player_2, 'N/A'),
+                        COALESCE(v_top_player_3, 'N/A'));
+
+    INSERT INTO game_data.ProcedureExecutionLog (ExecutionID, ProcedureName, LogLevel_LogLevelID, Message)
+    VALUES (v_execution_id, 'sp_RunWeeklyMaintenance', 1, v_summary);
+
+    RAISE NOTICE 'Weekly maintenance completed.';
+END;
+$$;
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: accountstatus; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.accountstatus (
+    statusid integer NOT NULL,
+    statusname character varying(10) NOT NULL
+);
+
+
+--
+-- Name: accountstatus_statusid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.accountstatus_statusid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: accountstatus_statusid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.accountstatus_statusid_seq OWNED BY game_data.accountstatus.statusid;
+
+
+--
+-- Name: character; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data."character" (
+    name character varying(10) NOT NULL,
+    isnpc boolean NOT NULL,
+    level integer DEFAULT 1,
+    maxhitpoints integer NOT NULL,
+    maxmana integer NOT NULL,
+    gold integer DEFAULT 0 NOT NULL,
+    experience integer DEFAULT 0 NOT NULL,
+    player_userame character varying(10),
+    CONSTRAINT character_level_check CHECK (((level >= 1) AND (level <= 100)))
+);
+
+
+--
+-- Name: guild; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.guild (
+    name character varying(20) NOT NULL,
+    leader_name character varying(10) NOT NULL,
+    guildgold integer DEFAULT 0 NOT NULL,
+    minlevel integer DEFAULT 1 NOT NULL,
+    reputation integer DEFAULT 0 NOT NULL,
+    CONSTRAINT guild_minlevel_check CHECK (((minlevel >= 1) AND (minlevel <= 100)))
+);
+
+
+--
+-- Name: iteam; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.iteam (
+    iteamid integer NOT NULL,
+    name character varying(25) NOT NULL,
+    description character varying(70) NOT NULL,
+    itemtype_categoryid integer NOT NULL,
+    rarity_rarityid integer NOT NULL,
+    price integer NOT NULL,
+    retailprice integer NOT NULL,
+    atackbonus integer DEFAULT 0,
+    defencebonus integer DEFAULT 0,
+    magicbonus integer DEFAULT 0
+);
+
+
+--
+-- Name: iteam_character; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.iteam_character (
+    inventoryid integer NOT NULL,
+    iteam_iteamid integer,
+    character_name character varying(10)
+);
+
+
+--
+-- Name: player; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.player (
+    username character varying(10) NOT NULL,
+    email character varying(20),
+    password_hash bytea NOT NULL,
+    accountstatus_statusid integer NOT NULL
+);
+
+
+--
+-- Name: rarity; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.rarity (
+    rarityid integer NOT NULL,
+    rarityname character varying(10) NOT NULL
+);
+
+
+--
+-- Name: admin_balance_overview; Type: VIEW; Schema: game_data; Owner: -
+--
+
+
+
+
+--
+-- Name: combatlog; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.combatlog (
+    combatlogid integer NOT NULL,
+    character_name character varying(10) NOT NULL,
+    monster_monsterid integer,
+    location_locationid integer,
+    victory boolean NOT NULL,
+    dmgtaken integer,
+    dmgdelt integer
+);
+
+
+--
+-- Name: location; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.location (
+    locationid integer NOT NULL,
+    name character varying(15),
+    locatiotype_typeid integer NOT NULL,
+    issafezone boolean DEFAULT false,
+    recomenedlevel integer NOT NULL,
+    monsterdensity integer DEFAULT 0 NOT NULL,
+    CONSTRAINT location_monsterdensity_check CHECK (((monsterdensity >= 0) AND (monsterdensity <= 100)))
+);
+
+
+--
+-- Name: monster; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.monster (
+    monsterid integer NOT NULL,
+    name character varying(20) NOT NULL,
+    level integer DEFAULT 1,
+    hitpoints integer DEFAULT 5 NOT NULL,
+    atack integer DEFAULT 1 NOT NULL,
+    defence integer DEFAULT 1 NOT NULL,
+    expdrop integer DEFAULT 0,
+    golddrop integer DEFAULT 0,
+    CONSTRAINT monster_level_check CHECK (((level >= 1) AND (level <= 100)))
+);
+
+
+--
+-- Name: admin_combat_logs; Type: VIEW; Schema: game_data; Owner: -
+--
+
+
+
+
+--
+-- Name: questlog; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.questlog (
+    questlogid integer NOT NULL,
+    character_name character varying(10) NOT NULL,
+    quest_questid integer NOT NULL,
+    queststatus_statusid integer NOT NULL,
+    atemptnumber integer NOT NULL,
+    starttime timestamp without time zone NOT NULL,
+    endtime timestamp without time zone
+);
+
+
+--
+-- Name: queststatus; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.queststatus (
+    statusid integer NOT NULL,
+    statusname character varying(15) NOT NULL
+);
+
+
+--
+-- Name: admin_player_activity; Type: VIEW; Schema: game_data; Owner: -
+--
+
+
+
+
+--
+-- Name: quest; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.quest (
+    questid integer NOT NULL,
+    name character varying(25) NOT NULL,
+    description character varying(70) NOT NULL,
+    giver character varying(15) NOT NULL,
+    goldreward integer DEFAULT 0,
+    iteam_iteamid integer,
+    location_locationid integer NOT NULL
+);
+
+
+--
+-- Name: admin_quest_statistics; Type: VIEW; Schema: game_data; Owner: -
+--
+
+
+
+
+--
+-- Name: character_class; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.character_class (
+    character_name character varying(10) NOT NULL,
+    class_name character varying(10) NOT NULL
+);
+
+
+--
+-- Name: class; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.class (
+    name character varying(10) NOT NULL,
+    description character varying(70) NOT NULL,
+    basemana integer NOT NULL,
+    basehealth integer NOT NULL
+);
+
+
+--
+-- Name: class_skill; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.class_skill (
+    class_name character varying(10) NOT NULL,
+    skill_skillid integer NOT NULL
+);
+
+
+--
+-- Name: combatlog_combatlogid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.combatlog_combatlogid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: combatlog_combatlogid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.combatlog_combatlogid_seq OWNED BY game_data.combatlog.combatlogid;
+
+
+--
+-- Name: combatlog_archive; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.combatlog_archive (
+    combatlogid integer DEFAULT nextval('game_data.combatlog_combatlogid_seq'::regclass) NOT NULL,
+    character_name character varying(10) NOT NULL,
+    monster_monsterid integer,
+    location_locationid integer,
+    victory boolean NOT NULL,
+    dmgtaken integer,
+    dmgdelt integer
+);
+
+
+--
+-- Name: developer_balance_test_results; Type: VIEW; Schema: game_data; Owner: -
+--
+
+CREATE VIEW game_data.developer_balance_test_results AS
+SELECT
+    NULL::text AS analysis_type,
+    NULL::character varying AS entity_name,
+    NULL::bigint AS total_fights_recorded,
+    NULL::numeric AS win_rate_percent,
+    NULL::numeric AS avg_damage_dealt,
+    NULL::numeric AS avg_damage_taken,
+    NULL::text AS summary;
+
+
+--
+-- Name: developer_economic_flow; Type: VIEW; Schema: game_data; Owner: -
+--
+
+CREATE VIEW game_data.developer_economic_flow AS
+SELECT
+    NULL::text AS source_type,
+    NULL::character varying AS source_name,
+    NULL::integer AS gold_per_instance,
+    NULL::bigint AS times_completed,
+    NULL::bigint AS total_gold_generated;
+
+
+--
+-- Name: developer_item_distribution; Type: VIEW; Schema: game_data; Owner: -
+--
+
+CREATE VIEW game_data.developer_item_distribution AS
+SELECT
+    NULL::character varying(25) AS item_name,
+    NULL::character varying(15) AS item_category,
+    NULL::character varying(10) AS item_rarity,
+    NULL::bigint AS total_owned_by_players,
+    NULL::integer AS purchase_price;
+
+
+--
+-- Name: guildmember; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.guildmember (
+    character_name character varying(10) NOT NULL,
+    guild_name character varying(20) NOT NULL,
+    memberstatus_statusid integer NOT NULL,
+    isband boolean NOT NULL,
+    joinedat timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    contribution integer DEFAULT 0 NOT NULL
+);
+
+
+--
+-- Name: iteam_character_inventoryid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.iteam_character_inventoryid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: iteam_character_inventoryid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.iteam_character_inventoryid_seq OWNED BY game_data.iteam_character.inventoryid;
+
+
+--
+-- Name: iteam_iteamid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.iteam_iteamid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: iteam_iteamid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.iteam_iteamid_seq OWNED BY game_data.iteam.iteamid;
+
+
+--
+-- Name: iteam_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.iteam_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: iteamtype_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.iteamtype_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: itemtype; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.itemtype (
+    typeid integer NOT NULL,
+    category character varying(15) NOT NULL
+);
+
+
+--
+-- Name: itemtype_typeid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.itemtype_typeid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: itemtype_typeid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.itemtype_typeid_seq OWNED BY game_data.itemtype.typeid;
+
+
+--
+-- Name: location_locationid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.location_locationid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: location_locationid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.location_locationid_seq OWNED BY game_data.location.locationid;
+
+
+--
+-- Name: location_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.location_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: locationtype; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.locationtype (
+    typeid integer NOT NULL,
+    typename character varying(10) NOT NULL
+);
+
+
+--
+-- Name: locationtype_typeid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.locationtype_typeid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: locationtype_typeid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.locationtype_typeid_seq OWNED BY game_data.locationtype.typeid;
+
+
+--
+-- Name: loglevel; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.loglevel (
+    loglevelid integer NOT NULL,
+    loglevelname character varying(10) NOT NULL
+);
+
+
+--
+-- Name: loglevel_loglevelid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.loglevel_loglevelid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: loglevel_loglevelid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.loglevel_loglevelid_seq OWNED BY game_data.loglevel.loglevelid;
+
+
+--
+-- Name: memberstatus; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.memberstatus (
+    memberstatusid integer NOT NULL,
+    memberstatus character varying(10) NOT NULL
+);
+
+
+--
+-- Name: memberstatus_memberstatusid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.memberstatus_memberstatusid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: memberstatus_memberstatusid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.memberstatus_memberstatusid_seq OWNED BY game_data.memberstatus.memberstatusid;
+
+
+--
+-- Name: monster_location; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.monster_location (
+    monster_monsterid integer NOT NULL,
+    location_locationid integer NOT NULL
+);
+
+
+--
+-- Name: monster_monsterid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.monster_monsterid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: monster_monsterid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.monster_monsterid_seq OWNED BY game_data.monster.monsterid;
+
+
+--
+-- Name: monster_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.monster_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: race; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.race (
+    name character varying(10) NOT NULL,
+    description character varying(70) NOT NULL,
+    fightbonus integer NOT NULL,
+    magicbonus integer NOT NULL
+);
+
+
+--
+-- Name: race_character; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.race_character (
+    race_name character varying(10) NOT NULL,
+    character_name character varying(10) NOT NULL
+);
+
+
+--
+-- Name: player_character_summary; Type: VIEW; Schema: game_data; Owner: -
+--
+
+
+
+
+--
+-- Name: player_inventory_view; Type: VIEW; Schema: game_data; Owner: -
+--
+
+CREATE VIEW game_data.player_inventory_view AS
+ SELECT p.username AS owner_username,
+    ic.character_name,
+    i.name AS item_name,
+    count(i.iteamid) AS quantity,
+    it.category AS item_category,
+    r.rarityname AS item_rarity,
+    i.description,
+    i.atackbonus,
+    i.defencebonus,
+    i.magicbonus,
+    i.price AS purchase_price,
+    i.retailprice AS sell_price,
+        CASE
+            WHEN (q.name IS NOT NULL) THEN ('Nagroda z zadania: '::text || (q.name)::text)
+            ELSE 'Loot / Sklep'::text
+        END AS item_source
+   FROM ((((((game_data.iteam_character ic
+     JOIN game_data.iteam i ON ((ic.iteam_iteamid = i.iteamid)))
+     JOIN game_data.rarity r ON ((i.rarity_rarityid = r.rarityid)))
+     JOIN game_data.itemtype it ON ((i.itemtype_categoryid = it.typeid)))
+     JOIN game_data."character" c ON (((ic.character_name)::text = (c.name)::text)))
+     JOIN game_data.player p ON (((c.player_userame)::text = (p.username)::text)))
+     LEFT JOIN game_data.quest q ON ((i.iteamid = q.iteam_iteamid)))
+  GROUP BY p.username, ic.character_name, i.name, it.category, r.rarityname, i.description, i.atackbonus, i.defencebonus, i.magicbonus, i.price, i.retailprice, q.name;
+
+
+--
+-- Name: player_location_explored; Type: VIEW; Schema: game_data; Owner: -
+--
+
+
+
+
+--
+-- Name: player_quest_log; Type: VIEW; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: skill; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.skill (
+    skillid integer NOT NULL,
+    name character varying(20) NOT NULL,
+    description character varying(70) NOT NULL,
+    damage integer DEFAULT 0,
+    cooldown integer DEFAULT 0,
+    manacost integer DEFAULT 0
+);
+
+
+--
+-- Name: skill_character; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.skill_character (
+    skill_skillid integer NOT NULL,
+    character_name character varying(10) NOT NULL
+);
+
+
+--
+-- Name: player_skill_tree; Type: VIEW; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: procedureexecutionlog; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.procedureexecutionlog (
+    logid integer NOT NULL,
+    executionid uuid DEFAULT gen_random_uuid(),
+    procedurename character varying(100),
+    logtimestamp timestamp with time zone DEFAULT now(),
+    loglevel_loglevelid integer NOT NULL,
+    message text
+);
+
+
+--
+-- Name: procedureexecutionlog_logid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.procedureexecutionlog_logid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: procedureexecutionlog_logid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.procedureexecutionlog_logid_seq OWNED BY game_data.procedureexecutionlog.logid;
+
+
+--
+-- Name: quest_guild; Type: TABLE; Schema: game_data; Owner: -
+--
+
+CREATE TABLE game_data.quest_guild (
+    quest_questid integer NOT NULL,
+    guild_name character varying(20) NOT NULL
+);
+
+
+--
+-- Name: quest_questid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.quest_questid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: quest_questid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.quest_questid_seq OWNED BY game_data.quest.questid;
+
+
+--
+-- Name: quest_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.quest_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: questlog_questlogid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.questlog_questlogid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: questlog_questlogid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.questlog_questlogid_seq OWNED BY game_data.questlog.questlogid;
+
+
+--
+-- Name: queststatus_statusid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.queststatus_statusid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: queststatus_statusid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.queststatus_statusid_seq OWNED BY game_data.queststatus.statusid;
+
+
+--
+-- Name: rarity_rarityid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.rarity_rarityid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rarity_rarityid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.rarity_rarityid_seq OWNED BY game_data.rarity.rarityid;
+
+
+--
+-- Name: skill_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.skill_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: skill_skillid_seq; Type: SEQUENCE; Schema: game_data; Owner: -
+--
+
+CREATE SEQUENCE game_data.skill_skillid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: skill_skillid_seq; Type: SEQUENCE OWNED BY; Schema: game_data; Owner: -
+--
+
+ALTER SEQUENCE game_data.skill_skillid_seq OWNED BY game_data.skill.skillid;
+
+
+--
+-- Name: system_anomaly_detection; Type: VIEW; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: system_boss_fight_log; Type: VIEW; Schema: game_data; Owner: -
+--
+
+
+
+
+--
+-- Name: system_ranking_overview; Type: VIEW; Schema: game_data; Owner: -
+--
+
+CREATE VIEW game_data.system_ranking_overview AS
+ SELECT c.name AS character_name,
+    'Experience'::text AS ranking_category,
+    c.experience AS rank_value,
+    rank() OVER (ORDER BY c.experience DESC, c.level DESC) AS rank_position
+   FROM game_data."character" c
+  WHERE (c.isnpc = false)
+UNION ALL
+ SELECT ql.character_name,
+    'Completed Quests'::text AS ranking_category,
+    count(ql.questlogid) AS rank_value,
+    rank() OVER (ORDER BY (count(ql.questlogid)) DESC) AS rank_position
+   FROM (game_data.questlog ql
+     JOIN game_data.queststatus qs ON ((ql.queststatus_statusid = qs.statusid)))
+  WHERE ((qs.statusname)::text = 'Completed'::text)
+  GROUP BY ql.character_name
+UNION ALL
+ SELECT c.name AS character_name,
+    'Wealth (Gold)'::text AS ranking_category,
+    c.gold AS rank_value,
+    rank() OVER (ORDER BY c.gold DESC) AS rank_position
+   FROM game_data."character" c
+  WHERE (c.isnpc = false)
+UNION ALL
+ SELECT cl.character_name,
+    'PvE Victories'::text AS ranking_category,
+    count(cl.combatlogid) AS rank_value,
+    rank() OVER (ORDER BY (count(cl.combatlogid)) DESC) AS rank_position
+   FROM game_data.combatlog cl
+  WHERE ((cl.victory = true) AND (cl.monster_monsterid IS NOT NULL))
+  GROUP BY cl.character_name;
+
+
+--
+-- Name: accountstatus statusid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.accountstatus ALTER COLUMN statusid SET DEFAULT nextval('game_data.accountstatus_statusid_seq'::regclass);
+
+
+--
+-- Name: combatlog combatlogid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.combatlog ALTER COLUMN combatlogid SET DEFAULT nextval('game_data.combatlog_combatlogid_seq'::regclass);
+
+
+--
+-- Name: iteam iteamid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.iteam ALTER COLUMN iteamid SET DEFAULT nextval('game_data.iteam_iteamid_seq'::regclass);
+
+
+--
+-- Name: iteam_character inventoryid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.iteam_character ALTER COLUMN inventoryid SET DEFAULT nextval('game_data.iteam_character_inventoryid_seq'::regclass);
+
+
+--
+-- Name: itemtype typeid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.itemtype ALTER COLUMN typeid SET DEFAULT nextval('game_data.itemtype_typeid_seq'::regclass);
+
+
+--
+-- Name: location locationid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.location ALTER COLUMN locationid SET DEFAULT nextval('game_data.location_locationid_seq'::regclass);
+
+
+--
+-- Name: locationtype typeid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.locationtype ALTER COLUMN typeid SET DEFAULT nextval('game_data.locationtype_typeid_seq'::regclass);
+
+
+--
+-- Name: loglevel loglevelid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.loglevel ALTER COLUMN loglevelid SET DEFAULT nextval('game_data.loglevel_loglevelid_seq'::regclass);
+
+
+--
+-- Name: memberstatus memberstatusid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.memberstatus ALTER COLUMN memberstatusid SET DEFAULT nextval('game_data.memberstatus_memberstatusid_seq'::regclass);
+
+
+--
+-- Name: monster monsterid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.monster ALTER COLUMN monsterid SET DEFAULT nextval('game_data.monster_monsterid_seq'::regclass);
+
+
+--
+-- Name: procedureexecutionlog logid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.procedureexecutionlog ALTER COLUMN logid SET DEFAULT nextval('game_data.procedureexecutionlog_logid_seq'::regclass);
+
+
+--
+-- Name: quest questid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.quest ALTER COLUMN questid SET DEFAULT nextval('game_data.quest_questid_seq'::regclass);
+
+
+--
+-- Name: questlog questlogid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.questlog ALTER COLUMN questlogid SET DEFAULT nextval('game_data.questlog_questlogid_seq'::regclass);
+
+
+--
+-- Name: queststatus statusid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.queststatus ALTER COLUMN statusid SET DEFAULT nextval('game_data.queststatus_statusid_seq'::regclass);
+
+
+--
+-- Name: rarity rarityid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.rarity ALTER COLUMN rarityid SET DEFAULT nextval('game_data.rarity_rarityid_seq'::regclass);
+
+
+--
+-- Name: skill skillid; Type: DEFAULT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.skill ALTER COLUMN skillid SET DEFAULT nextval('game_data.skill_skillid_seq'::regclass);
+
+
+--
+-- Data for Name: job; Type: TABLE DATA; Schema: cron; Owner: -
+--
+
+COPY cron.job (jobid, schedule, command, nodename, nodeport, database, username, active, jobname) FROM stdin;
+\.
+
+
+--
+-- Data for Name: job_run_details; Type: TABLE DATA; Schema: cron; Owner: -
+--
+
+COPY cron.job_run_details (jobid, runid, job_pid, database, username, command, status, return_message, start_time, end_time) FROM stdin;
+12	12	259	rpg_game_db	rpg_admin	 CALL game_data.sp_RunWeeklyMaintenance(); 	succeeded	CALL	2025-10-25 16:43:00.011817+00	2025-10-25 16:43:00.018348+00
+1	1	48	rpg_game_db	rpg_admin	SELECT now();	succeeded	1 row	2025-10-25 15:25:00.012475+00	2025-10-25 15:25:00.014006+00
+9	9	221	rpg_game_db	rpg_admin	 CALL game_data.sp_RunWeeklyMaintenance(); 	failed	ERROR:  relation "combatlog_archive" does not exist\nLINE 1: ...ogID > (SELECT COALESCE(MAX(CombatLogID), 0) FROM CombatLog_...\n                                                             ^\nQUERY:  SELECT COUNT(*)                      FROM game_data.CombatLog_Archive WHERE CombatLogID > (SELECT COALESCE(MAX(CombatLogID), 0) FROM CombatLog_Archive) - 100000\nCONTEXT:  PL/pgSQL function game_data.sp_runweeklymaintenance() line 45 at SQL statement\n	2025-10-25 16:28:00.009688+00	2025-10-25 16:28:00.012077+00
+1	2	53	rpg_game_db	rpg_admin	SELECT now();	succeeded	1 row	2025-10-25 15:26:00.009092+00	2025-10-25 15:26:00.010544+00
+10	10	231	rpg_game_db	rpg_admin	 CALL game_data.sp_RunWeeklyMaintenance(); 	failed	ERROR:  relation "character_class" does not exist\nLINE 1: SELECT Class_Name                       FROM Character_Class...\n                                                     ^\nQUERY:  SELECT Class_Name                       FROM Character_Class WHERE Character_Name = NEW.Name\nCONTEXT:  PL/pgSQL function game_data.fn_checkcharacterstats() line 7 at SQL statement\nSQL statement "UPDATE game_data.Character SET Gold = Gold + v_reward_amount WHERE Name = v_top_player_1"\nPL/pgSQL function game_data.sp_runweeklymaintenance() line 52 at SQL statement\n	2025-10-25 16:31:00.009423+00	2025-10-25 16:31:00.012655+00
+2	3	91	rpg_game_db	rpg_admin	 SELECT 1; 	succeeded	1 row	2025-10-25 15:43:00.010154+00	2025-10-25 15:43:00.011783+00
+2	4	96	rpg_game_db	rpg_admin	 SELECT 1; 	succeeded	1 row	2025-10-25 15:44:00.007137+00	2025-10-25 15:44:00.009938+00
+11	11	252	rpg_game_db	rpg_admin	 CALL game_data.sp_RunWeeklyMaintenance(); 	failed	ERROR:  Statistisc of character (HP: 80, Mana: 50) canot be lower then base value for the character class (HP: 100, Mana: 80).\nCONTEXT:  PL/pgSQL function game_data.fn_checkcharacterstats() line 14 at RAISE\nSQL statement "UPDATE game_data.Character SET Gold = Gold + v_reward_amount WHERE Name = v_top_player_1"\nPL/pgSQL function game_data.sp_runweeklymaintenance() line 52 at SQL statement\n	2025-10-25 16:40:00.009822+00	2025-10-25 16:40:00.013843+00
+5	5	180	rpg_game_db	rpg_admin	 CALL sp_RunWeeklyMaintenance(); 	failed	ERROR:  procedure sp_runweeklymaintenance() does not exist\nLINE 1:  CALL sp_RunWeeklyMaintenance(); \n              ^\nHINT:  No procedure matches the given name and argument types. You might need to add explicit type casts.\n	2025-10-25 16:16:00.01038+00	2025-10-25 16:16:00.01356+00
+6	6	193	rpg_game_db	rpg_admin	 CALL game_data.sp_RunWeeklyMaintenance(); 	failed	ERROR:  relation "procedureexecutionlog" does not exist\nLINE 1: INSERT INTO ProcedureExecutionLog (ExecutionID, ProcedureNam...\n                    ^\nQUERY:  INSERT INTO ProcedureExecutionLog (ExecutionID, ProcedureName, LogLevel_LogLevelID, Message)\n    VALUES (v_execution_id, 'sp_RunWeeklyMaintenance', 1, 'Beginigng weekly maintenance')\nCONTEXT:  PL/pgSQL function game_data.sp_runweeklymaintenance() line 14 at SQL statement\n	2025-10-25 16:20:00.011643+00	2025-10-25 16:20:00.013543+00
+7	7	205	rpg_game_db	rpg_admin	 CALL game_data.sp_RunWeeklyMaintenance(); 	failed	ERROR:  relation "combatlog" does not exist\nLINE 3: ...    WHERE CombatLogID IN (SELECT CombatLogID FROM CombatLog ...\n                                                             ^\nQUERY:  WITH moved_rows AS (\n        DELETE FROM game_data.CombatLog\n        WHERE CombatLogID IN (SELECT CombatLogID FROM CombatLog ORDER BY CombatLogID ASC LIMIT 100000)\n        RETURNING * \n    ),\n    archived_data AS (\n        INSERT INTO game_data.CombatLog_Archive SELECT * FROM moved_rows\n        RETURNING * \n    ),\n    activity_analysis AS (\n        SELECT Character_Name, COUNT(*) AS fight_count\n        FROM archived_data\n        GROUP BY Character_Name\n        ORDER BY fight_count DESC\n        LIMIT 3\n    )\n    SELECT ARRAY_AGG(Character_Name)\n                                 FROM activity_analysis\nCONTEXT:  PL/pgSQL function game_data.sp_runweeklymaintenance() line 19 at SQL statement\n	2025-10-25 16:23:00.019524+00	2025-10-25 16:23:00.021047+00
+8	8	217	rpg_game_db	rpg_admin	 CALL game_data.sp_RunWeeklyMaintenance(); 	failed	ERROR:  relation "combatlog" does not exist\nLINE 3: ...CombatLogID IN (SELECT game_data.CombatLogID FROM CombatLog ...\n                                                             ^\nQUERY:  WITH moved_rows AS (\n        DELETE FROM game_data.CombatLog\n        WHERE CombatLogID IN (SELECT game_data.CombatLogID FROM CombatLog ORDER BY CombatLogID ASC LIMIT 100000)\n        RETURNING * \n    ),\n    archived_data AS (\n        INSERT INTO game_data.CombatLog_Archive SELECT * FROM moved_rows\n        RETURNING * \n    ),\n    activity_analysis AS (\n        SELECT Character_Name, COUNT(*) AS fight_count\n        FROM archived_data\n        GROUP BY Character_Name\n        ORDER BY fight_count DESC\n        LIMIT 3\n    )\n    SELECT ARRAY_AGG(Character_Name)\n                                 FROM activity_analysis\nCONTEXT:  PL/pgSQL function game_data.sp_runweeklymaintenance() line 19 at SQL statement\n	2025-10-25 16:27:00.007158+00	2025-10-25 16:27:00.00961+00
+\.
+
+
+--
+-- Data for Name: accountstatus; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.accountstatus (statusid, statusname) FROM stdin;
+1	Active
+2	Banned
+3	Inactive
+\.
+
+
+--
+-- Data for Name: character; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data."character" (name, isnpc, level, maxhitpoints, maxmana, gold, experience, player_userame) FROM stdin;
+Legolas	f	12	110	100	850	1800	User2
+Gimli	f	8	200	40	300	900	User3
+Thrall	f	15	250	80	1200	2500	User4
+Sylvanas	f	14	130	120	950	2200	User5
+Uther	f	11	180	70	600	1400	User7
+Illidan	f	16	220	90	1300	2700	User8
+Tyrande	f	13	120	140	900	1900	User10
+KelThuzad	f	14	150	160	1000	2100	User11
+Ragnaros	f	20	300	200	2000	4000	User12
+Boromir	f	9	170	50	400	1000	User1
+Frodo	f	7	90	30	200	600	User2
+Samwise	f	7	95	35	250	650	User3
+Gandalf	t	50	500	1500	9999	99999	\N
+Vesemir	t	48	450	1200	8000	85000	\N
+Aragorn	f	10	160	60	600	1300	User1
+Horus	f	13	240	70	65	6920	User1
+BobTheBard	f	5	80	50	600	250	User4
+Malfurion	f	12	140	130	1300	1750	User9
+Jaina	f	13	100	150	1600	2000	User6
+\.
+
+
+--
+-- Data for Name: character_class; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.character_class (character_name, class_name) FROM stdin;
+Aragorn	Warrior
+Legolas	Archer
+Gandalf	Mage
+BobTheBard	Rogue
+Thrall	Warrior
+Sylvanas	Archer
+Jaina	Mage
+Uther	Warrior
+Malfurion	Mage
+Gimli	Warrior
+Boromir	Warrior
+Frodo	Rogue
+Samwise	Rogue
+Ragnaros	Mage
+KelThuzad	Mage
+Tyrande	Archer
+Illidan	Rogue
+Horus	Warrior
+Vesemir	Warrior
+Horus	Mage
+\.
+
+
+--
+-- Data for Name: class; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.class (name, description, basemana, basehealth) FROM stdin;
+Warrior	Master of melee combat, uses heavy armor and weapons.	50	150
+Mage	Wielder of powerful arcane magic.	150	80
+Rogue	Cunning and agile, excels in stealth and precision.	80	100
+Archer	Master of the bow, attacks from a distance.	90	90
+Cleric	Healer and protector, uses holy magic.	120	110
+\.
+
+
+--
+-- Data for Name: class_skill; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.class_skill (class_name, skill_skillid) FROM stdin;
+Warrior	1
+Warrior	6
+Warrior	7
+Warrior	8
+Mage	2
+Mage	9
+Mage	10
+Mage	11
+Mage	5
+Rogue	3
+Rogue	12
+Rogue	13
+Rogue	14
+Archer	4
+Archer	15
+Archer	16
+Archer	17
+\.
+
+
+--
+-- Data for Name: combatlog; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.combatlog (combatlogid, character_name, monster_monsterid, location_locationid, victory, dmgtaken, dmgdelt) FROM stdin;
+\.
+
+
+--
+-- Data for Name: combatlog_archive; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.combatlog_archive (combatlogid, character_name, monster_monsterid, location_locationid, victory, dmgtaken, dmgdelt) FROM stdin;
+1	Aragorn	1	3	t	20	55
+2	Aragorn	1	2	t	25	60
+3	Legolas	3	2	t	50	130
+4	Legolas	2	3	f	85	40
+5	Gimli	1	3	t	30	70
+6	Thrall	4	5	t	100	220
+7	Sylvanas	5	5	t	120	300
+8	Jaina	2	3	t	40	150
+9	Uther	1	2	f	60	30
+10	Malfurion	3	2	t	70	160
+11	Aragorn	2	3	t	40	90
+12	Legolas	1	3	t	30	80
+13	Gimli	2	3	f	90	50
+14	Thrall	5	5	t	130	350
+15	Sylvanas	4	5	t	110	280
+16	Jaina	3	2	t	60	170
+17	Uther	2	3	t	50	100
+18	Malfurion	1	3	t	30	85
+19	Gandalf	5	5	t	200	500
+20	BobTheBard	1	3	t	15	45
+21	BobTheBard	1	2	t	10	40
+22	BobTheBard	3	2	f	60	25
+23	BobTheBard	2	3	t	25	70
+24	Boromir	4	5	f	180	95
+25	Boromir	1	3	t	25	60
+26	Frodo	6	3	t	5	18
+27	Samwise	9	2	f	65	40
+28	KelThuzad	15	3	f	120	80
+29	Ragnaros	13	5	t	40	260
+30	Illidan	17	3	t	35	110
+31	Tyrande	11	2	t	30	90
+32	Gandalf	16	5	f	220	150
+33	Malfurion	7	3	t	15	90
+34	Uther	12	3	t	10	150
+35	Jaina	14	3	t	21	200
+36	Horus	1	2	t	\N	\N
+37	Horus	17	3	f	\N	\N
+\.
+
+
+--
+-- Data for Name: guild; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.guild (name, leader_name, guildgold, minlevel, reputation) FROM stdin;
+TheRangers	Aragorn	1000	10	500
+ShadowClan	Sylvanas	1500	12	700
+MagesGuild	Jaina	2000	15	900
+Luna Wolfs	Horus	0	1	0
+\.
+
+
+--
+-- Data for Name: guildmember; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.guildmember (character_name, guild_name, memberstatus_statusid, isband, joinedat, contribution) FROM stdin;
+Aragorn	TheRangers	1	f	2025-01-10 15:00:00	0
+Legolas	TheRangers	3	f	2025-01-12 18:30:00	0
+Sylvanas	ShadowClan	1	f	2025-01-15 20:00:00	0
+Jaina	MagesGuild	1	f	2025-01-20 14:00:00	0
+Gimli	TheRangers	4	f	2025-01-22 16:45:00	0
+Thrall	MagesGuild	2	f	2025-01-25 19:15:00	0
+Uther	ShadowClan	3	f	2025-01-28 13:30:00	0
+Malfurion	MagesGuild	4	f	2025-01-30 17:00:00	0
+Horus	Luna Wolfs	1	f	2025-10-24 22:25:37.212406	0
+Illidan	Luna Wolfs	3	f	2025-10-24 22:37:42.703389	0
+Frodo	Luna Wolfs	2	f	2025-10-25 11:50:43.237549	0
+\.
+
+
+--
+-- Data for Name: iteam; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.iteam (iteamid, name, description, itemtype_categoryid, rarity_rarityid, price, retailprice, atackbonus, defencebonus, magicbonus) FROM stdin;
+1	Iron Sword	A basic but reliable sword.	1	1	100	50	10	0	0
+2	Leather Armor	Simple armor made from boiled leather.	2	1	150	75	0	15	0
+3	Health Potion	Restores a small amount of health.	4	1	50	25	0	0	0
+4	Goblin Ear	A proof of a slain goblin. Smells awful.	5	2	1	0	0	0	0
+5	DragonBlade	A legendary sword pulsating with power.	1	5	100000	50000	150	20	20
+6	Mystic Robe	A robe imbued with magical properties.	2	4	5000	2500	0	10	50
+7	Shield of Valor	A sturdy shield that has seen many battles.	3	3	2000	1000	0	40	0
+8	Elven Bow	A finely crafted bow made by elven artisans.	1	4	8000	4000	80	0	10
+9	Cave Map	A map detailing the layout of Goblin Cave.	5	2	500	0	0	0	0
+10	Potion of Mana	Restores a small amount of mana.	4	1	60	30	0	0	0
+11	Bandit Dagger	A sharp dagger used by bandits.	1	2	300	150	25	0	0
+12	Healing Herb	A common herb used in healing potions.	4	1	20	10	0	0	0
+13	Legendary Staff	A staff said to be wielded by ancient mages.	1	5	120000	60000	100	0	200
+14	Epic Armor Set	Armor set worn by legendary heroes.	2	5	90000	45000	0	100	50
+15	Cloak of Invisibility	A magical cloak that grants temporary invisibility.	2	5	150000	75000	0	20	100
+16	Dragon Slayer Sword	A sword specifically designed to slay dragons.	1	5	200000	100000	200	30	30
+17	Elixir of Life	A rare potion that greatly enhances vitality.	4	4	10000	5000	0	0	0
+\.
+
+
+--
+-- Data for Name: iteam_character; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.iteam_character (inventoryid, iteam_iteamid, character_name) FROM stdin;
+1	1	Aragorn
+2	2	Aragorn
+3	3	Aragorn
+4	3	Legolas
+5	8	Legolas
+6	4	BobTheBard
+7	12	BobTheBard
+8	10	Gandalf
+9	6	Gandalf
+10	7	Gandalf
+11	13	Jaina
+12	14	Sylvanas
+13	15	Thrall
+14	11	Legolas
+15	9	Gimli
+16	2	Uther
+17	1	Boromir
+18	1	Frodo
+19	1	Samwise
+20	3	Boromir
+21	3	Frodo
+22	3	Samwise
+23	16	Aragorn
+24	16	Illidan
+25	5	Boromir
+26	13	Gandalf
+27	13	Ragnaros
+28	13	KelThuzad
+29	14	Gimli
+30	14	Thrall
+31	15	Sylvanas
+32	15	BobTheBard
+33	6	Jaina
+34	6	Malfurion
+35	1	Vesemir
+36	2	Vesemir
+37	3	Vesemir
+38	9	Horus
+39	1	Horus
+40	1	Horus
+41	1	Horus
+42	1	Horus
+43	1	Horus
+44	1	Horus
+45	1	Horus
+46	1	Horus
+47	1	Horus
+48	1	Horus
+49	1	Horus
+50	1	Horus
+51	1	Horus
+52	1	Horus
+53	1	Horus
+54	1	Horus
+55	1	Horus
+56	1	Horus
+57	1	Horus
+58	1	Horus
+59	1	Horus
+60	1	Horus
+61	1	Horus
+62	1	Horus
+63	1	Horus
+64	1	Horus
+65	1	Horus
+66	1	Horus
+67	1	Horus
+68	1	Horus
+69	1	Horus
+70	1	Horus
+71	1	Horus
+72	1	Horus
+73	1	Horus
+74	1	Horus
+75	1	Horus
+76	1	Horus
+77	1	Horus
+78	1	Horus
+79	1	Horus
+80	1	Horus
+81	1	Horus
+82	1	Horus
+83	1	Horus
+84	1	Horus
+85	1	Horus
+86	1	Horus
+87	1	Horus
+90	1	Gimli
+\.
+
+
+--
+-- Data for Name: itemtype; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.itemtype (typeid, category) FROM stdin;
+1	Weapon
+2	Armor
+3	Shield
+4	Potion
+5	Quest Item
+6	Junk
+\.
+
+
+--
+-- Data for Name: location; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.location (locationid, name, locatiotype_typeid, issafezone, recomenedlevel, monsterdensity) FROM stdin;
+1	Riverwood	1	f	1	5
+2	WhisperingWoods	2	f	5	60
+3	Goblin Cave	5	f	8	70
+4	Ironhold	1	f	10	10
+5	DragonPeak	4	f	20	85
+6	Sunnyvale	1	t	1	0
+7	Bag End	1	t	1	0
+\.
+
+
+--
+-- Data for Name: locationtype; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.locationtype (typeid, typename) FROM stdin;
+1	Town
+2	Forest
+3	Dungeon
+4	Mountain
+5	Cave
+\.
+
+
+--
+-- Data for Name: loglevel; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.loglevel (loglevelid, loglevelname) FROM stdin;
+1	INFO
+2	WARNING
+3	ERROR
+\.
+
+
+--
+-- Data for Name: memberstatus; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.memberstatus (memberstatusid, memberstatus) FROM stdin;
+1	Leader
+2	Officer
+3	Member
+4	Initiate
+\.
+
+
+--
+-- Data for Name: monster; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.monster (monsterid, name, level, hitpoints, atack, defence, expdrop, golddrop) FROM stdin;
+1	Goblin	3	50	10	5	20	15
+2	Skeleton	5	80	15	10	35	25
+3	Forest Spider	8	120	25	15	60	40
+4	Orc Brute	12	200	40	30	100	80
+5	Cave Troll	15	350	50	40	150	120
+6	Slime	1	15	3	1	5	2
+7	Forest Wolf	4	60	12	6	25	18
+8	Bandit	6	90	18	8	40	30
+9	Giant Spider	9	140	28	12	75	45
+10	Wraith	11	160	35	20	120	60
+11	Bandit Archer	7	100	22	7	50	35
+12	Wyvern	18	420	70	35	350	220
+13	Fire Elemental	14	280	60	25	220	150
+14	Ice Golem	16	360	55	60	300	180
+15	Necromancer	20	240	45	30	500	300
+16	Stone Guardian	22	600	80	75	800	500
+17	Shadow Stalker	10	180	42	18	150	90
+18	Dark Mage	13	220	50	200	130	0
+\.
+
+
+--
+-- Data for Name: monster_location; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.monster_location (monster_monsterid, location_locationid) FROM stdin;
+1	2
+1	3
+2	3
+3	2
+4	5
+5	5
+6	3
+6	2
+7	2
+7	1
+8	4
+8	2
+9	3
+9	2
+10	3
+10	5
+11	4
+11	2
+12	5
+13	5
+14	5
+15	3
+15	2
+16	5
+17	2
+17	3
+\.
+
+
+--
+-- Data for Name: player; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.player (username, email, password_hash, accountstatus_statusid) FROM stdin;
+User1	user1@email.com	\\xdeadbeef	1
+User2	user2@email.com	\\xcafebabe	1
+User3	user3@email.com	\\xfeedface	1
+User4	user4@email.com	\\x8badf00d	1
+User5	user5@email.com	\\xdeadcafe	1
+User6	user6@email.com	\\xb16b00b5	1
+User7	user7@email.com	\\x0badc0de	1
+User8	user8@email.com	\\xf00dbabe	1
+User9	user9@email.com	\\xc0ffee00	1
+User10	user10@email.com	\\xfacefeed	1
+User11	user11@email.com	\\xbaadf00d	1
+User12	user12@email.com	\\xdead10cc	1
+BannedUser	banned@email.com	\\xbadf00dd	2
+karas	karas.email@mail.com	\\x70617373313233	1
+\.
+
+
+--
+-- Data for Name: procedureexecutionlog; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.procedureexecutionlog (logid, executionid, procedurename, logtimestamp, loglevel_loglevelid, message) FROM stdin;
+9	ad6f796a-36ca-4033-bc24-9156258f193e	sp_RunWeeklyMaintenance	2025-10-25 16:43:00.01182+00	1	Beginigng weekly maintenance
+10	ad6f796a-36ca-4033-bc24-9156258f193e	sp_RunWeeklyMaintenance	2025-10-25 16:43:00.01182+00	1	Archivised 37 rows form CombatLog.
+11	ad6f796a-36ca-4033-bc24-9156258f193e	sp_RunWeeklyMaintenance	2025-10-25 16:43:00.01182+00	1	Completed successfully. Approximately 37 rows archived. Players awarded based on archived data: BobTheBard, Malfurion, Jaina.
+\.
+
+
+--
+-- Data for Name: quest; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.quest (questid, name, description, giver, goldreward, iteam_iteamid, location_locationid) FROM stdin;
+1	Goblin Menace	Clear the nearby cave of goblins.	BobTheBard	100	\N	3
+2	Lost Scroll	Find the ancient scroll in WhisperingWoods.	Gandalf	0	13	2
+3	Dragon Hunt	Slay the dragon on DragonPeak.	Thrall	0	16	5
+4	Escort the Merchant	Protect the merchant traveling to Ironhold.	Uther	200	\N	4
+5	Herbal Remedy	Collect herbs from WhisperingWoods for Jaina.	Jaina	0	3	2
+6	Defend the Village	Help defend Riverwood from bandit attacks.	Aragorn	150	\N	1
+7	Cave Exploration	Explore the depths of Goblin Cave.	Gimli	0	9	3
+8	Mountain Rescue	Rescue lost hikers on DragonPeak.	Sylvanas	300	\N	5
+9	Ancient Artifact	Retrieve an ancient artifact from WhisperingWoods.	Malfurion	0	11	2
+10	Bandit Leader	Defeat the bandit leader terrorizing Ironhold.	Uther	400	\N	4
+11	Potion Ingredients	Gather ingredients for potions in WhisperingWoods.	Jaina	0	12	2
+\.
+
+
+--
+-- Data for Name: quest_guild; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.quest_guild (quest_questid, guild_name) FROM stdin;
+2	TheRangers
+\.
+
+
+--
+-- Data for Name: questlog; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.questlog (questlogid, character_name, quest_questid, queststatus_statusid, atemptnumber, starttime, endtime) FROM stdin;
+2	Legolas	1	3	1	2025-01-20 12:00:00	2025-01-20 18:00:00
+3	Gimli	7	2	1	2025-02-02 14:00:00	\N
+4	Thrall	3	3	1	2025-01-15 09:00:00	2025-01-16 11:00:00
+5	Sylvanas	8	2	1	2025-02-03 16:00:00	\N
+6	Jaina	5	3	1	2025-01-18 08:00:00	2025-01-18 12:00:00
+7	Uther	4	4	1	2025-01-22 13:00:00	2025-01-23 15:00:00
+8	Malfurion	9	2	1	2025-02-04 11:00:00	\N
+9	Aragorn	6	3	1	2025-01-25 10:00:00	2025-01-25 16:00:00
+10	Legolas	2	4	1	2025-01-28 14:00:00	2025-01-29 18:00:00
+11	Gandalf	10	3	1	2025-01-10 09:00:00	2025-01-11 12:00:00
+12	BobTheBard	1	3	2	2025-01-05 11:00:00	2025-01-05 17:00:00
+13	BobTheBard	1	4	1	2025-01-15 10:00:00	2025-01-16 14:00:00
+14	BobTheBard	3	2	1	2025-02-05 15:00:00	\N
+15	Uther	4	3	1	2025-01-30 12:00:00	2025-01-31 16:00:00
+16	Malfurion	9	4	1	2025-01-20 14:00:00	2025-01-21 18:00:00
+17	Jaina	5	2	1	2025-02-06 09:00:00	\N
+1	Aragorn	1	3	1	2025-02-01 10:00:00	2025-10-25 00:18:42.913948
+\.
+
+
+--
+-- Data for Name: queststatus; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.queststatus (statusid, statusname) FROM stdin;
+1	Available
+2	In_Progress
+3	Completed
+4	Failed
+\.
+
+
+--
+-- Data for Name: race; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.race (name, description, fightbonus, magicbonus) FROM stdin;
+Human	Versatile and adaptable, with balanced skills.	5	5
+Elf	Graceful and agile, masters of archery and light magic.	2	8
+Dwarf	Sturdy and strong, excellent fighters and crafters.	8	2
+Orc	Fierce and powerful, known for their brute strength.	10	0
+Undead	Resilient and dark, with a knack for necromancy.	4	6
+Hobbit	Small and stealthy, great at avoiding danger.	3	4
+Tiefing	Cunning and charismatic, with innate magical abilities.	1	9
+\.
+
+
+--
+-- Data for Name: race_character; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.race_character (race_name, character_name) FROM stdin;
+Human	Aragorn
+Elf	Legolas
+Human	Gandalf
+Dwarf	BobTheBard
+Orc	Thrall
+Elf	Sylvanas
+Human	Jaina
+Human	Uther
+Elf	Malfurion
+Dwarf	Gimli
+Human	Boromir
+Hobbit	Frodo
+Hobbit	Samwise
+Human	Ragnaros
+Undead	KelThuzad
+Elf	Tyrande
+Undead	Illidan
+Elf	Horus
+Human	Vesemir
+Undead	Horus
+\.
+
+
+--
+-- Data for Name: rarity; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.rarity (rarityid, rarityname) FROM stdin;
+1	Common
+2	Uncommon
+3	Rare
+4	Epic
+5	Legendary
+\.
+
+
+--
+-- Data for Name: skill; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.skill (skillid, name, description, damage, cooldown, manacost) FROM stdin;
+1	Heavy Strike	A powerful swing that deals significant damage.	30	5	10
+2	Fireball	Launches a ball of fire at the enemy.	40	8	30
+3	Backstab	A surprise attack that deals critical damage.	50	12	25
+4	Aimed Shot	A precise shot that rarely misses.	35	6	20
+5	Heal	A minor healing spell.	0	10	25
+6	Shield Bash	Stuns the enemy with a powerful shield strike.	20	8	15
+7	Whirlwind	Spin attack that damages all nearby enemies.	25	10	20
+8	Battle Cry	Increases damage for a short duration.	0	15	10
+9	Ice Lance	Pierces the enemy with a shard of ice.	35	6	25
+10	Arcane Blast	Unleashes raw arcane energy.	45	10	35
+11	Mana Shield	Absorbs damage using mana.	0	12	30
+12	Poison Blade	Coats weapon with deadly poison.	28	7	18
+13	Shadow Step	Teleports behind the enemy.	15	9	22
+14	Smoke Bomb	Creates cover to escape or reposition.	0	14	20
+15	Multi-Shot	Fires arrows at multiple targets.	22	8	18
+16	Explosive Arrow	Arrow that explodes on impact.	42	11	28
+17	Eagle Eye	Increases accuracy and critical chance.	0	13	15
+18	Ancient Strike	A forgotten technique of immense power.	60	15	40
+19	Life Drain	Steals health from the enemy.	25	9	30
+20	Berserk Rage	Sacrifice defense for massive damage boost.	0	20	25
+21	Mystic Ward	Creates a protective barrier.	0	16	35
+22	Thunderclap	Calls down lightning to strike foes.	48	12	32
+23	Soul Burn	Burns the enemy soul, dealing damage over time.	35	10	28
+24	Meteor Strike	Summons a meteor from the sky.	70	18	50
+25	Invisibility	Become invisible for a short time.	0	20	30
+26	Blood Pact	Sacrifice health to gain temporary power.	0	25	0
+27	Divine Light	Heals and removes debuffs.	0	14	40
+28	Chaos Bolt	Unpredictable magic with random effects.	38	11	27
+29	Nature Call	Summons forest creatures to aid in battle.	30	15	33
+30	Wind Fury	Increases attack speed significantly.	0	17	22
+\.
+
+
+--
+-- Data for Name: skill_character; Type: TABLE DATA; Schema: game_data; Owner: -
+--
+
+COPY game_data.skill_character (skill_skillid, character_name) FROM stdin;
+1	Aragorn
+6	Aragorn
+7	Aragorn
+18	Aragorn
+4	Legolas
+15	Legolas
+16	Legolas
+24	Legolas
+1	Gimli
+6	Gimli
+8	Gimli
+21	Gimli
+1	Thrall
+7	Thrall
+22	Thrall
+27	Thrall
+4	Sylvanas
+15	Sylvanas
+14	Sylvanas
+23	Sylvanas
+2	Jaina
+9	Jaina
+10	Jaina
+11	Jaina
+1	Uther
+6	Uther
+5	Uther
+25	Uther
+3	Illidan
+12	Illidan
+13	Illidan
+19	Illidan
+26	Illidan
+2	Malfurion
+5	Malfurion
+27	Malfurion
+22	Malfurion
+4	Tyrande
+15	Tyrande
+5	Tyrande
+25	Tyrande
+2	KelThuzad
+10	KelThuzad
+19	KelThuzad
+23	KelThuzad
+2	Ragnaros
+20	Ragnaros
+22	Ragnaros
+24	Ragnaros
+28	Ragnaros
+1	Boromir
+6	Boromir
+8	Boromir
+14	Frodo
+24	Frodo
+1	Samwise
+8	Samwise
+25	Samwise
+5	BobTheBard
+8	BobTheBard
+17	BobTheBard
+28	BobTheBard
+2	Gandalf
+5	Gandalf
+10	Gandalf
+18	Gandalf
+24	Gandalf
+25	Gandalf
+28	Gandalf
+9	Horus
+\.
+
+
+--
+-- Name: jobid_seq; Type: SEQUENCE SET; Schema: cron; Owner: -
+--
+
+
+--
+-- Name: runid_seq; Type: SEQUENCE SET; Schema: cron; Owner: -
+--
+
+
+
+--
+-- Name: accountstatus_statusid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: combatlog_combatlogid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: iteam_character_inventoryid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: iteam_iteamid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: iteam_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: iteamtype_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: itemtype_typeid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: location_locationid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: location_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: locationtype_typeid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: loglevel_loglevelid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: memberstatus_memberstatusid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: monster_monsterid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: monster_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: procedureexecutionlog_logid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: quest_questid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: quest_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: questlog_questlogid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: queststatus_statusid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: rarity_rarityid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: skill_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: skill_skillid_seq; Type: SEQUENCE SET; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: accountstatus accountstatus_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.accountstatus
+    ADD CONSTRAINT accountstatus_pkey PRIMARY KEY (statusid);
+
+
+--
+-- Name: accountstatus accountstatus_statusname_key; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.accountstatus
+    ADD CONSTRAINT accountstatus_statusname_key UNIQUE (statusname);
+
+
+--
+-- Name: character_class character_class_pk; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.character_class
+    ADD CONSTRAINT character_class_pk PRIMARY KEY (character_name, class_name);
+
+
+--
+-- Name: character character_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data."character"
+    ADD CONSTRAINT character_pkey PRIMARY KEY (name);
+
+
+--
+-- Name: class class_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.class
+    ADD CONSTRAINT class_pkey PRIMARY KEY (name);
+
+
+--
+-- Name: class_skill class_skill_pk; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.class_skill
+    ADD CONSTRAINT class_skill_pk PRIMARY KEY (class_name, skill_skillid);
+
+
+--
+-- Name: combatlog_archive combatlog_archive_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.combatlog_archive
+    ADD CONSTRAINT combatlog_archive_pkey PRIMARY KEY (combatlogid);
+
+
+--
+-- Name: combatlog combatlog_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.combatlog
+    ADD CONSTRAINT combatlog_pkey PRIMARY KEY (combatlogid);
+
+
+--
+-- Name: guild guild_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.guild
+    ADD CONSTRAINT guild_pkey PRIMARY KEY (name);
+
+
+--
+-- Name: guildmember guildmember_pk; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.guildmember
+    ADD CONSTRAINT guildmember_pk PRIMARY KEY (character_name, guild_name);
+
+
+--
+-- Name: iteam_character iteam_character_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.iteam_character
+    ADD CONSTRAINT iteam_character_pkey PRIMARY KEY (inventoryid);
+
+
+--
+-- Name: iteam iteam_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.iteam
+    ADD CONSTRAINT iteam_pkey PRIMARY KEY (iteamid);
+
+
+--
+-- Name: itemtype itemtype_category_key; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.itemtype
+    ADD CONSTRAINT itemtype_category_key UNIQUE (category);
+
+
+--
+-- Name: itemtype itemtype_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.itemtype
+    ADD CONSTRAINT itemtype_pkey PRIMARY KEY (typeid);
+
+
+--
+-- Name: location location_name_key; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.location
+    ADD CONSTRAINT location_name_key UNIQUE (name);
+
+
+--
+-- Name: location location_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.location
+    ADD CONSTRAINT location_pkey PRIMARY KEY (locationid);
+
+
+--
+-- Name: locationtype locationtype_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.locationtype
+    ADD CONSTRAINT locationtype_pkey PRIMARY KEY (typeid);
+
+
+--
+-- Name: locationtype locationtype_typename_key; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.locationtype
+    ADD CONSTRAINT locationtype_typename_key UNIQUE (typename);
+
+
+--
+-- Name: loglevel loglevel_loglevelname_key; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.loglevel
+    ADD CONSTRAINT loglevel_loglevelname_key UNIQUE (loglevelname);
+
+
+--
+-- Name: loglevel loglevel_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.loglevel
+    ADD CONSTRAINT loglevel_pkey PRIMARY KEY (loglevelid);
+
+
+--
+-- Name: memberstatus memberstatus_memberstatus_key; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.memberstatus
+    ADD CONSTRAINT memberstatus_memberstatus_key UNIQUE (memberstatus);
+
+
+--
+-- Name: memberstatus memberstatus_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.memberstatus
+    ADD CONSTRAINT memberstatus_pkey PRIMARY KEY (memberstatusid);
+
+
+--
+-- Name: monster_location monster_location_pk; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.monster_location
+    ADD CONSTRAINT monster_location_pk PRIMARY KEY (monster_monsterid, location_locationid);
+
+
+--
+-- Name: monster monster_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.monster
+    ADD CONSTRAINT monster_pkey PRIMARY KEY (monsterid);
+
+
+--
+-- Name: player player_email_key; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.player
+    ADD CONSTRAINT player_email_key UNIQUE (email);
+
+
+--
+-- Name: player player_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.player
+    ADD CONSTRAINT player_pkey PRIMARY KEY (username);
+
+
+--
+-- Name: procedureexecutionlog procedureexecutionlog_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.procedureexecutionlog
+    ADD CONSTRAINT procedureexecutionlog_pkey PRIMARY KEY (logid);
+
+
+--
+-- Name: quest_guild quest_guild_pk; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.quest_guild
+    ADD CONSTRAINT quest_guild_pk PRIMARY KEY (quest_questid, guild_name);
+
+
+--
+-- Name: quest quest_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.quest
+    ADD CONSTRAINT quest_pkey PRIMARY KEY (questid);
+
+
+--
+-- Name: questlog questlog_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.questlog
+    ADD CONSTRAINT questlog_pkey PRIMARY KEY (questlogid);
+
+
+--
+-- Name: queststatus queststatus_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.queststatus
+    ADD CONSTRAINT queststatus_pkey PRIMARY KEY (statusid);
+
+
+--
+-- Name: queststatus queststatus_statusname_key; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.queststatus
+    ADD CONSTRAINT queststatus_statusname_key UNIQUE (statusname);
+
+
+--
+-- Name: race_character race_character_pk; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.race_character
+    ADD CONSTRAINT race_character_pk PRIMARY KEY (race_name, character_name);
+
+
+--
+-- Name: race race_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.race
+    ADD CONSTRAINT race_pkey PRIMARY KEY (name);
+
+
+--
+-- Name: rarity rarity_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.rarity
+    ADD CONSTRAINT rarity_pkey PRIMARY KEY (rarityid);
+
+
+--
+-- Name: rarity rarity_rarityname_key; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.rarity
+    ADD CONSTRAINT rarity_rarityname_key UNIQUE (rarityname);
+
+
+--
+-- Name: skill_character skill_character_pk; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.skill_character
+    ADD CONSTRAINT skill_character_pk PRIMARY KEY (skill_skillid, character_name);
+
+
+--
+-- Name: skill skill_pkey; Type: CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.skill
+    ADD CONSTRAINT skill_pkey PRIMARY KEY (skillid);
+
+
+--
+-- Name: combatlog_archive_character_name_idx; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX combatlog_archive_character_name_idx ON game_data.combatlog_archive USING btree (character_name);
+
+
+--
+-- Name: combatlog_archive_location_locationid_idx; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX combatlog_archive_location_locationid_idx ON game_data.combatlog_archive USING btree (location_locationid);
+
+
+--
+-- Name: combatlog_archive_monster_monsterid_idx; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX combatlog_archive_monster_monsterid_idx ON game_data.combatlog_archive USING btree (monster_monsterid);
+
+
+--
+-- Name: idx_character_isnpc; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_character_isnpc ON game_data."character" USING btree (isnpc);
+
+
+--
+-- Name: idx_character_player_username; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_character_player_username ON game_data."character" USING btree (player_userame);
+
+
+--
+-- Name: idx_combatlog_character_name; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_combatlog_character_name ON game_data.combatlog USING btree (character_name);
+
+
+--
+-- Name: idx_combatlog_location_id; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_combatlog_location_id ON game_data.combatlog USING btree (location_locationid);
+
+
+--
+-- Name: idx_combatlog_monster_id; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_combatlog_monster_id ON game_data.combatlog USING btree (monster_monsterid);
+
+
+--
+-- Name: idx_guild_leader_name; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_guild_leader_name ON game_data.guild USING btree (leader_name);
+
+
+--
+-- Name: idx_guild_min_level; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_guild_min_level ON game_data.guild USING btree (minlevel);
+
+
+--
+-- Name: idx_item_character_character_name; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_item_character_character_name ON game_data.iteam_character USING btree (character_name);
+
+
+--
+-- Name: idx_item_character_item_id; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_item_character_item_id ON game_data.iteam_character USING btree (iteam_iteamid);
+
+
+--
+-- Name: idx_item_name; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_item_name ON game_data.iteam USING btree (name);
+
+
+--
+-- Name: idx_item_price; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_item_price ON game_data.iteam USING btree (price);
+
+
+--
+-- Name: idx_item_rarity; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_item_rarity ON game_data.iteam USING btree (rarity_rarityid);
+
+
+--
+-- Name: idx_item_retail_price; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_item_retail_price ON game_data.iteam USING btree (retailprice);
+
+
+--
+-- Name: idx_item_type_category; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_item_type_category ON game_data.iteam USING btree (itemtype_categoryid);
+
+
+--
+-- Name: idx_player_accountstatus; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_player_accountstatus ON game_data.player USING btree (accountstatus_statusid);
+
+
+--
+-- Name: idx_quest_item; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_quest_item ON game_data.quest USING btree (iteam_iteamid);
+
+
+--
+-- Name: idx_quest_location; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_quest_location ON game_data.quest USING btree (location_locationid);
+
+
+--
+-- Name: idx_questlog_character_name; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_questlog_character_name ON game_data.questlog USING btree (character_name);
+
+
+--
+-- Name: idx_questlog_quest_id; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_questlog_quest_id ON game_data.questlog USING btree (quest_questid);
+
+
+--
+-- Name: idx_questlog_status_id; Type: INDEX; Schema: game_data; Owner: -
+--
+
+CREATE INDEX idx_questlog_status_id ON game_data.questlog USING btree (queststatus_statusid);
+
+
+--
+-- Name: developer_balance_test_results _RETURN; Type: RULE; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: developer_economic_flow _RETURN; Type: RULE; Schema: game_data; Owner: -
+--
+
+
+
+--
+-- Name: developer_item_distribution _RETURN; Type: RULE; Schema: game_data; Owner: -
+--
+
+CREATE OR REPLACE VIEW game_data.developer_item_distribution AS
+ SELECT i.name AS item_name,
+    it.category AS item_category,
+    r.rarityname AS item_rarity,
+    count(ic.inventoryid) AS total_owned_by_players,
+    i.price AS purchase_price
+   FROM (((game_data.iteam i
+     LEFT JOIN game_data.iteam_character ic ON ((i.iteamid = ic.iteam_iteamid)))
+     JOIN game_data.itemtype it ON ((i.itemtype_categoryid = it.typeid)))
+     JOIN game_data.rarity r ON ((i.rarity_rarityid = r.rarityid)))
+  GROUP BY i.iteamid, i.name, it.category, r.rarityname
+  ORDER BY (count(ic.inventoryid)) DESC;
+
+
+--
+-- Name: character trg_characterlevelup; Type: TRIGGER; Schema: game_data; Owner: -
+--
+
+CREATE TRIGGER trg_characterlevelup BEFORE UPDATE ON game_data."character" FOR EACH ROW EXECUTE FUNCTION game_data.fn_autolevelup();
+
+
+--
+-- Name: combatlog trg_combat_log_rewards; Type: TRIGGER; Schema: game_data; Owner: -
+--
+
+CREATE TRIGGER trg_combat_log_rewards AFTER INSERT ON game_data.combatlog FOR EACH ROW EXECUTE FUNCTION game_data.fn_grantcombatrewards();
+
+
+--
+-- Name: guildmember trg_guildlevelcheck; Type: TRIGGER; Schema: game_data; Owner: -
+--
+
+CREATE TRIGGER trg_guildlevelcheck BEFORE INSERT ON game_data.guildmember FOR EACH ROW EXECUTE FUNCTION game_data.fn_checkguildlevel();
+
+
+--
+-- Name: iteam_character trg_inventorylimitcheck; Type: TRIGGER; Schema: game_data; Owner: -
+--
+
+CREATE TRIGGER trg_inventorylimitcheck BEFORE INSERT ON game_data.iteam_character FOR EACH ROW EXECUTE FUNCTION game_data.fn_checkinventorylimit();
+
+
+--
+-- Name: character_class character_class_character_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.character_class
+    ADD CONSTRAINT character_class_character_name_fkey FOREIGN KEY (character_name) REFERENCES game_data."character"(name);
+
+
+--
+-- Name: character_class character_class_class_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.character_class
+    ADD CONSTRAINT character_class_class_name_fkey FOREIGN KEY (class_name) REFERENCES game_data.class(name);
+
+
+--
+-- Name: character character_player_userame_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data."character"
+    ADD CONSTRAINT character_player_userame_fkey FOREIGN KEY (player_userame) REFERENCES game_data.player(username);
+
+
+--
+-- Name: class_skill class_skill_class_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.class_skill
+    ADD CONSTRAINT class_skill_class_name_fkey FOREIGN KEY (class_name) REFERENCES game_data.class(name);
+
+
+--
+-- Name: class_skill class_skill_skill_skillid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.class_skill
+    ADD CONSTRAINT class_skill_skill_skillid_fkey FOREIGN KEY (skill_skillid) REFERENCES game_data.skill(skillid);
+
+
+--
+-- Name: combatlog combatlog_character_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.combatlog
+    ADD CONSTRAINT combatlog_character_name_fkey FOREIGN KEY (character_name) REFERENCES game_data."character"(name);
+
+
+--
+-- Name: combatlog combatlog_location_locationid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.combatlog
+    ADD CONSTRAINT combatlog_location_locationid_fkey FOREIGN KEY (location_locationid) REFERENCES game_data.location(locationid);
+
+
+--
+-- Name: combatlog combatlog_monster_monsterid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.combatlog
+    ADD CONSTRAINT combatlog_monster_monsterid_fkey FOREIGN KEY (monster_monsterid) REFERENCES game_data.monster(monsterid);
+
+
+--
+-- Name: guild guild_leader_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.guild
+    ADD CONSTRAINT guild_leader_name_fkey FOREIGN KEY (leader_name) REFERENCES game_data."character"(name);
+
+
+--
+-- Name: guildmember guildmember_character_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.guildmember
+    ADD CONSTRAINT guildmember_character_name_fkey FOREIGN KEY (character_name) REFERENCES game_data."character"(name);
+
+
+--
+-- Name: guildmember guildmember_guild_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.guildmember
+    ADD CONSTRAINT guildmember_guild_name_fkey FOREIGN KEY (guild_name) REFERENCES game_data.guild(name);
+
+
+--
+-- Name: guildmember guildmember_memberstatus_statusid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.guildmember
+    ADD CONSTRAINT guildmember_memberstatus_statusid_fkey FOREIGN KEY (memberstatus_statusid) REFERENCES game_data.memberstatus(memberstatusid);
+
+
+--
+-- Name: iteam_character iteam_character_character_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.iteam_character
+    ADD CONSTRAINT iteam_character_character_name_fkey FOREIGN KEY (character_name) REFERENCES game_data."character"(name);
+
+
+--
+-- Name: iteam_character iteam_character_iteam_iteamid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.iteam_character
+    ADD CONSTRAINT iteam_character_iteam_iteamid_fkey FOREIGN KEY (iteam_iteamid) REFERENCES game_data.iteam(iteamid);
+
+
+--
+-- Name: iteam iteam_itemtype_categoryid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.iteam
+    ADD CONSTRAINT iteam_itemtype_categoryid_fkey FOREIGN KEY (itemtype_categoryid) REFERENCES game_data.itemtype(typeid);
+
+
+--
+-- Name: iteam iteam_rarity_rarityid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.iteam
+    ADD CONSTRAINT iteam_rarity_rarityid_fkey FOREIGN KEY (rarity_rarityid) REFERENCES game_data.rarity(rarityid);
+
+
+--
+-- Name: location location_locatiotype_typeid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.location
+    ADD CONSTRAINT location_locatiotype_typeid_fkey FOREIGN KEY (locatiotype_typeid) REFERENCES game_data.locationtype(typeid);
+
+
+--
+-- Name: monster_location monster_location_location_locationid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.monster_location
+    ADD CONSTRAINT monster_location_location_locationid_fkey FOREIGN KEY (location_locationid) REFERENCES game_data.location(locationid);
+
+
+--
+-- Name: monster_location monster_location_monster_monsterid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.monster_location
+    ADD CONSTRAINT monster_location_monster_monsterid_fkey FOREIGN KEY (monster_monsterid) REFERENCES game_data.monster(monsterid);
+
+
+--
+-- Name: player player_accountstatus_statusid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.player
+    ADD CONSTRAINT player_accountstatus_statusid_fkey FOREIGN KEY (accountstatus_statusid) REFERENCES game_data.accountstatus(statusid);
+
+
+--
+-- Name: procedureexecutionlog procedureexecutionlog_loglevel_loglevelid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.procedureexecutionlog
+    ADD CONSTRAINT procedureexecutionlog_loglevel_loglevelid_fkey FOREIGN KEY (loglevel_loglevelid) REFERENCES game_data.loglevel(loglevelid);
+
+
+--
+-- Name: quest_guild quest_guild_guild_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.quest_guild
+    ADD CONSTRAINT quest_guild_guild_name_fkey FOREIGN KEY (guild_name) REFERENCES game_data.guild(name);
+
+
+--
+-- Name: quest_guild quest_guild_quest_questid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.quest_guild
+    ADD CONSTRAINT quest_guild_quest_questid_fkey FOREIGN KEY (quest_questid) REFERENCES game_data.quest(questid);
+
+
+--
+-- Name: quest quest_iteam_iteamid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.quest
+    ADD CONSTRAINT quest_iteam_iteamid_fkey FOREIGN KEY (iteam_iteamid) REFERENCES game_data.iteam(iteamid);
+
+
+--
+-- Name: quest quest_location_locationid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.quest
+    ADD CONSTRAINT quest_location_locationid_fkey FOREIGN KEY (location_locationid) REFERENCES game_data.location(locationid);
+
+
+--
+-- Name: questlog questlog_character_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.questlog
+    ADD CONSTRAINT questlog_character_name_fkey FOREIGN KEY (character_name) REFERENCES game_data."character"(name);
+
+
+--
+-- Name: questlog questlog_quest_questid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.questlog
+    ADD CONSTRAINT questlog_quest_questid_fkey FOREIGN KEY (quest_questid) REFERENCES game_data.quest(questid);
+
+
+--
+-- Name: questlog questlog_queststatus_statusid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.questlog
+    ADD CONSTRAINT questlog_queststatus_statusid_fkey FOREIGN KEY (queststatus_statusid) REFERENCES game_data.queststatus(statusid);
+
+
+--
+-- Name: race_character race_character_character_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.race_character
+    ADD CONSTRAINT race_character_character_name_fkey FOREIGN KEY (character_name) REFERENCES game_data."character"(name);
+
+
+--
+-- Name: race_character race_character_race_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.race_character
+    ADD CONSTRAINT race_character_race_name_fkey FOREIGN KEY (race_name) REFERENCES game_data.race(name);
+
+
+--
+-- Name: skill_character skill_character_character_name_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.skill_character
+    ADD CONSTRAINT skill_character_character_name_fkey FOREIGN KEY (character_name) REFERENCES game_data."character"(name);
+
+
+--
+-- Name: skill_character skill_character_skill_skillid_fkey; Type: FK CONSTRAINT; Schema: game_data; Owner: -
+--
+
+ALTER TABLE ONLY game_data.skill_character
+    ADD CONSTRAINT skill_character_skill_skillid_fkey FOREIGN KEY (skill_skillid) REFERENCES game_data.skill(skillid);
+
+
+--
+-- PostgreSQL database dump complete

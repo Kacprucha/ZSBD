@@ -13,5 +13,20 @@ services:
       - ./init_scripts:/docker-entrypoint-initdb.d 
     restart: unless-stopped
 
+  mysql:
+    image: mysql:8.0
+    container_name: rpg_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password 
+      MYSQL_DATABASE: rpg_game_db_mysql 
+      MYSQL_USER: rpg_admin 
+      MYSQL_PASSWORD: rpg_admin_password 
+    ports:
+      - "3306:3306" 
+    volumes:
+      - mysql_data:/var/lib/mysql 
+    restart: unless-stopped
+
 volumes:
   postgres_data:
+  mysql_data:
