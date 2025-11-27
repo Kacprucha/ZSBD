@@ -36,7 +36,7 @@ db.runCommand({
           required: ["steamid", "num_games_owned", "num_reviews", "playtime_forever"],
           properties: {
             steamid: {
-              bsonType: "long",
+              bsonType: ["long", "string", "binData"],
               description: "Steam ID of the author"
             },
             num_games_owned: {
@@ -85,7 +85,7 @@ db.runCommand({
               description: "Number of funny votes - minimum 0"
             },
             weighted_score: {
-              bsonType: "double",
+              bsonType: ["double", "int"],
               minimum: 0,
               maximum: 1,
               description: "Weighted score from 0 to 1"
