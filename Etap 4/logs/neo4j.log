@@ -1,0 +1,62 @@
+2025-12-27 17:49:43.209+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2025-12-27 17:49:43.223+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2025-12-27 17:49:43.224+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2025-12-27 17:49:43.237+0000 INFO  Starting...
+2025-12-27 17:49:44.937+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2025-12-27 17:49:46.350+0000 INFO  ======== Neo4j 5.15.0 ========
+2025-12-27 17:49:46.521+0000 INFO  Progress tracking: enabled
+2025-12-27 17:49:46.522+0000 INFO  Memory usage guard: minimum estimate
+2025-12-27 17:49:46.528+0000 INFO  GDS license file: null
+2025-12-27 17:49:46.529+0000 INFO  GDS license state: unlicensed
+2025-12-27 17:49:46.541+0000 INFO  Register GraphDataScience...
+2025-12-27 17:49:46.569+0000 INFO  GraphDataScience registered.
+2025-12-27 17:49:46.570+0000 INFO  Register GraphDataScienceExtras...
+2025-12-27 17:49:46.571+0000 INFO  GraphDataScienceExtras registered.
+2025-12-27 17:49:46.571+0000 INFO  Register MetricsFacade...
+2025-12-27 17:49:46.573+0000 INFO  MetricsFacade registered.
+2025-12-27 17:49:46.574+0000 INFO  Register legacy Task Store/ Registry...
+2025-12-27 17:49:46.576+0000 INFO  Task Store/ Registry registered.
+2025-12-27 17:49:46.576+0000 INFO  Register legacy User Log Registry...
+2025-12-27 17:49:46.577+0000 INFO  User Log Registry registered.
+2025-12-27 17:49:46.933+0000 INFO  GDS compatibility: for Neo4j Settings 5.x -- available, for Neo4j Settings 4.4 -- not available, selected: Neo4j Settings 5.x
+2025-12-27 17:49:46.934+0000 INFO  GDS compatibility: for Neo4j 4.4 -- not available, for Neo4j 5.11 -- not available, for Neo4j 5.12 -- not available, for Neo4j 5.13 -- not available, for Neo4j 5.14 -- not available, for Neo4j 5.15 -- available, for Neo4j 5.16 -- not available, for Neo4j 5.17 -- not available, for Neo4j 5.18 -- not available, for Neo4j 5.19 -- not available, for Neo4j 5.20 -- not available, selected: Neo4j 5.15
+2025-12-27 17:50:16.295+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2025-12-27 17:50:17.639+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2025-12-27 17:50:17.640+0000 INFO  Remote interface available at http://localhost:7474/
+2025-12-27 17:50:17.645+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2025-12-27 17:50:17.645+0000 INFO  name: system
+2025-12-27 17:50:17.646+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2025-12-27 17:50:17.646+0000 INFO  Started.
+2025-12-27 17:58:15.603+0000 INFO  Neo4j Server shutdown initiated by request
+2025-12-27 17:58:15.604+0000 INFO  Stopping...
+2025-12-27 17:58:21.190+0000 INFO  Stopped.
+2025-12-27 17:58:40.372+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2025-12-27 17:58:40.386+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2025-12-27 17:58:40.386+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2025-12-27 17:58:40.402+0000 INFO  Starting...
+2025-12-27 17:58:41.975+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2025-12-27 17:58:43.290+0000 INFO  ======== Neo4j 5.15.0 ========
+2025-12-27 17:58:43.445+0000 INFO  Progress tracking: enabled
+2025-12-27 17:58:43.446+0000 INFO  Memory usage guard: minimum estimate
+2025-12-27 17:58:43.452+0000 INFO  GDS license file: null
+2025-12-27 17:58:43.454+0000 INFO  GDS license state: unlicensed
+2025-12-27 17:58:43.466+0000 INFO  Register GraphDataScience...
+2025-12-27 17:58:43.495+0000 INFO  GraphDataScience registered.
+2025-12-27 17:58:43.496+0000 INFO  Register GraphDataScienceExtras...
+2025-12-27 17:58:43.497+0000 INFO  GraphDataScienceExtras registered.
+2025-12-27 17:58:43.498+0000 INFO  Register MetricsFacade...
+2025-12-27 17:58:43.500+0000 INFO  MetricsFacade registered.
+2025-12-27 17:58:43.501+0000 INFO  Register legacy Task Store/ Registry...
+2025-12-27 17:58:43.503+0000 INFO  Task Store/ Registry registered.
+2025-12-27 17:58:43.503+0000 INFO  Register legacy User Log Registry...
+2025-12-27 17:58:43.505+0000 INFO  User Log Registry registered.
+2025-12-27 17:58:43.892+0000 INFO  GDS compatibility: for Neo4j Settings 5.x -- available, for Neo4j Settings 4.4 -- not available, selected: Neo4j Settings 5.x
+2025-12-27 17:58:43.893+0000 INFO  GDS compatibility: for Neo4j 4.4 -- not available, for Neo4j 5.11 -- not available, for Neo4j 5.12 -- not available, for Neo4j 5.13 -- not available, for Neo4j 5.14 -- not available, for Neo4j 5.15 -- available, for Neo4j 5.16 -- not available, for Neo4j 5.17 -- not available, for Neo4j 5.18 -- not available, for Neo4j 5.19 -- not available, for Neo4j 5.20 -- not available, selected: Neo4j 5.15
+2025-12-27 17:59:12.281+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2025-12-27 17:59:13.607+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2025-12-27 17:59:13.608+0000 INFO  Remote interface available at http://localhost:7474/
+2025-12-27 17:59:13.613+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2025-12-27 17:59:13.613+0000 INFO  name: system
+2025-12-27 17:59:13.614+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2025-12-27 17:59:13.614+0000 INFO  Started.
+2025-12-28 01:39:35.971+0000 ERROR Client triggered an unexpected error [Neo.DatabaseError.General.UnknownError]: Lexical error at line 6, column 31.  Encountered: <EOF> after : "", reference f0781f31-8a81-4f9e-b8d6-ae214a2f2232.
