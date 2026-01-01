@@ -60,3 +60,1629 @@
 2025-12-27 17:59:13.614+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
 2025-12-27 17:59:13.614+0000 INFO  Started.
 2025-12-28 01:39:35.971+0000 ERROR Client triggered an unexpected error [Neo.DatabaseError.General.UnknownError]: Lexical error at line 6, column 31.  Encountered: <EOF> after : "", reference f0781f31-8a81-4f9e-b8d6-ae214a2f2232.
+2025-12-28 02:16:53.749+0000 INFO  Neo4j Server shutdown initiated by request
+2025-12-28 02:16:53.765+0000 INFO  Stopping...
+2025-12-28 02:16:58.824+0000 INFO  Stopped.
+2025-12-28 10:50:17.734+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2025-12-28 10:50:17.748+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2025-12-28 10:50:17.749+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2025-12-28 10:50:17.769+0000 INFO  Starting...
+2025-12-28 10:50:19.369+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2025-12-28 10:50:21.201+0000 INFO  ======== Neo4j 5.15.0 ========
+2025-12-28 10:50:21.364+0000 INFO  Progress tracking: enabled
+2025-12-28 10:50:21.365+0000 INFO  Memory usage guard: minimum estimate
+2025-12-28 10:50:21.371+0000 INFO  GDS license file: null
+2025-12-28 10:50:21.373+0000 INFO  GDS license state: unlicensed
+2025-12-28 10:50:21.384+0000 INFO  Register GraphDataScience...
+2025-12-28 10:50:21.412+0000 INFO  GraphDataScience registered.
+2025-12-28 10:50:21.413+0000 INFO  Register GraphDataScienceExtras...
+2025-12-28 10:50:21.414+0000 INFO  GraphDataScienceExtras registered.
+2025-12-28 10:50:21.414+0000 INFO  Register MetricsFacade...
+2025-12-28 10:50:21.416+0000 INFO  MetricsFacade registered.
+2025-12-28 10:50:21.418+0000 INFO  Register legacy Task Store/ Registry...
+2025-12-28 10:50:21.419+0000 INFO  Task Store/ Registry registered.
+2025-12-28 10:50:21.420+0000 INFO  Register legacy User Log Registry...
+2025-12-28 10:50:21.421+0000 INFO  User Log Registry registered.
+2025-12-28 10:50:21.896+0000 INFO  GDS compatibility: for Neo4j Settings 5.x -- available, for Neo4j Settings 4.4 -- not available, selected: Neo4j Settings 5.x
+2025-12-28 10:50:21.898+0000 INFO  GDS compatibility: for Neo4j 4.4 -- not available, for Neo4j 5.11 -- not available, for Neo4j 5.12 -- not available, for Neo4j 5.13 -- not available, for Neo4j 5.14 -- not available, for Neo4j 5.15 -- available, for Neo4j 5.16 -- not available, for Neo4j 5.17 -- not available, for Neo4j 5.18 -- not available, for Neo4j 5.19 -- not available, for Neo4j 5.20 -- not available, selected: Neo4j 5.15
+2025-12-28 10:50:53.515+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2025-12-28 10:50:55.032+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2025-12-28 10:50:55.033+0000 INFO  Remote interface available at http://localhost:7474/
+2025-12-28 10:50:55.039+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2025-12-28 10:50:55.039+0000 INFO  name: system
+2025-12-28 10:50:55.039+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2025-12-28 10:50:55.040+0000 INFO  Started.
+2025-12-28 11:29:30.697+0000 INFO  Neo4j Server shutdown initiated by request
+2025-12-28 11:29:30.698+0000 INFO  Stopping...
+2025-12-28 11:29:36.177+0000 INFO  Stopped.
+2025-12-28 11:30:53.782+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2025-12-28 11:30:53.797+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2025-12-28 11:30:53.798+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2025-12-28 11:30:53.814+0000 INFO  Starting...
+2025-12-28 11:30:55.553+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2025-12-28 11:30:57.791+0000 INFO  ======== Neo4j 5.26.19 ========
+2025-12-28 11:30:58.185+0000 INFO  GDS license file: null
+2025-12-28 11:30:58.187+0000 INFO  GDS license state: unlicensed
+2025-12-28 11:30:58.190+0000 INFO  Prometheus: disabled
+2025-12-28 11:30:58.191+0000 WARN  GDS metrics disabled
+2025-12-28 11:30:58.201+0000 INFO  Progress tracking: enabled
+2025-12-28 11:30:58.202+0000 INFO  Memory usage guard: minimum estimate
+2025-12-28 11:30:58.209+0000 INFO  Register GDS Memory Facade...
+2025-12-28 11:30:58.211+0000 INFO  GDS Memory Facade registered.
+2025-12-28 11:30:58.218+0000 INFO  Building Graph Data Science extension...
+2025-12-28 11:30:58.223+0000 INFO  Register Graph Data Science...
+2025-12-28 11:30:58.224+0000 INFO  Graph Data Science registered.
+2025-12-28 11:30:58.225+0000 INFO  Register Metrics...
+2025-12-28 11:30:58.226+0000 INFO  Metrics registered.
+2025-12-28 11:30:58.227+0000 INFO  Register Model Catalog...
+2025-12-28 11:30:58.228+0000 INFO  Model Catalog registered.
+2025-12-28 11:30:58.229+0000 INFO  Register Task Registry Factory...
+2025-12-28 11:30:58.230+0000 INFO  Task Registry Factory registered.
+2025-12-28 11:30:58.231+0000 INFO  Register Task Store...
+2025-12-28 11:30:58.232+0000 INFO  Task Store registered.
+2025-12-28 11:30:58.233+0000 INFO  Register User Log Registry Factory...
+2025-12-28 11:30:58.234+0000 INFO  User Log Registry Factory registered.
+2025-12-28 11:30:58.235+0000 INFO  Graph Data Science extension built.
+2025-12-28 11:30:58.236+0000 INFO  Building Graph Data Science Extras extension...
+2025-12-28 11:30:58.237+0000 INFO  Register Graph Data Science Extras...
+2025-12-28 11:30:58.238+0000 INFO  Graph Data Science Extras registered.
+2025-12-28 11:30:58.239+0000 INFO  Graph Data Science Extras extension built.
+2025-12-28 11:31:27.211+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+2025-12-28 11:31:27.308+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2025-12-28 11:31:29.006+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2025-12-28 11:31:29.008+0000 INFO  Remote interface available at http://localhost:7474/
+2025-12-28 11:31:29.014+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2025-12-28 11:31:29.015+0000 INFO  name: system
+2025-12-28 11:31:29.015+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2025-12-28 11:31:29.015+0000 INFO  Started.
+2025-12-28 15:10:41.202+0000 INFO  Neo4j Server shutdown initiated by request
+2025-12-28 15:10:41.205+0000 INFO  Stopping...
+2025-12-28 15:10:46.899+0000 INFO  Stopped.
+2025-12-28 16:26:17.342+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2025-12-28 16:26:17.356+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2025-12-28 16:26:17.357+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2025-12-28 16:26:17.371+0000 INFO  Starting...
+2025-12-28 16:26:18.984+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2025-12-28 16:26:21.173+0000 INFO  ======== Neo4j 5.26.19 ========
+2025-12-28 16:26:21.546+0000 INFO  GDS license file: null
+2025-12-28 16:26:21.547+0000 INFO  GDS license state: unlicensed
+2025-12-28 16:26:21.550+0000 INFO  Prometheus: disabled
+2025-12-28 16:26:21.551+0000 WARN  GDS metrics disabled
+2025-12-28 16:26:21.560+0000 INFO  Progress tracking: enabled
+2025-12-28 16:26:21.561+0000 INFO  Memory usage guard: minimum estimate
+2025-12-28 16:26:21.568+0000 INFO  Register GDS Memory Facade...
+2025-12-28 16:26:21.569+0000 INFO  GDS Memory Facade registered.
+2025-12-28 16:26:21.575+0000 INFO  Building Graph Data Science extension...
+2025-12-28 16:26:21.580+0000 INFO  Register Graph Data Science...
+2025-12-28 16:26:21.581+0000 INFO  Graph Data Science registered.
+2025-12-28 16:26:21.582+0000 INFO  Register Metrics...
+2025-12-28 16:26:21.583+0000 INFO  Metrics registered.
+2025-12-28 16:26:21.584+0000 INFO  Register Model Catalog...
+2025-12-28 16:26:21.584+0000 INFO  Model Catalog registered.
+2025-12-28 16:26:21.585+0000 INFO  Register Task Registry Factory...
+2025-12-28 16:26:21.586+0000 INFO  Task Registry Factory registered.
+2025-12-28 16:26:21.587+0000 INFO  Register Task Store...
+2025-12-28 16:26:21.588+0000 INFO  Task Store registered.
+2025-12-28 16:26:21.588+0000 INFO  Register User Log Registry Factory...
+2025-12-28 16:26:21.589+0000 INFO  User Log Registry Factory registered.
+2025-12-28 16:26:21.590+0000 INFO  Graph Data Science extension built.
+2025-12-28 16:26:21.590+0000 INFO  Building Graph Data Science Extras extension...
+2025-12-28 16:26:21.592+0000 INFO  Register Graph Data Science Extras...
+2025-12-28 16:26:21.592+0000 INFO  Graph Data Science Extras registered.
+2025-12-28 16:26:21.593+0000 INFO  Graph Data Science Extras extension built.
+2025-12-28 16:26:49.840+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+2025-12-28 16:26:50.024+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2025-12-28 16:26:52.957+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2025-12-28 16:26:52.959+0000 INFO  Remote interface available at http://localhost:7474/
+2025-12-28 16:26:52.967+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2025-12-28 16:26:52.967+0000 INFO  name: system
+2025-12-28 16:26:52.968+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2025-12-28 16:26:52.968+0000 INFO  Started.
+2025-12-28 19:44:04.151+0000 INFO  Neo4j Server shutdown initiated by request
+2025-12-28 19:44:04.152+0000 INFO  Stopping...
+2025-12-28 19:44:09.921+0000 INFO  Stopped.
+2025-12-29 13:31:44.805+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2025-12-29 13:31:44.825+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2025-12-29 13:31:44.826+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2025-12-29 13:31:44.844+0000 INFO  Starting...
+2025-12-29 13:31:46.904+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2025-12-29 13:31:49.690+0000 INFO  ======== Neo4j 5.26.19 ========
+2025-12-29 13:31:50.251+0000 INFO  GDS license file: null
+2025-12-29 13:31:50.254+0000 INFO  GDS license state: unlicensed
+2025-12-29 13:31:50.259+0000 INFO  Prometheus: disabled
+2025-12-29 13:31:50.260+0000 WARN  GDS metrics disabled
+2025-12-29 13:31:50.275+0000 INFO  Progress tracking: enabled
+2025-12-29 13:31:50.276+0000 INFO  Memory usage guard: minimum estimate
+2025-12-29 13:31:50.287+0000 INFO  Register GDS Memory Facade...
+2025-12-29 13:31:50.288+0000 INFO  GDS Memory Facade registered.
+2025-12-29 13:31:50.304+0000 INFO  Building Graph Data Science extension...
+2025-12-29 13:31:50.314+0000 INFO  Register Graph Data Science...
+2025-12-29 13:31:50.315+0000 INFO  Graph Data Science registered.
+2025-12-29 13:31:50.317+0000 INFO  Register Metrics...
+2025-12-29 13:31:50.318+0000 INFO  Metrics registered.
+2025-12-29 13:31:50.319+0000 INFO  Register Model Catalog...
+2025-12-29 13:31:50.320+0000 INFO  Model Catalog registered.
+2025-12-29 13:31:50.321+0000 INFO  Register Task Registry Factory...
+2025-12-29 13:31:50.322+0000 INFO  Task Registry Factory registered.
+2025-12-29 13:31:50.323+0000 INFO  Register Task Store...
+2025-12-29 13:31:50.325+0000 INFO  Task Store registered.
+2025-12-29 13:31:50.326+0000 INFO  Register User Log Registry Factory...
+2025-12-29 13:31:50.327+0000 INFO  User Log Registry Factory registered.
+2025-12-29 13:31:50.328+0000 INFO  Graph Data Science extension built.
+2025-12-29 13:31:50.329+0000 INFO  Building Graph Data Science Extras extension...
+2025-12-29 13:31:50.331+0000 INFO  Register Graph Data Science Extras...
+2025-12-29 13:31:50.332+0000 INFO  Graph Data Science Extras registered.
+2025-12-29 13:31:50.333+0000 INFO  Graph Data Science Extras extension built.
+2025-12-29 13:32:23.152+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+2025-12-29 13:32:23.238+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2025-12-29 13:32:24.984+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2025-12-29 13:32:24.985+0000 INFO  Remote interface available at http://localhost:7474/
+2025-12-29 13:32:24.991+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2025-12-29 13:32:24.992+0000 INFO  name: system
+2025-12-29 13:32:24.992+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2025-12-29 13:32:24.993+0000 INFO  Started.
+2025-12-29 18:30:02.588+0000 INFO  Neo4j Server shutdown initiated by request
+2025-12-29 18:30:02.589+0000 INFO  Stopping...
+2025-12-29 18:30:08.639+0000 INFO  Stopped.
+2025-12-29 20:16:35.338+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2025-12-29 20:16:35.352+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2025-12-29 20:16:35.353+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2025-12-29 20:16:35.369+0000 INFO  Starting...
+2025-12-29 20:16:37.346+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2025-12-29 20:16:41.123+0000 INFO  ======== Neo4j 5.26.19 ========
+2025-12-29 20:16:41.786+0000 INFO  GDS license file: null
+2025-12-29 20:16:41.789+0000 INFO  GDS license state: unlicensed
+2025-12-29 20:16:41.794+0000 INFO  Prometheus: disabled
+2025-12-29 20:16:41.795+0000 WARN  GDS metrics disabled
+2025-12-29 20:16:41.814+0000 INFO  Progress tracking: enabled
+2025-12-29 20:16:41.816+0000 INFO  Memory usage guard: minimum estimate
+2025-12-29 20:16:41.830+0000 INFO  Register GDS Memory Facade...
+2025-12-29 20:16:41.833+0000 INFO  GDS Memory Facade registered.
+2025-12-29 20:16:41.854+0000 INFO  Building Graph Data Science extension...
+2025-12-29 20:16:41.866+0000 INFO  Register Graph Data Science...
+2025-12-29 20:16:41.868+0000 INFO  Graph Data Science registered.
+2025-12-29 20:16:41.872+0000 INFO  Register Metrics...
+2025-12-29 20:16:41.874+0000 INFO  Metrics registered.
+2025-12-29 20:16:41.877+0000 INFO  Register Model Catalog...
+2025-12-29 20:16:41.879+0000 INFO  Model Catalog registered.
+2025-12-29 20:16:41.881+0000 INFO  Register Task Registry Factory...
+2025-12-29 20:16:41.884+0000 INFO  Task Registry Factory registered.
+2025-12-29 20:16:41.886+0000 INFO  Register Task Store...
+2025-12-29 20:16:41.889+0000 INFO  Task Store registered.
+2025-12-29 20:16:41.893+0000 INFO  Register User Log Registry Factory...
+2025-12-29 20:16:41.899+0000 INFO  User Log Registry Factory registered.
+2025-12-29 20:16:41.901+0000 INFO  Graph Data Science extension built.
+2025-12-29 20:16:41.903+0000 INFO  Building Graph Data Science Extras extension...
+2025-12-29 20:16:41.907+0000 INFO  Register Graph Data Science Extras...
+2025-12-29 20:16:41.910+0000 INFO  Graph Data Science Extras registered.
+2025-12-29 20:16:41.914+0000 INFO  Graph Data Science Extras extension built.
+2025-12-29 20:17:15.042+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+2025-12-29 20:17:15.230+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2025-12-29 20:17:18.070+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2025-12-29 20:17:18.072+0000 INFO  Remote interface available at http://localhost:7474/
+2025-12-29 20:17:18.079+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2025-12-29 20:17:18.080+0000 INFO  name: system
+2025-12-29 20:17:18.080+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2025-12-29 20:17:18.081+0000 INFO  Started.
+2025-12-30 21:33:49.295+0000 INFO  Neo4j Server shutdown initiated by request
+2025-12-30 21:33:49.296+0000 INFO  Stopping...
+2025-12-30 21:33:55.063+0000 INFO  Stopped.
+2025-12-30 21:34:18.386+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2025-12-30 21:34:18.412+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2025-12-30 21:34:18.413+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2025-12-30 21:34:18.440+0000 INFO  Starting...
+2025-12-30 21:34:20.634+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2025-12-30 21:34:23.522+0000 INFO  ======== Neo4j 5.26.19 ========
+2025-12-30 21:34:24.021+0000 INFO  GDS license file: null
+2025-12-30 21:34:24.023+0000 INFO  GDS license state: unlicensed
+2025-12-30 21:34:24.027+0000 INFO  Prometheus: disabled
+2025-12-30 21:34:24.027+0000 WARN  GDS metrics disabled
+2025-12-30 21:34:24.040+0000 INFO  Progress tracking: enabled
+2025-12-30 21:34:24.041+0000 INFO  Memory usage guard: minimum estimate
+2025-12-30 21:34:24.049+0000 INFO  Register GDS Memory Facade...
+2025-12-30 21:34:24.050+0000 INFO  GDS Memory Facade registered.
+2025-12-30 21:34:24.060+0000 INFO  Building Graph Data Science extension...
+2025-12-30 21:34:24.068+0000 INFO  Register Graph Data Science...
+2025-12-30 21:34:24.070+0000 INFO  Graph Data Science registered.
+2025-12-30 21:34:24.072+0000 INFO  Register Metrics...
+2025-12-30 21:34:24.074+0000 INFO  Metrics registered.
+2025-12-30 21:34:24.075+0000 INFO  Register Model Catalog...
+2025-12-30 21:34:24.077+0000 INFO  Model Catalog registered.
+2025-12-30 21:34:24.078+0000 INFO  Register Task Registry Factory...
+2025-12-30 21:34:24.079+0000 INFO  Task Registry Factory registered.
+2025-12-30 21:34:24.080+0000 INFO  Register Task Store...
+2025-12-30 21:34:24.081+0000 INFO  Task Store registered.
+2025-12-30 21:34:24.082+0000 INFO  Register User Log Registry Factory...
+2025-12-30 21:34:24.083+0000 INFO  User Log Registry Factory registered.
+2025-12-30 21:34:24.084+0000 INFO  Graph Data Science extension built.
+2025-12-30 21:34:24.085+0000 INFO  Building Graph Data Science Extras extension...
+2025-12-30 21:34:24.087+0000 INFO  Register Graph Data Science Extras...
+2025-12-30 21:34:24.088+0000 INFO  Graph Data Science Extras registered.
+2025-12-30 21:34:24.089+0000 INFO  Graph Data Science Extras extension built.
+2025-12-30 21:34:56.178+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+2025-12-30 21:34:56.286+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2025-12-30 21:34:58.535+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2025-12-30 21:34:58.537+0000 INFO  Remote interface available at http://localhost:7474/
+2025-12-30 21:34:58.544+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2025-12-30 21:34:58.544+0000 INFO  name: system
+2025-12-30 21:34:58.545+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2025-12-30 21:34:58.545+0000 INFO  Started.
+2025-12-30 21:56:20.181+0000 INFO  Neo4j Server shutdown initiated by request
+2025-12-30 21:56:20.184+0000 INFO  Stopping...
+2025-12-30 21:56:26.121+0000 INFO  Stopped.
+2025-12-31 13:26:21.733+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2025-12-31 13:26:21.749+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2025-12-31 13:26:21.750+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2025-12-31 13:26:21.770+0000 INFO  Starting...
+2025-12-31 13:26:23.377+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2025-12-31 13:26:25.663+0000 INFO  ======== Neo4j 5.26.19 ========
+2025-12-31 13:26:26.031+0000 INFO  GDS license file: null
+2025-12-31 13:26:26.033+0000 INFO  GDS license state: unlicensed
+2025-12-31 13:26:26.035+0000 INFO  Prometheus: disabled
+2025-12-31 13:26:26.036+0000 WARN  GDS metrics disabled
+2025-12-31 13:26:26.045+0000 INFO  Progress tracking: enabled
+2025-12-31 13:26:26.046+0000 INFO  Memory usage guard: minimum estimate
+2025-12-31 13:26:26.053+0000 INFO  Register GDS Memory Facade...
+2025-12-31 13:26:26.054+0000 INFO  GDS Memory Facade registered.
+2025-12-31 13:26:26.060+0000 INFO  Building Graph Data Science extension...
+2025-12-31 13:26:26.065+0000 INFO  Register Graph Data Science...
+2025-12-31 13:26:26.066+0000 INFO  Graph Data Science registered.
+2025-12-31 13:26:26.067+0000 INFO  Register Metrics...
+2025-12-31 13:26:26.067+0000 INFO  Metrics registered.
+2025-12-31 13:26:26.068+0000 INFO  Register Model Catalog...
+2025-12-31 13:26:26.069+0000 INFO  Model Catalog registered.
+2025-12-31 13:26:26.070+0000 INFO  Register Task Registry Factory...
+2025-12-31 13:26:26.071+0000 INFO  Task Registry Factory registered.
+2025-12-31 13:26:26.071+0000 INFO  Register Task Store...
+2025-12-31 13:26:26.072+0000 INFO  Task Store registered.
+2025-12-31 13:26:26.073+0000 INFO  Register User Log Registry Factory...
+2025-12-31 13:26:26.074+0000 INFO  User Log Registry Factory registered.
+2025-12-31 13:26:26.074+0000 INFO  Graph Data Science extension built.
+2025-12-31 13:26:26.075+0000 INFO  Building Graph Data Science Extras extension...
+2025-12-31 13:26:26.076+0000 INFO  Register Graph Data Science Extras...
+2025-12-31 13:26:26.077+0000 INFO  Graph Data Science Extras registered.
+2025-12-31 13:26:26.077+0000 INFO  Graph Data Science Extras extension built.
+2025-12-31 13:26:52.425+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+2025-12-31 13:26:52.514+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2025-12-31 13:26:54.104+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2025-12-31 13:26:54.105+0000 INFO  Remote interface available at http://localhost:7474/
+2025-12-31 13:26:54.110+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2025-12-31 13:26:54.110+0000 INFO  name: system
+2025-12-31 13:26:54.111+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2025-12-31 13:26:54.111+0000 INFO  Started.
+2025-12-31 15:12:05.064+0000 INFO  Neo4j Server shutdown initiated by request
+2025-12-31 15:12:05.067+0000 INFO  Stopping...
+2025-12-31 15:12:15.942+0000 INFO  Stopped.
+2026-01-01 17:32:48.147+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2026-01-01 17:32:48.169+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2026-01-01 17:32:48.170+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2026-01-01 17:32:48.195+0000 INFO  Starting...
+2026-01-01 17:32:50.099+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2026-01-01 17:32:52.846+0000 INFO  ======== Neo4j 5.26.19 ========
+2026-01-01 17:32:53.297+0000 INFO  GDS license file: null
+2026-01-01 17:32:53.299+0000 INFO  GDS license state: unlicensed
+2026-01-01 17:32:53.304+0000 INFO  Prometheus: disabled
+2026-01-01 17:32:53.304+0000 WARN  GDS metrics disabled
+2026-01-01 17:32:53.317+0000 INFO  Progress tracking: enabled
+2026-01-01 17:32:53.318+0000 INFO  Memory usage guard: minimum estimate
+2026-01-01 17:32:53.328+0000 INFO  Register GDS Memory Facade...
+2026-01-01 17:32:53.329+0000 INFO  GDS Memory Facade registered.
+2026-01-01 17:32:53.342+0000 INFO  Building Graph Data Science extension...
+2026-01-01 17:32:53.349+0000 INFO  Register Graph Data Science...
+2026-01-01 17:32:53.350+0000 INFO  Graph Data Science registered.
+2026-01-01 17:32:53.351+0000 INFO  Register Metrics...
+2026-01-01 17:32:53.352+0000 INFO  Metrics registered.
+2026-01-01 17:32:53.353+0000 INFO  Register Model Catalog...
+2026-01-01 17:32:53.354+0000 INFO  Model Catalog registered.
+2026-01-01 17:32:53.355+0000 INFO  Register Task Registry Factory...
+2026-01-01 17:32:53.355+0000 INFO  Task Registry Factory registered.
+2026-01-01 17:32:53.356+0000 INFO  Register Task Store...
+2026-01-01 17:32:53.357+0000 INFO  Task Store registered.
+2026-01-01 17:32:53.358+0000 INFO  Register User Log Registry Factory...
+2026-01-01 17:32:53.359+0000 INFO  User Log Registry Factory registered.
+2026-01-01 17:32:53.359+0000 INFO  Graph Data Science extension built.
+2026-01-01 17:32:53.360+0000 INFO  Building Graph Data Science Extras extension...
+2026-01-01 17:32:53.361+0000 INFO  Register Graph Data Science Extras...
+2026-01-01 17:32:53.362+0000 INFO  Graph Data Science Extras registered.
+2026-01-01 17:32:53.363+0000 INFO  Graph Data Science Extras extension built.
+2026-01-01 17:33:27.631+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+2026-01-01 17:33:27.718+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2026-01-01 17:33:29.358+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2026-01-01 17:33:29.360+0000 INFO  Remote interface available at http://localhost:7474/
+2026-01-01 17:33:29.365+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2026-01-01 17:33:29.365+0000 INFO  name: system
+2026-01-01 17:33:29.366+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2026-01-01 17:33:29.366+0000 INFO  Started.
+2026-01-01 18:33:18.022+0000 WARN  Graph creation failed
+java.lang.IllegalArgumentException: Invalid node projection, one or more labels not found: 'Deck, Card, Format, Player'
+	at org.neo4j.gds.projection.GraphDimensionsValidation.checkValidNodePredicate(GraphDimensionsValidation.java:47) ~[graph-data-science.jar:?]
+	at org.neo4j.gds.projection.GraphDimensionsValidation.validate(GraphDimensionsValidation.java:39) ~[graph-data-science.jar:?]
+	at org.neo4j.gds.projection.NativeFactory.build(NativeFactory.java:135) ~[graph-data-science.jar:?]
+	at org.neo4j.gds.projection.NativeFactory.build(NativeFactory.java:45) ~[graph-data-science.jar:?]
+	at org.neo4j.gds.applications.graphstorecatalog.GraphStoreFromDatabaseLoader.graphStore(GraphStoreFromDatabaseLoader.java:56) ~[graph-data-science.jar:?]
+	at org.neo4j.gds.applications.graphstorecatalog.GenericProjectApplication.projectGraph(GenericProjectApplication.java:148) ~[graph-data-science.jar:?]
+	at org.neo4j.gds.applications.graphstorecatalog.GenericProjectApplication.project(GenericProjectApplication.java:71) ~[graph-data-science.jar:?]
+	at org.neo4j.gds.applications.graphstorecatalog.NativeProjectApplication.project(NativeProjectApplication.java:58) ~[graph-data-science.jar:?]
+	at org.neo4j.gds.applications.graphstorecatalog.DefaultGraphCatalogApplications.nativeProject(DefaultGraphCatalogApplications.java:349) ~[graph-data-science.jar:?]
+	at com.neo4j.gds.extension.LicenseCheckerForGraphCatalog.lambda$nativeProject$3(LicenseCheckerForGraphCatalog.java:122) ~[graph-data-science.jar:?]
+	at com.neo4j.gds.extension.LicenseCheckerForGraphCatalog.runWithLicenseChecked(LicenseCheckerForGraphCatalog.java:608) ~[graph-data-science.jar:?]
+	at com.neo4j.gds.extension.LicenseCheckerForGraphCatalog.nativeProject(LicenseCheckerForGraphCatalog.java:122) ~[graph-data-science.jar:?]
+	at org.neo4j.gds.procedures.catalog.LocalGraphCatalogProcedureFacade.nativeProject(LocalGraphCatalogProcedureFacade.java:196) ~[graph-data-science.jar:?]
+	at org.neo4j.gds.catalog.GraphProjectProc.project(GraphProjectProc.java:60) ~[graph-data-science.jar:?]
+	at org.neo4j.kernel.impl.proc.GeneratedProcedure_project81271242848.apply(Unknown Source) ~[?:?]
+	at org.neo4j.procedure.impl.ProcedureRegistry.callProcedure(ProcedureRegistry.java:205) ~[neo4j-procedure-5.26.19.jar:5.26.19]
+	at org.neo4j.procedure.impl.ProcedureViewImpl.callProcedure(ProcedureViewImpl.java:140) ~[neo4j-procedure-5.26.19.jar:5.26.19]
+	at org.neo4j.kernel.impl.newapi.ProcedureCaller$ForTransactionScope.doCallProcedure(ProcedureCaller.java:287) ~[neo4j-kernel-5.26.19.jar:5.26.19]
+	at org.neo4j.kernel.impl.newapi.ProcedureCaller.callProcedure(ProcedureCaller.java:183) ~[neo4j-kernel-5.26.19.jar:5.26.19]
+	at org.neo4j.kernel.impl.newapi.KernelProcedures.procedureCallRead(KernelProcedures.java:134) ~[neo4j-kernel-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.runtime.interpreted.TransactionBoundReadQueryContext.callReadOnlyProcedure(TransactionBoundQueryContext.scala:1701) ~[neo4j-cypher-interpreted-runtime-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.planning.ExceptionTranslatingReadQueryContext.callReadOnlyProcedure(ExceptionTranslatingQueryContext.scala:322) ~[neo4j-cypher-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.runtime.LazyReadOnlyCallMode$.callProcedure(ProcedureCallMode.scala:71) ~[neo4j-cypher-runtime-util-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.runtime.interpreted.pipes.ProcedureCallPipe.$anonfun$internalCreateResults$1(ProcedureCallPipe.scala:63) ~[neo4j-cypher-interpreted-runtime-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.runtime.ClosingIterator$$anon$2.nextCur(ClosingIterator.scala:150) ~[neo4j-cypher-runtime-util-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.runtime.ClosingIterator$$anon$2.innerHasNext(ClosingIterator.scala:156) ~[neo4j-cypher-runtime-util-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.runtime.ClosingIterator.hasNext(ClosingIterator.scala:136) ~[neo4j-cypher-runtime-util-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.runtime.ClosingIterator$$anon$4.innerHasNext(ClosingIterator.scala:200) ~[neo4j-cypher-runtime-util-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.runtime.ClosingIterator.hasNext(ClosingIterator.scala:136) ~[neo4j-cypher-runtime-util-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.runtime.interpreted.PipeExecutionResult.serveResults(PipeExecutionResult.scala:97) ~[neo4j-cypher-interpreted-runtime-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.runtime.interpreted.PipeExecutionResult.request(PipeExecutionResult.scala:82) ~[neo4j-cypher-interpreted-runtime-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.result.StandardInternalExecutionResult.request(StandardInternalExecutionResult.scala:106) ~[neo4j-cypher-5.26.19.jar:5.26.19]
+	at org.neo4j.cypher.internal.result.ClosingExecutionResult.request(ClosingExecutionResult.scala:157) ~[neo4j-cypher-5.26.19.jar:5.26.19]
+	at org.neo4j.router.impl.subscriber.DelegatingQueryExecution.request(DelegatingQueryExecution.java:72) ~[neo4j-query-router-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.tx.statement.StatementImpl.consume(StatementImpl.java:167) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.protocol.common.fsm.transition.transaction.streaming.PullResultsStreamingStateTransition.process(PullResultsStreamingStateTransition.java:48) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.protocol.common.fsm.transition.transaction.streaming.StreamingStateTransition.process(StreamingStateTransition.java:62) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.protocol.common.fsm.transition.transaction.streaming.StreamingStateTransition.process(StreamingStateTransition.java:55) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.protocol.common.fsm.transition.transaction.streaming.StreamingStateTransition.process(StreamingStateTransition.java:34) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.protocol.common.fsm.transition.transaction.TransactionalStateTransition.process(TransactionalStateTransition.java:42) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.fsm.state.MultiTransitionState.process(MultiTransitionState.java:53) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.fsm.StateMachineImpl.process(StateMachineImpl.java:157) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.protocol.common.connector.connection.AtomicSchedulingConnection$ProcessJob.perform(AtomicSchedulingConnection.java:635) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.protocol.common.connector.connection.AtomicSchedulingConnection.executeJob(AtomicSchedulingConnection.java:335) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.protocol.common.connector.connection.AtomicSchedulingConnection.doExecuteJobs(AtomicSchedulingConnection.java:268) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at org.neo4j.bolt.protocol.common.connector.connection.AtomicSchedulingConnection.executeJobs(AtomicSchedulingConnection.java:209) ~[neo4j-bolt-5.26.19.jar:5.26.19]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539) [?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+	at java.lang.Thread.run(Thread.java:840) [?:?]
+2026-01-01 18:33:50.195+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Start
+2026-01-01 18:33:50.201+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Nodes :: Start
+2026-01-01 18:33:50.202+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Nodes :: Store Scan :: Start
+2026-01-01 18:33:50.316+0000 INFO  [node-store-scan-0] Loading :: Nodes :: Store Scan 100%
+2026-01-01 18:33:50.320+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Nodes :: Store Scan :: Finished
+2026-01-01 18:33:50.354+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Nodes :: Finished
+2026-01-01 18:33:50.356+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Relationships :: Start
+2026-01-01 18:33:50.356+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Relationships :: Store Scan :: Start
+2026-01-01 18:33:50.486+0000 INFO  [relationship-store-scan-3] Loading :: Relationships :: Store Scan 48%
+2026-01-01 18:33:50.504+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Relationships :: Store Scan 100%
+2026-01-01 18:33:50.505+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Relationships :: Store Scan :: Finished
+2026-01-01 18:33:51.934+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Relationships :: Finished
+2026-01-01 18:33:51.938+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] Loading :: Finished
+2026-01-01 18:34:47.259+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints :: Start
+2026-01-01 18:34:47.264+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 0%
+2026-01-01 18:34:47.273+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 1%
+2026-01-01 18:34:47.277+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 2%
+2026-01-01 18:34:47.279+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 3%
+2026-01-01 18:34:47.281+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 4%
+2026-01-01 18:34:47.283+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 5%
+2026-01-01 18:34:47.285+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 6%
+2026-01-01 18:34:47.286+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 7%
+2026-01-01 18:34:47.287+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 8%
+2026-01-01 18:34:47.288+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 9%
+2026-01-01 18:34:47.289+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 10%
+2026-01-01 18:34:47.290+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 11%
+2026-01-01 18:34:47.291+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 12%
+2026-01-01 18:34:47.292+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 13%
+2026-01-01 18:34:47.293+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 14%
+2026-01-01 18:34:47.294+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 15%
+2026-01-01 18:34:47.295+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 16%
+2026-01-01 18:34:47.296+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 17%
+2026-01-01 18:34:47.298+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 18%
+2026-01-01 18:34:47.299+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 19%
+2026-01-01 18:34:47.301+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 20%
+2026-01-01 18:34:47.302+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 21%
+2026-01-01 18:34:47.303+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 22%
+2026-01-01 18:34:47.304+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 23%
+2026-01-01 18:34:47.306+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 24%
+2026-01-01 18:34:47.307+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 25%
+2026-01-01 18:34:47.308+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 26%
+2026-01-01 18:34:47.309+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 27%
+2026-01-01 18:34:47.311+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 28%
+2026-01-01 18:34:47.313+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 29%
+2026-01-01 18:34:47.314+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 30%
+2026-01-01 18:34:47.315+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 31%
+2026-01-01 18:34:47.316+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 32%
+2026-01-01 18:34:47.317+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 33%
+2026-01-01 18:34:47.318+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 34%
+2026-01-01 18:34:47.319+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 35%
+2026-01-01 18:34:47.320+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 36%
+2026-01-01 18:34:47.322+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 37%
+2026-01-01 18:34:47.323+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 38%
+2026-01-01 18:34:47.323+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 39%
+2026-01-01 18:34:47.325+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 40%
+2026-01-01 18:34:47.326+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 41%
+2026-01-01 18:34:47.327+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 42%
+2026-01-01 18:34:47.329+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 43%
+2026-01-01 18:34:47.330+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 44%
+2026-01-01 18:34:47.331+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 45%
+2026-01-01 18:34:47.332+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 46%
+2026-01-01 18:34:47.332+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 47%
+2026-01-01 18:34:47.333+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 48%
+2026-01-01 18:34:47.334+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 49%
+2026-01-01 18:34:47.334+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 50%
+2026-01-01 18:34:47.335+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 51%
+2026-01-01 18:34:47.335+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 52%
+2026-01-01 18:34:47.336+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 53%
+2026-01-01 18:34:47.336+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 54%
+2026-01-01 18:34:47.337+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 55%
+2026-01-01 18:34:47.337+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 56%
+2026-01-01 18:34:47.338+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 57%
+2026-01-01 18:34:47.339+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 58%
+2026-01-01 18:34:47.340+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 59%
+2026-01-01 18:34:47.341+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 60%
+2026-01-01 18:34:47.341+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 61%
+2026-01-01 18:34:47.342+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 62%
+2026-01-01 18:34:47.343+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 63%
+2026-01-01 18:34:47.344+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 64%
+2026-01-01 18:34:47.345+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 65%
+2026-01-01 18:34:47.346+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 66%
+2026-01-01 18:34:47.347+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 67%
+2026-01-01 18:34:47.350+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 68%
+2026-01-01 18:34:47.351+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 69%
+2026-01-01 18:34:47.352+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 70%
+2026-01-01 18:34:47.352+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 71%
+2026-01-01 18:34:47.353+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 72%
+2026-01-01 18:34:47.353+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 73%
+2026-01-01 18:34:47.354+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 74%
+2026-01-01 18:34:47.355+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 75%
+2026-01-01 18:34:47.355+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 76%
+2026-01-01 18:34:47.356+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 77%
+2026-01-01 18:34:47.357+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 78%
+2026-01-01 18:34:47.357+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 79%
+2026-01-01 18:34:47.358+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 80%
+2026-01-01 18:34:47.358+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 81%
+2026-01-01 18:34:47.359+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 82%
+2026-01-01 18:34:47.359+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 83%
+2026-01-01 18:34:47.360+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 84%
+2026-01-01 18:34:47.361+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 85%
+2026-01-01 18:34:47.362+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 86%
+2026-01-01 18:34:47.363+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 87%
+2026-01-01 18:34:47.364+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 88%
+2026-01-01 18:34:47.365+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 89%
+2026-01-01 18:34:47.365+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 90%
+2026-01-01 18:34:47.366+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 91%
+2026-01-01 18:34:47.367+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 92%
+2026-01-01 18:34:47.368+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 93%
+2026-01-01 18:34:47.368+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 94%
+2026-01-01 18:34:47.369+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 95%
+2026-01-01 18:34:47.370+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 96%
+2026-01-01 18:34:47.370+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 97%
+2026-01-01 18:34:47.371+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 98%
+2026-01-01 18:34:47.372+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 99%
+2026-01-01 18:34:47.372+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints 100%
+2026-01-01 18:34:47.373+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] ArticulationPoints :: Finished
+2026-01-01 18:35:57.354+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] WCC :: Start
+2026-01-01 18:35:57.372+0000 INFO  [gds-1] WCC 0%
+2026-01-01 18:35:57.376+0000 INFO  [gds-3] WCC 1%
+2026-01-01 18:35:57.381+0000 INFO  [gds-3] WCC 2%
+2026-01-01 18:35:57.381+0000 INFO  [gds-3] WCC 3%
+2026-01-01 18:35:57.382+0000 INFO  [gds-3] WCC 4%
+2026-01-01 18:35:57.383+0000 INFO  [gds-3] WCC 5%
+2026-01-01 18:35:57.384+0000 INFO  [gds-3] WCC 6%
+2026-01-01 18:35:57.385+0000 INFO  [gds-3] WCC 7%
+2026-01-01 18:35:57.386+0000 INFO  [gds-3] WCC 8%
+2026-01-01 18:35:57.387+0000 INFO  [gds-3] WCC 9%
+2026-01-01 18:35:57.387+0000 INFO  [gds-3] WCC 10%
+2026-01-01 18:35:57.394+0000 INFO  [gds-2] WCC 11%
+2026-01-01 18:35:57.402+0000 INFO  [gds-1] WCC 12%
+2026-01-01 18:35:57.414+0000 INFO  [gds-1] WCC 13%
+2026-01-01 18:35:57.432+0000 INFO  [gds-2] WCC 14%
+2026-01-01 18:35:57.437+0000 INFO  [gds-1] WCC 15%
+2026-01-01 18:35:57.448+0000 INFO  [gds-1] WCC 16%
+2026-01-01 18:35:57.457+0000 INFO  [gds-2] WCC 17%
+2026-01-01 18:35:57.466+0000 INFO  [gds-2] WCC 18%
+2026-01-01 18:35:57.471+0000 INFO  [gds-1] WCC 19%
+2026-01-01 18:35:57.476+0000 INFO  [gds-1] WCC 20%
+2026-01-01 18:35:57.479+0000 INFO  [gds-2] WCC 21%
+2026-01-01 18:35:57.482+0000 INFO  [gds-2] WCC 22%
+2026-01-01 18:35:57.486+0000 INFO  [gds-2] WCC 23%
+2026-01-01 18:35:57.522+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] WCC 100%
+2026-01-01 18:35:57.523+0000 INFO  [neo4j.BoltWorker-6 [bolt-14 - /172.21.0.1:42918]] WCC :: Finished
+2026-01-01 18:36:49.975+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints :: Start
+2026-01-01 18:36:49.976+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 0%
+2026-01-01 18:36:49.980+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 1%
+2026-01-01 18:36:49.982+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 2%
+2026-01-01 18:36:49.983+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 3%
+2026-01-01 18:36:49.984+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 4%
+2026-01-01 18:36:49.986+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 5%
+2026-01-01 18:36:49.987+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 6%
+2026-01-01 18:36:49.987+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 7%
+2026-01-01 18:36:49.988+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 8%
+2026-01-01 18:36:49.989+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 9%
+2026-01-01 18:36:49.990+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 10%
+2026-01-01 18:36:49.990+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 11%
+2026-01-01 18:36:49.991+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 12%
+2026-01-01 18:36:49.991+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 13%
+2026-01-01 18:36:49.992+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 14%
+2026-01-01 18:36:49.992+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 15%
+2026-01-01 18:36:49.993+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 16%
+2026-01-01 18:36:49.993+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 17%
+2026-01-01 18:36:49.994+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 18%
+2026-01-01 18:36:49.995+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 19%
+2026-01-01 18:36:49.996+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 20%
+2026-01-01 18:36:49.996+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 21%
+2026-01-01 18:36:49.997+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 22%
+2026-01-01 18:36:49.998+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 23%
+2026-01-01 18:36:49.998+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 24%
+2026-01-01 18:36:49.999+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 25%
+2026-01-01 18:36:50.000+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 26%
+2026-01-01 18:36:50.001+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 27%
+2026-01-01 18:36:50.002+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 28%
+2026-01-01 18:36:50.003+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 29%
+2026-01-01 18:36:50.004+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 30%
+2026-01-01 18:36:50.004+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 31%
+2026-01-01 18:36:50.005+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 32%
+2026-01-01 18:36:50.005+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 33%
+2026-01-01 18:36:50.006+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 34%
+2026-01-01 18:36:50.007+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 35%
+2026-01-01 18:36:50.007+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 36%
+2026-01-01 18:36:50.008+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 37%
+2026-01-01 18:36:50.008+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 38%
+2026-01-01 18:36:50.009+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 39%
+2026-01-01 18:36:50.009+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 40%
+2026-01-01 18:36:50.010+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 41%
+2026-01-01 18:36:50.010+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 42%
+2026-01-01 18:36:50.011+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 43%
+2026-01-01 18:36:50.012+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 44%
+2026-01-01 18:36:50.013+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 45%
+2026-01-01 18:36:50.013+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 46%
+2026-01-01 18:36:50.014+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 47%
+2026-01-01 18:36:50.014+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 48%
+2026-01-01 18:36:50.015+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 49%
+2026-01-01 18:36:50.016+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 50%
+2026-01-01 18:36:50.016+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 51%
+2026-01-01 18:36:50.017+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 52%
+2026-01-01 18:36:50.017+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 53%
+2026-01-01 18:36:50.018+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 54%
+2026-01-01 18:36:50.018+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 55%
+2026-01-01 18:36:50.019+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 56%
+2026-01-01 18:36:50.019+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 57%
+2026-01-01 18:36:50.020+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 58%
+2026-01-01 18:36:50.020+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 59%
+2026-01-01 18:36:50.021+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 60%
+2026-01-01 18:36:50.021+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 61%
+2026-01-01 18:36:50.022+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 62%
+2026-01-01 18:36:50.022+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 63%
+2026-01-01 18:36:50.022+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 64%
+2026-01-01 18:36:50.023+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 65%
+2026-01-01 18:36:50.023+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 66%
+2026-01-01 18:36:50.024+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 67%
+2026-01-01 18:36:50.025+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 68%
+2026-01-01 18:36:50.025+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 69%
+2026-01-01 18:36:50.026+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 70%
+2026-01-01 18:36:50.027+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 71%
+2026-01-01 18:36:50.028+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 72%
+2026-01-01 18:36:50.028+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 73%
+2026-01-01 18:36:50.029+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 74%
+2026-01-01 18:36:50.030+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 75%
+2026-01-01 18:36:50.031+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 76%
+2026-01-01 18:36:50.031+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 77%
+2026-01-01 18:36:50.032+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 78%
+2026-01-01 18:36:50.032+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 79%
+2026-01-01 18:36:50.033+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 80%
+2026-01-01 18:36:50.033+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 81%
+2026-01-01 18:36:50.034+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 82%
+2026-01-01 18:36:50.035+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 83%
+2026-01-01 18:36:50.035+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 84%
+2026-01-01 18:36:50.036+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 85%
+2026-01-01 18:36:50.036+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 86%
+2026-01-01 18:36:50.037+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 87%
+2026-01-01 18:36:50.037+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 88%
+2026-01-01 18:36:50.037+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 89%
+2026-01-01 18:36:50.038+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 90%
+2026-01-01 18:36:50.039+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 91%
+2026-01-01 18:36:50.039+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 92%
+2026-01-01 18:36:50.040+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 93%
+2026-01-01 18:36:50.040+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 94%
+2026-01-01 18:36:50.040+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 95%
+2026-01-01 18:36:50.041+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 96%
+2026-01-01 18:36:50.041+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 97%
+2026-01-01 18:36:50.042+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 98%
+2026-01-01 18:36:50.042+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 99%
+2026-01-01 18:36:50.043+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints 100%
+2026-01-01 18:36:50.043+0000 INFO  [neo4j.BoltWorker-5 [bolt-24 - /172.21.0.1:52068]] ArticulationPoints :: Finished
+2026-01-01 18:38:57.932+0000 INFO  Neo4j Server shutdown initiated by request
+2026-01-01 18:38:57.932+0000 INFO  Stopping...
+2026-01-01 18:39:03.683+0000 INFO  Stopped.
+2026-01-01 18:39:26.148+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2026-01-01 18:39:26.160+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+2026-01-01 18:39:26.160+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+2026-01-01 18:39:26.178+0000 INFO  Starting...
+2026-01-01 18:39:27.862+0000 INFO  This instance is ServerId{10e849f6} (10e849f6-88c6-4229-9105-45e81ca75cf9)
+2026-01-01 18:39:29.862+0000 INFO  ======== Neo4j 5.26.19 ========
+2026-01-01 18:39:30.225+0000 INFO  GDS license file: null
+2026-01-01 18:39:30.226+0000 INFO  GDS license state: unlicensed
+2026-01-01 18:39:30.229+0000 INFO  Prometheus: disabled
+2026-01-01 18:39:30.231+0000 WARN  GDS metrics disabled
+2026-01-01 18:39:30.241+0000 INFO  Progress tracking: enabled
+2026-01-01 18:39:30.242+0000 INFO  Memory usage guard: minimum estimate
+2026-01-01 18:39:30.249+0000 INFO  Register GDS Memory Facade...
+2026-01-01 18:39:30.250+0000 INFO  GDS Memory Facade registered.
+2026-01-01 18:39:30.258+0000 INFO  Building Graph Data Science extension...
+2026-01-01 18:39:30.264+0000 INFO  Register Graph Data Science...
+2026-01-01 18:39:30.266+0000 INFO  Graph Data Science registered.
+2026-01-01 18:39:30.267+0000 INFO  Register Metrics...
+2026-01-01 18:39:30.268+0000 INFO  Metrics registered.
+2026-01-01 18:39:30.269+0000 INFO  Register Model Catalog...
+2026-01-01 18:39:30.270+0000 INFO  Model Catalog registered.
+2026-01-01 18:39:30.271+0000 INFO  Register Task Registry Factory...
+2026-01-01 18:39:30.272+0000 INFO  Task Registry Factory registered.
+2026-01-01 18:39:30.273+0000 INFO  Register Task Store...
+2026-01-01 18:39:30.274+0000 INFO  Task Store registered.
+2026-01-01 18:39:30.275+0000 INFO  Register User Log Registry Factory...
+2026-01-01 18:39:30.276+0000 INFO  User Log Registry Factory registered.
+2026-01-01 18:39:30.276+0000 INFO  Graph Data Science extension built.
+2026-01-01 18:39:30.277+0000 INFO  Building Graph Data Science Extras extension...
+2026-01-01 18:39:30.279+0000 INFO  Register Graph Data Science Extras...
+2026-01-01 18:39:30.280+0000 INFO  Graph Data Science Extras registered.
+2026-01-01 18:39:30.281+0000 INFO  Graph Data Science Extras extension built.
+2026-01-01 18:39:57.373+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+2026-01-01 18:39:57.461+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2026-01-01 18:39:59.100+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2026-01-01 18:39:59.102+0000 INFO  Remote interface available at http://localhost:7474/
+2026-01-01 18:39:59.109+0000 INFO  id: 5D6456F626F15D900312D21A6DDDEA3EAF4CACF43259F3390E2DE84AA6450867
+2026-01-01 18:39:59.110+0000 INFO  name: system
+2026-01-01 18:39:59.110+0000 INFO  creationDate: 2025-12-27T17:49:47.892Z
+2026-01-01 18:39:59.111+0000 INFO  Started.
+2026-01-01 18:40:55.695+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Start
+2026-01-01 18:40:55.703+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Nodes :: Start
+2026-01-01 18:40:55.704+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Nodes :: Store Scan :: Start
+2026-01-01 18:40:55.813+0000 INFO  [node-store-scan-1] Loading :: Nodes :: Store Scan 100%
+2026-01-01 18:40:55.819+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Nodes :: Store Scan :: Finished
+2026-01-01 18:40:55.845+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Nodes :: Finished
+2026-01-01 18:40:55.847+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Relationships :: Start
+2026-01-01 18:40:55.848+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Relationships :: Store Scan :: Start
+2026-01-01 18:40:56.033+0000 INFO  [relationship-store-scan-1] Loading :: Relationships :: Store Scan 48%
+2026-01-01 18:40:56.046+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Relationships :: Store Scan 100%
+2026-01-01 18:40:56.047+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Relationships :: Store Scan :: Finished
+2026-01-01 18:40:57.201+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Relationships :: Finished
+2026-01-01 18:40:57.205+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] Loading :: Finished
+2026-01-01 18:40:59.377+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints :: Start
+2026-01-01 18:40:59.382+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 0%
+2026-01-01 18:40:59.389+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 1%
+2026-01-01 18:40:59.392+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 2%
+2026-01-01 18:40:59.394+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 3%
+2026-01-01 18:40:59.395+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 4%
+2026-01-01 18:40:59.397+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 5%
+2026-01-01 18:40:59.398+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 6%
+2026-01-01 18:40:59.400+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 7%
+2026-01-01 18:40:59.400+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 8%
+2026-01-01 18:40:59.401+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 9%
+2026-01-01 18:40:59.402+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 10%
+2026-01-01 18:40:59.403+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 11%
+2026-01-01 18:40:59.404+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 12%
+2026-01-01 18:40:59.404+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 13%
+2026-01-01 18:40:59.405+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 14%
+2026-01-01 18:40:59.406+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 15%
+2026-01-01 18:40:59.407+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 16%
+2026-01-01 18:40:59.407+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 17%
+2026-01-01 18:40:59.408+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 18%
+2026-01-01 18:40:59.409+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 19%
+2026-01-01 18:40:59.410+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 20%
+2026-01-01 18:40:59.410+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 21%
+2026-01-01 18:40:59.411+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 22%
+2026-01-01 18:40:59.412+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 23%
+2026-01-01 18:40:59.413+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 24%
+2026-01-01 18:40:59.414+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 25%
+2026-01-01 18:40:59.416+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 26%
+2026-01-01 18:40:59.417+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 27%
+2026-01-01 18:40:59.418+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 28%
+2026-01-01 18:40:59.419+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 29%
+2026-01-01 18:40:59.420+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 30%
+2026-01-01 18:40:59.421+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 31%
+2026-01-01 18:40:59.422+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 32%
+2026-01-01 18:40:59.423+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 33%
+2026-01-01 18:40:59.423+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 34%
+2026-01-01 18:40:59.424+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 35%
+2026-01-01 18:40:59.425+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 36%
+2026-01-01 18:40:59.426+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 37%
+2026-01-01 18:40:59.426+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 38%
+2026-01-01 18:40:59.427+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 39%
+2026-01-01 18:40:59.428+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 40%
+2026-01-01 18:40:59.429+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 41%
+2026-01-01 18:40:59.429+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 42%
+2026-01-01 18:40:59.430+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 43%
+2026-01-01 18:40:59.431+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 44%
+2026-01-01 18:40:59.431+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 45%
+2026-01-01 18:40:59.432+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 46%
+2026-01-01 18:40:59.433+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 47%
+2026-01-01 18:40:59.434+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 48%
+2026-01-01 18:40:59.435+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 49%
+2026-01-01 18:40:59.436+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 50%
+2026-01-01 18:40:59.437+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 51%
+2026-01-01 18:40:59.437+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 52%
+2026-01-01 18:40:59.438+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 53%
+2026-01-01 18:40:59.439+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 54%
+2026-01-01 18:40:59.441+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 55%
+2026-01-01 18:40:59.442+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 56%
+2026-01-01 18:40:59.443+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 57%
+2026-01-01 18:40:59.444+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 58%
+2026-01-01 18:40:59.445+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 59%
+2026-01-01 18:40:59.446+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 60%
+2026-01-01 18:40:59.447+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 61%
+2026-01-01 18:40:59.448+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 62%
+2026-01-01 18:40:59.448+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 63%
+2026-01-01 18:40:59.449+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 64%
+2026-01-01 18:40:59.450+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 65%
+2026-01-01 18:40:59.451+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 66%
+2026-01-01 18:40:59.452+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 67%
+2026-01-01 18:40:59.453+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 68%
+2026-01-01 18:40:59.454+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 69%
+2026-01-01 18:40:59.454+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 70%
+2026-01-01 18:40:59.455+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 71%
+2026-01-01 18:40:59.456+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 72%
+2026-01-01 18:40:59.457+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 73%
+2026-01-01 18:40:59.458+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 74%
+2026-01-01 18:40:59.459+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 75%
+2026-01-01 18:40:59.459+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 76%
+2026-01-01 18:40:59.460+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 77%
+2026-01-01 18:40:59.461+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 78%
+2026-01-01 18:40:59.462+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 79%
+2026-01-01 18:40:59.463+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 80%
+2026-01-01 18:40:59.464+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 81%
+2026-01-01 18:40:59.465+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 82%
+2026-01-01 18:40:59.466+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 83%
+2026-01-01 18:40:59.467+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 84%
+2026-01-01 18:40:59.468+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 85%
+2026-01-01 18:40:59.468+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 86%
+2026-01-01 18:40:59.469+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 87%
+2026-01-01 18:40:59.470+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 88%
+2026-01-01 18:40:59.471+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 89%
+2026-01-01 18:40:59.472+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 90%
+2026-01-01 18:40:59.473+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 91%
+2026-01-01 18:40:59.473+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 92%
+2026-01-01 18:40:59.474+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 93%
+2026-01-01 18:40:59.475+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 94%
+2026-01-01 18:40:59.476+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 95%
+2026-01-01 18:40:59.477+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 96%
+2026-01-01 18:40:59.478+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 97%
+2026-01-01 18:40:59.479+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 98%
+2026-01-01 18:40:59.480+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 99%
+2026-01-01 18:40:59.481+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints 100%
+2026-01-01 18:40:59.482+0000 INFO  [neo4j.BoltWorker-2 [bolt-22 - /172.21.0.1:42268]] ArticulationPoints :: Finished
+2026-01-01 18:41:08.998+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] WCC :: Start
+2026-01-01 18:41:09.009+0000 INFO  [gds-4] WCC 0%
+2026-01-01 18:41:09.012+0000 INFO  [gds-4] WCC 1%
+2026-01-01 18:41:09.013+0000 INFO  [gds-4] WCC 2%
+2026-01-01 18:41:09.015+0000 INFO  [gds-4] WCC 3%
+2026-01-01 18:41:09.015+0000 INFO  [gds-4] WCC 4%
+2026-01-01 18:41:09.016+0000 INFO  [gds-4] WCC 5%
+2026-01-01 18:41:09.016+0000 INFO  [gds-4] WCC 6%
+2026-01-01 18:41:09.017+0000 INFO  [gds-4] WCC 7%
+2026-01-01 18:41:09.017+0000 INFO  [gds-4] WCC 8%
+2026-01-01 18:41:09.018+0000 INFO  [gds-4] WCC 9%
+2026-01-01 18:41:09.022+0000 INFO  [gds-3] WCC 10%
+2026-01-01 18:41:09.030+0000 INFO  [gds-3] WCC 11%
+2026-01-01 18:41:09.034+0000 INFO  [gds-3] WCC 12%
+2026-01-01 18:41:09.045+0000 INFO  [gds-3] WCC 13%
+2026-01-01 18:41:09.052+0000 INFO  [gds-1] WCC 14%
+2026-01-01 18:41:09.059+0000 INFO  [gds-1] WCC 15%
+2026-01-01 18:41:09.064+0000 INFO  [gds-3] WCC 16%
+2026-01-01 18:41:09.069+0000 INFO  [gds-1] WCC 17%
+2026-01-01 18:41:09.072+0000 INFO  [gds-3] WCC 18%
+2026-01-01 18:41:09.078+0000 INFO  [gds-3] WCC 19%
+2026-01-01 18:41:09.081+0000 INFO  [gds-1] WCC 20%
+2026-01-01 18:41:09.083+0000 INFO  [gds-3] WCC 21%
+2026-01-01 18:41:09.088+0000 INFO  [gds-1] WCC 22%
+2026-01-01 18:41:09.089+0000 INFO  [gds-3] WCC 23%
+2026-01-01 18:41:09.135+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] WCC 100%
+2026-01-01 18:41:09.136+0000 INFO  [neo4j.BoltWorker-7 [bolt-22 - /172.21.0.1:42268]] WCC :: Finished
+2026-01-01 18:44:32.623+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges :: Start
+2026-01-01 18:44:32.628+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 0%
+2026-01-01 18:44:32.634+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 1%
+2026-01-01 18:44:32.635+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 2%
+2026-01-01 18:44:32.637+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 3%
+2026-01-01 18:44:32.637+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 4%
+2026-01-01 18:44:32.638+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 5%
+2026-01-01 18:44:32.639+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 6%
+2026-01-01 18:44:32.640+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 7%
+2026-01-01 18:44:32.641+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 8%
+2026-01-01 18:44:32.641+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 9%
+2026-01-01 18:44:32.643+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 10%
+2026-01-01 18:44:32.644+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 11%
+2026-01-01 18:44:32.644+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 12%
+2026-01-01 18:44:32.645+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 13%
+2026-01-01 18:44:32.646+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 14%
+2026-01-01 18:44:32.647+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 15%
+2026-01-01 18:44:32.648+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 16%
+2026-01-01 18:44:32.649+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 17%
+2026-01-01 18:44:32.650+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 18%
+2026-01-01 18:44:32.651+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 19%
+2026-01-01 18:44:32.651+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 20%
+2026-01-01 18:44:32.652+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 21%
+2026-01-01 18:44:32.653+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 22%
+2026-01-01 18:44:32.654+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 23%
+2026-01-01 18:44:32.655+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 24%
+2026-01-01 18:44:32.655+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 25%
+2026-01-01 18:44:32.656+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 26%
+2026-01-01 18:44:32.657+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 27%
+2026-01-01 18:44:32.657+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 28%
+2026-01-01 18:44:32.659+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 29%
+2026-01-01 18:44:32.660+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 30%
+2026-01-01 18:44:32.660+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 31%
+2026-01-01 18:44:32.661+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 32%
+2026-01-01 18:44:32.663+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 33%
+2026-01-01 18:44:32.664+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 34%
+2026-01-01 18:44:32.665+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 35%
+2026-01-01 18:44:32.666+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 36%
+2026-01-01 18:44:32.666+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 37%
+2026-01-01 18:44:32.667+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 38%
+2026-01-01 18:44:32.668+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 39%
+2026-01-01 18:44:32.668+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 40%
+2026-01-01 18:44:32.669+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 41%
+2026-01-01 18:44:32.669+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 42%
+2026-01-01 18:44:32.670+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 43%
+2026-01-01 18:44:32.671+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 44%
+2026-01-01 18:44:32.671+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 45%
+2026-01-01 18:44:32.672+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 46%
+2026-01-01 18:44:32.673+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 47%
+2026-01-01 18:44:32.673+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 48%
+2026-01-01 18:44:32.674+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 49%
+2026-01-01 18:44:32.675+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 50%
+2026-01-01 18:44:32.676+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 51%
+2026-01-01 18:44:32.676+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 52%
+2026-01-01 18:44:32.677+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 53%
+2026-01-01 18:44:32.678+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 54%
+2026-01-01 18:44:32.679+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 55%
+2026-01-01 18:44:32.680+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 56%
+2026-01-01 18:44:32.681+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 57%
+2026-01-01 18:44:32.682+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 58%
+2026-01-01 18:44:32.683+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 59%
+2026-01-01 18:44:32.684+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 60%
+2026-01-01 18:44:32.684+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 61%
+2026-01-01 18:44:32.685+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 62%
+2026-01-01 18:44:32.687+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 63%
+2026-01-01 18:44:32.688+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 64%
+2026-01-01 18:44:32.689+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 65%
+2026-01-01 18:44:32.689+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 66%
+2026-01-01 18:44:32.690+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 67%
+2026-01-01 18:44:32.691+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 68%
+2026-01-01 18:44:32.692+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 69%
+2026-01-01 18:44:32.693+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 70%
+2026-01-01 18:44:32.694+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 71%
+2026-01-01 18:44:32.696+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 72%
+2026-01-01 18:44:32.697+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 73%
+2026-01-01 18:44:32.698+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 74%
+2026-01-01 18:44:32.699+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 75%
+2026-01-01 18:44:32.700+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 76%
+2026-01-01 18:44:32.701+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 77%
+2026-01-01 18:44:32.701+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 78%
+2026-01-01 18:44:32.702+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 79%
+2026-01-01 18:44:32.702+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 80%
+2026-01-01 18:44:32.702+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 81%
+2026-01-01 18:44:32.703+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 82%
+2026-01-01 18:44:32.703+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 83%
+2026-01-01 18:44:32.704+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 84%
+2026-01-01 18:44:32.704+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 85%
+2026-01-01 18:44:32.705+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 86%
+2026-01-01 18:44:32.705+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 87%
+2026-01-01 18:44:32.705+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 88%
+2026-01-01 18:44:32.706+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 89%
+2026-01-01 18:44:32.706+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 90%
+2026-01-01 18:44:32.707+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 91%
+2026-01-01 18:44:32.707+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 92%
+2026-01-01 18:44:32.707+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 93%
+2026-01-01 18:44:32.708+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 94%
+2026-01-01 18:44:32.708+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 95%
+2026-01-01 18:44:32.708+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 96%
+2026-01-01 18:44:32.709+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 97%
+2026-01-01 18:44:32.709+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 98%
+2026-01-01 18:44:32.710+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 99%
+2026-01-01 18:44:32.710+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges 100%
+2026-01-01 18:44:32.711+0000 INFO  [neo4j.BoltWorker-6 [bolt-22 - /172.21.0.1:42268]] Bridges :: Finished
+2026-01-01 18:46:35.964+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges :: Start
+2026-01-01 18:46:35.965+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 0%
+2026-01-01 18:46:35.965+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 1%
+2026-01-01 18:46:35.966+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 2%
+2026-01-01 18:46:35.967+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 3%
+2026-01-01 18:46:35.967+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 4%
+2026-01-01 18:46:35.967+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 5%
+2026-01-01 18:46:35.967+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 6%
+2026-01-01 18:46:35.968+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 7%
+2026-01-01 18:46:35.968+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 8%
+2026-01-01 18:46:35.968+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 9%
+2026-01-01 18:46:35.968+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 10%
+2026-01-01 18:46:35.968+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 11%
+2026-01-01 18:46:35.969+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 12%
+2026-01-01 18:46:35.969+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 13%
+2026-01-01 18:46:35.972+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 14%
+2026-01-01 18:46:35.973+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 15%
+2026-01-01 18:46:35.973+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 16%
+2026-01-01 18:46:35.973+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 17%
+2026-01-01 18:46:35.973+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 18%
+2026-01-01 18:46:35.974+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 19%
+2026-01-01 18:46:35.974+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 20%
+2026-01-01 18:46:35.975+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 21%
+2026-01-01 18:46:35.975+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 22%
+2026-01-01 18:46:35.976+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 23%
+2026-01-01 18:46:35.976+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 24%
+2026-01-01 18:46:35.977+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 25%
+2026-01-01 18:46:35.978+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 26%
+2026-01-01 18:46:35.978+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 27%
+2026-01-01 18:46:35.979+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 28%
+2026-01-01 18:46:35.981+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 29%
+2026-01-01 18:46:35.982+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 30%
+2026-01-01 18:46:35.983+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 31%
+2026-01-01 18:46:35.983+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 32%
+2026-01-01 18:46:35.984+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 33%
+2026-01-01 18:46:35.984+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 34%
+2026-01-01 18:46:35.984+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 35%
+2026-01-01 18:46:35.984+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 36%
+2026-01-01 18:46:35.984+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 37%
+2026-01-01 18:46:35.985+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 38%
+2026-01-01 18:46:35.985+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 39%
+2026-01-01 18:46:35.985+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 40%
+2026-01-01 18:46:35.986+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 41%
+2026-01-01 18:46:35.986+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 42%
+2026-01-01 18:46:35.986+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 43%
+2026-01-01 18:46:35.986+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 44%
+2026-01-01 18:46:35.987+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 45%
+2026-01-01 18:46:35.987+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 46%
+2026-01-01 18:46:35.987+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 47%
+2026-01-01 18:46:35.987+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 48%
+2026-01-01 18:46:35.987+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 49%
+2026-01-01 18:46:35.988+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 50%
+2026-01-01 18:46:35.988+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 51%
+2026-01-01 18:46:35.988+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 52%
+2026-01-01 18:46:35.988+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 53%
+2026-01-01 18:46:35.989+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 54%
+2026-01-01 18:46:35.989+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 55%
+2026-01-01 18:46:35.989+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 56%
+2026-01-01 18:46:35.989+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 57%
+2026-01-01 18:46:35.989+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 58%
+2026-01-01 18:46:35.990+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 59%
+2026-01-01 18:46:35.990+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 60%
+2026-01-01 18:46:35.990+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 61%
+2026-01-01 18:46:35.990+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 62%
+2026-01-01 18:46:35.990+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 63%
+2026-01-01 18:46:35.991+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 64%
+2026-01-01 18:46:35.991+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 65%
+2026-01-01 18:46:35.991+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 66%
+2026-01-01 18:46:35.991+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 67%
+2026-01-01 18:46:35.992+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 68%
+2026-01-01 18:46:35.992+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 69%
+2026-01-01 18:46:35.992+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 70%
+2026-01-01 18:46:35.993+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 71%
+2026-01-01 18:46:35.993+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 72%
+2026-01-01 18:46:35.993+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 73%
+2026-01-01 18:46:35.993+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 74%
+2026-01-01 18:46:35.994+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 75%
+2026-01-01 18:46:35.994+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 76%
+2026-01-01 18:46:35.994+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 77%
+2026-01-01 18:46:35.994+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 78%
+2026-01-01 18:46:35.995+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 79%
+2026-01-01 18:46:35.995+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 80%
+2026-01-01 18:46:35.995+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 81%
+2026-01-01 18:46:35.995+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 82%
+2026-01-01 18:46:35.996+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 83%
+2026-01-01 18:46:35.996+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 84%
+2026-01-01 18:46:35.996+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 85%
+2026-01-01 18:46:35.996+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 86%
+2026-01-01 18:46:35.997+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 87%
+2026-01-01 18:46:35.997+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 88%
+2026-01-01 18:46:35.997+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 89%
+2026-01-01 18:46:35.998+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 90%
+2026-01-01 18:46:35.998+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 91%
+2026-01-01 18:46:35.998+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 92%
+2026-01-01 18:46:35.998+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 93%
+2026-01-01 18:46:35.999+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 94%
+2026-01-01 18:46:36.000+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 95%
+2026-01-01 18:46:36.000+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 96%
+2026-01-01 18:46:36.000+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 97%
+2026-01-01 18:46:36.001+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 98%
+2026-01-01 18:46:36.001+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 99%
+2026-01-01 18:46:36.002+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges 100%
+2026-01-01 18:46:36.002+0000 INFO  [neo4j.BoltWorker-8 [bolt-22 - /172.21.0.1:42268]] Bridges :: Finished
+2026-01-01 20:19:17.751+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Start
+2026-01-01 20:19:17.752+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Nodes :: Start
+2026-01-01 20:19:17.752+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Nodes :: Store Scan :: Start
+2026-01-01 20:19:17.770+0000 INFO  [node-store-scan-0] Loading :: Nodes :: Store Scan 100%
+2026-01-01 20:19:17.772+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Nodes :: Store Scan :: Finished
+2026-01-01 20:19:17.793+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Nodes :: Finished
+2026-01-01 20:19:17.793+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Relationships :: Start
+2026-01-01 20:19:17.794+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Relationships :: Store Scan :: Start
+2026-01-01 20:19:17.884+0000 INFO  [relationship-store-scan-0] Loading :: Relationships :: Store Scan 50%
+2026-01-01 20:19:17.892+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Relationships :: Store Scan 100%
+2026-01-01 20:19:17.893+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Relationships :: Store Scan :: Finished
+2026-01-01 20:19:17.894+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Relationships :: Finished
+2026-01-01 20:19:17.894+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Loading :: Finished
+2026-01-01 20:19:17.987+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Start
+2026-01-01 20:19:17.987+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare :: Start
+2026-01-01 20:19:17.991+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 0%
+2026-01-01 20:19:17.992+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 1%
+2026-01-01 20:19:17.993+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 2%
+2026-01-01 20:19:17.994+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 3%
+2026-01-01 20:19:17.996+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 4%
+2026-01-01 20:19:17.997+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 5%
+2026-01-01 20:19:17.998+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 6%
+2026-01-01 20:19:17.999+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 7%
+2026-01-01 20:19:17.999+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 8%
+2026-01-01 20:19:18.000+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 9%
+2026-01-01 20:19:18.000+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 10%
+2026-01-01 20:19:18.001+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 11%
+2026-01-01 20:19:18.002+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 12%
+2026-01-01 20:19:18.002+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 13%
+2026-01-01 20:19:18.003+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 14%
+2026-01-01 20:19:18.003+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 15%
+2026-01-01 20:19:18.003+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 16%
+2026-01-01 20:19:18.003+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 17%
+2026-01-01 20:19:18.004+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 18%
+2026-01-01 20:19:18.004+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 19%
+2026-01-01 20:19:18.004+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 20%
+2026-01-01 20:19:18.005+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 21%
+2026-01-01 20:19:18.008+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 22%
+2026-01-01 20:19:18.009+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 23%
+2026-01-01 20:19:18.009+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 24%
+2026-01-01 20:19:18.009+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 25%
+2026-01-01 20:19:18.010+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 26%
+2026-01-01 20:19:18.010+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 27%
+2026-01-01 20:19:18.010+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 28%
+2026-01-01 20:19:18.011+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 29%
+2026-01-01 20:19:18.011+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 30%
+2026-01-01 20:19:18.012+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 31%
+2026-01-01 20:19:18.012+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 32%
+2026-01-01 20:19:18.013+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 33%
+2026-01-01 20:19:18.013+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 34%
+2026-01-01 20:19:18.013+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 35%
+2026-01-01 20:19:18.013+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 36%
+2026-01-01 20:19:18.014+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 37%
+2026-01-01 20:19:18.014+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 38%
+2026-01-01 20:19:18.014+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 39%
+2026-01-01 20:19:18.015+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 40%
+2026-01-01 20:19:18.015+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 41%
+2026-01-01 20:19:18.015+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 42%
+2026-01-01 20:19:18.015+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 43%
+2026-01-01 20:19:18.016+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 44%
+2026-01-01 20:19:18.016+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 45%
+2026-01-01 20:19:18.016+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 46%
+2026-01-01 20:19:18.016+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 47%
+2026-01-01 20:19:18.017+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 48%
+2026-01-01 20:19:18.017+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 49%
+2026-01-01 20:19:18.017+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 50%
+2026-01-01 20:19:18.018+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 51%
+2026-01-01 20:19:18.018+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 52%
+2026-01-01 20:19:18.018+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 53%
+2026-01-01 20:19:18.018+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 54%
+2026-01-01 20:19:18.018+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 55%
+2026-01-01 20:19:18.018+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 56%
+2026-01-01 20:19:18.019+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 57%
+2026-01-01 20:19:18.019+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 58%
+2026-01-01 20:19:18.019+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 59%
+2026-01-01 20:19:18.019+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 60%
+2026-01-01 20:19:18.019+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 61%
+2026-01-01 20:19:18.019+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 62%
+2026-01-01 20:19:18.020+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 63%
+2026-01-01 20:19:18.020+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 64%
+2026-01-01 20:19:18.021+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 65%
+2026-01-01 20:19:18.021+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 66%
+2026-01-01 20:19:18.021+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 67%
+2026-01-01 20:19:18.021+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 68%
+2026-01-01 20:19:18.021+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 69%
+2026-01-01 20:19:18.022+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 70%
+2026-01-01 20:19:18.022+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 71%
+2026-01-01 20:19:18.022+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 72%
+2026-01-01 20:19:18.022+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 73%
+2026-01-01 20:19:18.023+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 74%
+2026-01-01 20:19:18.023+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 75%
+2026-01-01 20:19:18.023+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 76%
+2026-01-01 20:19:18.023+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 77%
+2026-01-01 20:19:18.023+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 78%
+2026-01-01 20:19:18.024+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 79%
+2026-01-01 20:19:18.024+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 80%
+2026-01-01 20:19:18.024+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 81%
+2026-01-01 20:19:18.024+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 82%
+2026-01-01 20:19:18.024+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 83%
+2026-01-01 20:19:18.024+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 84%
+2026-01-01 20:19:18.024+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 85%
+2026-01-01 20:19:18.025+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 86%
+2026-01-01 20:19:18.025+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 87%
+2026-01-01 20:19:18.025+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 88%
+2026-01-01 20:19:18.025+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 89%
+2026-01-01 20:19:18.025+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 90%
+2026-01-01 20:19:18.026+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 91%
+2026-01-01 20:19:18.026+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 92%
+2026-01-01 20:19:18.026+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 93%
+2026-01-01 20:19:18.026+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 94%
+2026-01-01 20:19:18.026+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 95%
+2026-01-01 20:19:18.026+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 96%
+2026-01-01 20:19:18.027+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 97%
+2026-01-01 20:19:18.027+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 98%
+2026-01-01 20:19:18.027+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 99%
+2026-01-01 20:19:18.027+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare 100%
+2026-01-01 20:19:18.029+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: prepare :: Finished
+2026-01-01 20:19:18.029+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: compare node pairs :: Start
+2026-01-01 20:19:18.062+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 0%
+2026-01-01 20:19:18.067+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 1%
+2026-01-01 20:19:18.070+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 2%
+2026-01-01 20:19:18.072+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 3%
+2026-01-01 20:19:18.074+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 4%
+2026-01-01 20:19:18.076+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 5%
+2026-01-01 20:19:18.077+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 6%
+2026-01-01 20:19:18.079+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 7%
+2026-01-01 20:19:18.080+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 8%
+2026-01-01 20:19:18.082+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 9%
+2026-01-01 20:19:18.084+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 10%
+2026-01-01 20:19:18.085+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 11%
+2026-01-01 20:19:18.086+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 12%
+2026-01-01 20:19:18.088+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 13%
+2026-01-01 20:19:18.090+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 14%
+2026-01-01 20:19:18.092+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 15%
+2026-01-01 20:19:18.094+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 16%
+2026-01-01 20:19:18.095+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 17%
+2026-01-01 20:19:18.097+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 18%
+2026-01-01 20:19:18.099+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 19%
+2026-01-01 20:19:18.101+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 20%
+2026-01-01 20:19:18.102+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 21%
+2026-01-01 20:19:18.104+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 22%
+2026-01-01 20:19:18.105+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 23%
+2026-01-01 20:19:18.106+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 24%
+2026-01-01 20:19:18.107+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 25%
+2026-01-01 20:19:18.109+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 26%
+2026-01-01 20:19:18.111+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 27%
+2026-01-01 20:19:18.112+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 28%
+2026-01-01 20:19:18.114+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 29%
+2026-01-01 20:19:18.116+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 30%
+2026-01-01 20:19:18.118+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 31%
+2026-01-01 20:19:18.120+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 32%
+2026-01-01 20:19:18.120+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 33%
+2026-01-01 20:19:18.122+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 34%
+2026-01-01 20:19:18.123+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 35%
+2026-01-01 20:19:18.125+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 36%
+2026-01-01 20:19:18.126+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 37%
+2026-01-01 20:19:18.127+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 38%
+2026-01-01 20:19:18.129+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 39%
+2026-01-01 20:19:18.131+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 40%
+2026-01-01 20:19:18.132+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 41%
+2026-01-01 20:19:18.133+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 42%
+2026-01-01 20:19:18.134+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 43%
+2026-01-01 20:19:18.136+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 44%
+2026-01-01 20:19:18.137+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 45%
+2026-01-01 20:19:18.145+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 46%
+2026-01-01 20:19:18.147+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 47%
+2026-01-01 20:19:18.148+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 48%
+2026-01-01 20:19:18.150+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 49%
+2026-01-01 20:19:18.151+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 50%
+2026-01-01 20:19:18.152+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 51%
+2026-01-01 20:19:18.154+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 52%
+2026-01-01 20:19:18.155+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 53%
+2026-01-01 20:19:18.158+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 54%
+2026-01-01 20:19:18.160+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 55%
+2026-01-01 20:19:18.161+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 56%
+2026-01-01 20:19:18.163+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 57%
+2026-01-01 20:19:18.164+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 58%
+2026-01-01 20:19:18.165+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 59%
+2026-01-01 20:19:18.166+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 60%
+2026-01-01 20:19:18.167+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 61%
+2026-01-01 20:19:18.168+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 62%
+2026-01-01 20:19:18.168+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 63%
+2026-01-01 20:19:18.168+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 64%
+2026-01-01 20:19:18.169+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 65%
+2026-01-01 20:19:18.170+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 66%
+2026-01-01 20:19:18.170+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 67%
+2026-01-01 20:19:18.171+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 68%
+2026-01-01 20:19:18.171+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 69%
+2026-01-01 20:19:18.171+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 70%
+2026-01-01 20:19:18.172+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 71%
+2026-01-01 20:19:18.173+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 72%
+2026-01-01 20:19:18.173+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 73%
+2026-01-01 20:19:18.174+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 74%
+2026-01-01 20:19:18.175+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 75%
+2026-01-01 20:19:18.175+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 76%
+2026-01-01 20:19:18.176+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 77%
+2026-01-01 20:19:18.176+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 78%
+2026-01-01 20:19:18.177+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 79%
+2026-01-01 20:19:18.178+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 80%
+2026-01-01 20:19:18.178+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 81%
+2026-01-01 20:19:18.179+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 82%
+2026-01-01 20:19:18.179+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 83%
+2026-01-01 20:19:18.180+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 84%
+2026-01-01 20:19:18.181+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 85%
+2026-01-01 20:19:18.181+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 86%
+2026-01-01 20:19:18.182+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 87%
+2026-01-01 20:19:18.182+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 88%
+2026-01-01 20:19:18.183+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 89%
+2026-01-01 20:19:18.183+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 90%
+2026-01-01 20:19:18.183+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 91%
+2026-01-01 20:19:18.184+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 92%
+2026-01-01 20:19:18.184+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 93%
+2026-01-01 20:19:18.185+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 94%
+2026-01-01 20:19:18.186+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 95%
+2026-01-01 20:19:18.187+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 96%
+2026-01-01 20:19:18.187+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 97%
+2026-01-01 20:19:18.188+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 98%
+2026-01-01 20:19:18.188+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 99%
+2026-01-01 20:19:18.190+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: compare node pairs 100%
+2026-01-01 20:19:18.191+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: compare node pairs :: Finished
+2026-01-01 20:19:18.191+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Finished
+2026-01-01 20:19:18.352+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write :: Start
+2026-01-01 20:19:18.412+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 1%
+2026-01-01 20:19:18.421+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 3%
+2026-01-01 20:19:18.428+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 4%
+2026-01-01 20:19:18.435+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 6%
+2026-01-01 20:19:18.440+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 7%
+2026-01-01 20:19:18.445+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 9%
+2026-01-01 20:19:18.450+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 11%
+2026-01-01 20:19:18.456+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 12%
+2026-01-01 20:19:18.460+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 14%
+2026-01-01 20:19:18.464+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 15%
+2026-01-01 20:19:18.469+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 17%
+2026-01-01 20:19:18.473+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 19%
+2026-01-01 20:19:18.477+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 20%
+2026-01-01 20:19:18.481+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 22%
+2026-01-01 20:19:18.484+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 23%
+2026-01-01 20:19:18.489+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 25%
+2026-01-01 20:19:18.499+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 27%
+2026-01-01 20:19:18.508+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 28%
+2026-01-01 20:19:18.519+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 30%
+2026-01-01 20:19:18.529+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 31%
+2026-01-01 20:19:18.536+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 33%
+2026-01-01 20:19:18.548+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 35%
+2026-01-01 20:19:18.552+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 36%
+2026-01-01 20:19:18.560+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 38%
+2026-01-01 20:19:18.564+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 39%
+2026-01-01 20:19:18.582+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 41%
+2026-01-01 20:19:18.585+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 43%
+2026-01-01 20:19:18.587+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 44%
+2026-01-01 20:19:18.590+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 46%
+2026-01-01 20:19:18.593+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 47%
+2026-01-01 20:19:18.597+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 49%
+2026-01-01 20:19:18.600+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 51%
+2026-01-01 20:19:18.604+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 52%
+2026-01-01 20:19:18.606+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 54%
+2026-01-01 20:19:18.607+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 55%
+2026-01-01 20:19:18.609+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 57%
+2026-01-01 20:19:18.610+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 58%
+2026-01-01 20:19:18.612+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 60%
+2026-01-01 20:19:18.613+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 62%
+2026-01-01 20:19:18.615+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 63%
+2026-01-01 20:19:18.616+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 65%
+2026-01-01 20:19:18.617+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 66%
+2026-01-01 20:19:18.619+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 68%
+2026-01-01 20:19:18.620+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 70%
+2026-01-01 20:19:18.621+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 71%
+2026-01-01 20:19:18.622+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 73%
+2026-01-01 20:19:18.624+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 74%
+2026-01-01 20:19:18.626+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 76%
+2026-01-01 20:19:18.627+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 78%
+2026-01-01 20:19:18.631+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 79%
+2026-01-01 20:19:18.633+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 81%
+2026-01-01 20:19:18.636+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 82%
+2026-01-01 20:19:18.637+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 84%
+2026-01-01 20:19:18.638+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 86%
+2026-01-01 20:19:18.639+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 87%
+2026-01-01 20:19:18.641+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 89%
+2026-01-01 20:19:18.642+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 90%
+2026-01-01 20:19:18.644+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 92%
+2026-01-01 20:19:18.645+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 94%
+2026-01-01 20:19:18.647+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 95%
+2026-01-01 20:19:18.648+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 97%
+2026-01-01 20:19:18.649+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 98%
+2026-01-01 20:19:19.019+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write 100%
+2026-01-01 20:19:19.019+0000 INFO  [neo4j.BoltWorker-8 [bolt-36 - /172.21.0.1:57468]] Node Similarity :: Relationships :: Write :: Finished
+2026-01-01 21:53:16.484+0000 WARN  Error during iterate.commit:
+2026-01-01 21:53:16.485+0000 WARN  2 times: org.neo4j.graphdb.QueryExecutionException: Invalid input '{': expected an expression (line 7, column 19 (offset: 219))
+"   MERGE (p:Pilot {name: row.Pilot})"
+                   ^
+2026-01-01 21:53:16.486+0000 WARN  Error during iterate.execute:
+2026-01-01 21:53:16.486+0000 WARN  2 times: Invalid input '{': expected an expression (line 7, column 19 (offset: 219))
+"   MERGE (p:Pilot {name: row.Pilot})"
+                   ^
+2026-01-01 21:53:32.882+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Start
+2026-01-01 21:53:32.882+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare :: Start
+2026-01-01 21:53:32.882+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 0%
+2026-01-01 21:53:32.882+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 1%
+2026-01-01 21:53:32.883+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 2%
+2026-01-01 21:53:32.883+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 3%
+2026-01-01 21:53:32.883+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 4%
+2026-01-01 21:53:32.883+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 5%
+2026-01-01 21:53:32.883+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 6%
+2026-01-01 21:53:32.884+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 7%
+2026-01-01 21:53:32.884+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 8%
+2026-01-01 21:53:32.884+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 9%
+2026-01-01 21:53:32.884+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 10%
+2026-01-01 21:53:32.884+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 11%
+2026-01-01 21:53:32.884+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 12%
+2026-01-01 21:53:32.885+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 13%
+2026-01-01 21:53:32.885+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 14%
+2026-01-01 21:53:32.885+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 15%
+2026-01-01 21:53:32.885+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 16%
+2026-01-01 21:53:32.885+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 17%
+2026-01-01 21:53:32.885+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 18%
+2026-01-01 21:53:32.885+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 19%
+2026-01-01 21:53:32.886+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 20%
+2026-01-01 21:53:32.886+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 21%
+2026-01-01 21:53:32.886+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 22%
+2026-01-01 21:53:32.886+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 23%
+2026-01-01 21:53:32.886+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 24%
+2026-01-01 21:53:32.886+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 25%
+2026-01-01 21:53:32.887+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 26%
+2026-01-01 21:53:32.887+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 27%
+2026-01-01 21:53:32.888+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 28%
+2026-01-01 21:53:32.888+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 29%
+2026-01-01 21:53:32.888+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 30%
+2026-01-01 21:53:32.888+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 31%
+2026-01-01 21:53:32.888+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 32%
+2026-01-01 21:53:32.889+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 33%
+2026-01-01 21:53:32.889+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 34%
+2026-01-01 21:53:32.889+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 35%
+2026-01-01 21:53:32.889+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 36%
+2026-01-01 21:53:32.889+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 37%
+2026-01-01 21:53:32.889+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 38%
+2026-01-01 21:53:32.889+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 39%
+2026-01-01 21:53:32.890+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 40%
+2026-01-01 21:53:32.890+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 41%
+2026-01-01 21:53:32.890+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 42%
+2026-01-01 21:53:32.890+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 43%
+2026-01-01 21:53:32.890+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 44%
+2026-01-01 21:53:32.890+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 45%
+2026-01-01 21:53:32.891+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 46%
+2026-01-01 21:53:32.891+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 47%
+2026-01-01 21:53:32.891+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 48%
+2026-01-01 21:53:32.891+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 49%
+2026-01-01 21:53:32.891+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 50%
+2026-01-01 21:53:32.891+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 51%
+2026-01-01 21:53:32.892+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 52%
+2026-01-01 21:53:32.892+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 53%
+2026-01-01 21:53:32.892+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 54%
+2026-01-01 21:53:32.892+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 55%
+2026-01-01 21:53:32.892+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 56%
+2026-01-01 21:53:32.892+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 57%
+2026-01-01 21:53:32.892+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 58%
+2026-01-01 21:53:32.892+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 59%
+2026-01-01 21:53:32.892+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 60%
+2026-01-01 21:53:32.892+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 61%
+2026-01-01 21:53:32.893+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 62%
+2026-01-01 21:53:32.893+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 63%
+2026-01-01 21:53:32.893+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 64%
+2026-01-01 21:53:32.893+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 65%
+2026-01-01 21:53:32.893+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 66%
+2026-01-01 21:53:32.893+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 67%
+2026-01-01 21:53:32.893+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 68%
+2026-01-01 21:53:32.893+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 69%
+2026-01-01 21:53:32.893+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 70%
+2026-01-01 21:53:32.894+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 71%
+2026-01-01 21:53:32.894+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 72%
+2026-01-01 21:53:32.894+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 73%
+2026-01-01 21:53:32.894+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 74%
+2026-01-01 21:53:32.894+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 75%
+2026-01-01 21:53:32.894+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 76%
+2026-01-01 21:53:32.894+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 77%
+2026-01-01 21:53:32.894+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 78%
+2026-01-01 21:53:32.894+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 79%
+2026-01-01 21:53:32.894+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 80%
+2026-01-01 21:53:32.895+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 81%
+2026-01-01 21:53:32.895+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 82%
+2026-01-01 21:53:32.895+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 83%
+2026-01-01 21:53:32.895+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 84%
+2026-01-01 21:53:32.895+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 85%
+2026-01-01 21:53:32.895+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 86%
+2026-01-01 21:53:32.895+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 87%
+2026-01-01 21:53:32.895+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 88%
+2026-01-01 21:53:32.896+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 89%
+2026-01-01 21:53:32.896+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 90%
+2026-01-01 21:53:32.896+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 91%
+2026-01-01 21:53:32.896+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 92%
+2026-01-01 21:53:32.896+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 93%
+2026-01-01 21:53:32.896+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 94%
+2026-01-01 21:53:32.896+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 95%
+2026-01-01 21:53:32.896+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 96%
+2026-01-01 21:53:32.896+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 97%
+2026-01-01 21:53:32.897+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 98%
+2026-01-01 21:53:32.897+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 99%
+2026-01-01 21:53:32.897+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare 100%
+2026-01-01 21:53:32.897+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: prepare :: Finished
+2026-01-01 21:53:32.897+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: compare node pairs :: Start
+2026-01-01 21:53:32.903+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 0%
+2026-01-01 21:53:32.904+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 1%
+2026-01-01 21:53:32.905+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 2%
+2026-01-01 21:53:32.905+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 3%
+2026-01-01 21:53:32.905+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 4%
+2026-01-01 21:53:32.906+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 5%
+2026-01-01 21:53:32.906+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 6%
+2026-01-01 21:53:32.907+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 7%
+2026-01-01 21:53:32.907+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 8%
+2026-01-01 21:53:32.907+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 9%
+2026-01-01 21:53:32.908+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 10%
+2026-01-01 21:53:32.908+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 11%
+2026-01-01 21:53:32.909+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 12%
+2026-01-01 21:53:32.909+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 13%
+2026-01-01 21:53:32.910+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 14%
+2026-01-01 21:53:32.910+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 15%
+2026-01-01 21:53:32.911+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 16%
+2026-01-01 21:53:32.911+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 17%
+2026-01-01 21:53:32.911+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 18%
+2026-01-01 21:53:32.912+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 19%
+2026-01-01 21:53:32.912+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 20%
+2026-01-01 21:53:32.912+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 21%
+2026-01-01 21:53:32.913+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 22%
+2026-01-01 21:53:32.913+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 23%
+2026-01-01 21:53:32.913+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 24%
+2026-01-01 21:53:32.914+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 25%
+2026-01-01 21:53:32.914+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 26%
+2026-01-01 21:53:32.914+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 27%
+2026-01-01 21:53:32.915+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 28%
+2026-01-01 21:53:32.915+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 29%
+2026-01-01 21:53:32.916+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 30%
+2026-01-01 21:53:32.916+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 31%
+2026-01-01 21:53:32.916+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 32%
+2026-01-01 21:53:32.917+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 33%
+2026-01-01 21:53:32.917+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 34%
+2026-01-01 21:53:32.918+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 35%
+2026-01-01 21:53:32.918+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 36%
+2026-01-01 21:53:32.918+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 37%
+2026-01-01 21:53:32.919+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 38%
+2026-01-01 21:53:32.919+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 39%
+2026-01-01 21:53:32.919+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 40%
+2026-01-01 21:53:32.920+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 41%
+2026-01-01 21:53:32.920+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 42%
+2026-01-01 21:53:32.920+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 43%
+2026-01-01 21:53:32.921+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 44%
+2026-01-01 21:53:32.921+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 45%
+2026-01-01 21:53:32.921+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 46%
+2026-01-01 21:53:32.922+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 47%
+2026-01-01 21:53:32.922+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 48%
+2026-01-01 21:53:32.923+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 49%
+2026-01-01 21:53:32.923+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 50%
+2026-01-01 21:53:32.923+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 51%
+2026-01-01 21:53:32.924+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 52%
+2026-01-01 21:53:32.924+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 53%
+2026-01-01 21:53:32.924+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 54%
+2026-01-01 21:53:32.925+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 55%
+2026-01-01 21:53:32.925+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 56%
+2026-01-01 21:53:32.925+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 57%
+2026-01-01 21:53:32.926+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 58%
+2026-01-01 21:53:32.926+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 59%
+2026-01-01 21:53:32.927+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 60%
+2026-01-01 21:53:32.927+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 61%
+2026-01-01 21:53:32.928+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 62%
+2026-01-01 21:53:32.928+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 63%
+2026-01-01 21:53:32.928+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 64%
+2026-01-01 21:53:32.929+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 65%
+2026-01-01 21:53:32.929+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 66%
+2026-01-01 21:53:32.929+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 67%
+2026-01-01 21:53:32.930+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 68%
+2026-01-01 21:53:32.930+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 69%
+2026-01-01 21:53:32.931+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 70%
+2026-01-01 21:53:32.931+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 71%
+2026-01-01 21:53:32.931+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 72%
+2026-01-01 21:53:32.932+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 73%
+2026-01-01 21:53:32.932+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 74%
+2026-01-01 21:53:32.932+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 75%
+2026-01-01 21:53:32.933+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 76%
+2026-01-01 21:53:32.933+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 77%
+2026-01-01 21:53:32.933+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 78%
+2026-01-01 21:53:32.934+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 79%
+2026-01-01 21:53:32.934+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 80%
+2026-01-01 21:53:32.934+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 81%
+2026-01-01 21:53:32.935+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 82%
+2026-01-01 21:53:32.935+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 83%
+2026-01-01 21:53:32.936+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 84%
+2026-01-01 21:53:32.936+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 85%
+2026-01-01 21:53:32.936+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 86%
+2026-01-01 21:53:32.937+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 87%
+2026-01-01 21:53:32.937+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 88%
+2026-01-01 21:53:32.937+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 89%
+2026-01-01 21:53:32.937+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 90%
+2026-01-01 21:53:32.938+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 91%
+2026-01-01 21:53:32.938+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 92%
+2026-01-01 21:53:32.938+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 93%
+2026-01-01 21:53:32.939+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 94%
+2026-01-01 21:53:32.939+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 95%
+2026-01-01 21:53:32.940+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 96%
+2026-01-01 21:53:32.940+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 97%
+2026-01-01 21:53:32.940+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 98%
+2026-01-01 21:53:32.941+0000 INFO  [gds-forkjoin-0] Node Similarity :: compare node pairs 99%
+2026-01-01 21:53:32.941+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: compare node pairs 100%
+2026-01-01 21:53:32.941+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: compare node pairs :: Finished
+2026-01-01 21:53:32.941+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Finished
+2026-01-01 21:53:32.945+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write :: Start
+2026-01-01 21:53:32.946+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 1%
+2026-01-01 21:53:32.946+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 3%
+2026-01-01 21:53:32.947+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 4%
+2026-01-01 21:53:32.947+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 6%
+2026-01-01 21:53:32.947+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 7%
+2026-01-01 21:53:32.948+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 9%
+2026-01-01 21:53:32.948+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 11%
+2026-01-01 21:53:32.948+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 12%
+2026-01-01 21:53:32.948+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 14%
+2026-01-01 21:53:32.949+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 15%
+2026-01-01 21:53:32.949+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 17%
+2026-01-01 21:53:32.949+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 19%
+2026-01-01 21:53:32.949+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 20%
+2026-01-01 21:53:32.950+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 22%
+2026-01-01 21:53:32.950+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 23%
+2026-01-01 21:53:32.950+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 25%
+2026-01-01 21:53:32.950+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 27%
+2026-01-01 21:53:32.950+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 28%
+2026-01-01 21:53:32.951+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 30%
+2026-01-01 21:53:32.951+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 31%
+2026-01-01 21:53:32.951+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 33%
+2026-01-01 21:53:32.951+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 35%
+2026-01-01 21:53:32.952+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 36%
+2026-01-01 21:53:32.952+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 38%
+2026-01-01 21:53:32.952+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 39%
+2026-01-01 21:53:32.952+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 41%
+2026-01-01 21:53:32.953+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 43%
+2026-01-01 21:53:32.953+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 44%
+2026-01-01 21:53:32.953+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 46%
+2026-01-01 21:53:32.953+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 47%
+2026-01-01 21:53:32.954+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 49%
+2026-01-01 21:53:32.954+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 51%
+2026-01-01 21:53:32.954+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 52%
+2026-01-01 21:53:32.955+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 54%
+2026-01-01 21:53:32.955+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 55%
+2026-01-01 21:53:32.955+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 57%
+2026-01-01 21:53:32.955+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 58%
+2026-01-01 21:53:32.955+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 60%
+2026-01-01 21:53:32.956+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 62%
+2026-01-01 21:53:32.956+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 63%
+2026-01-01 21:53:32.956+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 65%
+2026-01-01 21:53:32.956+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 66%
+2026-01-01 21:53:32.957+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 68%
+2026-01-01 21:53:32.957+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 70%
+2026-01-01 21:53:32.957+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 71%
+2026-01-01 21:53:32.957+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 73%
+2026-01-01 21:53:32.957+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 74%
+2026-01-01 21:53:32.958+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 76%
+2026-01-01 21:53:32.958+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 78%
+2026-01-01 21:53:32.958+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 79%
+2026-01-01 21:53:32.969+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write 100%
+2026-01-01 21:53:32.970+0000 INFO  [neo4j.BoltWorker-4 [bolt-58 - /172.21.0.1:38570]] Node Similarity :: Relationships :: Write :: Finished
+2026-01-01 21:57:49.624+0000 WARN  Error during iterate.commit:
+2026-01-01 21:57:49.624+0000 WARN  2 times: org.neo4j.graphdb.QueryExecutionException: Invalid input '{': expected an expression (line 4, column 19 (offset: 210))
+"   MERGE (p:Pilot {name: row.Pilot})"
+                   ^
+2026-01-01 21:57:49.625+0000 WARN  Error during iterate.execute:
+2026-01-01 21:57:49.625+0000 WARN  2 times: Invalid input '{': expected an expression (line 4, column 19 (offset: 210))
+"   MERGE (p:Pilot {name: row.Pilot})"
+                   ^
+2026-01-01 22:01:09.931+0000 WARN  Error during iterate.commit:
+2026-01-01 22:01:09.933+0000 WARN  2 times: org.neo4j.graphdb.QueryExecutionException: Invalid input '{': expected an expression (line 4, column 19 (offset: 210))
+"   MERGE (p:Pilot {name: row.Pilot})"
+                   ^
+2026-01-01 22:01:09.934+0000 WARN  Error during iterate.execute:
+2026-01-01 22:01:09.935+0000 WARN  2 times: Invalid input '{': expected an expression (line 4, column 19 (offset: 210))
+"   MERGE (p:Pilot {name: row.Pilot})"
+                   ^
+2026-01-01 22:03:59.009+0000 WARN  Error during iterate.commit:
+2026-01-01 22:03:59.010+0000 WARN  2 times: org.neo4j.graphdb.QueryExecutionException: Invalid input '{': expected an expression (line 4, column 19 (offset: 210))
+"   MERGE (p:Pilot {name: row.Pilot})"
+                   ^
+2026-01-01 22:03:59.010+0000 WARN  Error during iterate.execute:
+2026-01-01 22:03:59.010+0000 WARN  2 times: Invalid input '{': expected an expression (line 4, column 19 (offset: 210))
+"   MERGE (p:Pilot {name: row.Pilot})"
+                   ^
+2026-01-01 22:04:12.113+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Start
+2026-01-01 22:04:12.114+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Nodes :: Start
+2026-01-01 22:04:12.114+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Nodes :: Store Scan :: Start
+2026-01-01 22:04:12.156+0000 INFO  [node-store-scan-3] Loading :: Nodes :: Store Scan 100%
+2026-01-01 22:04:12.157+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Nodes :: Store Scan :: Finished
+2026-01-01 22:04:12.164+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Nodes :: Finished
+2026-01-01 22:04:12.165+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Relationships :: Start
+2026-01-01 22:04:12.165+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Relationships :: Store Scan :: Start
+2026-01-01 22:04:12.189+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Relationships :: Store Scan 100%
+2026-01-01 22:04:12.190+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Relationships :: Store Scan :: Finished
+2026-01-01 22:04:12.191+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Relationships :: Finished
+2026-01-01 22:04:12.191+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Loading :: Finished
+2026-01-01 22:04:12.230+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: Start
+2026-01-01 22:04:12.230+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: prepare :: Start
+2026-01-01 22:04:12.232+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: prepare 100%
+2026-01-01 22:04:12.232+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: prepare :: Finished
+2026-01-01 22:04:12.232+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: compare node pairs :: Start
+2026-01-01 22:04:12.234+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: compare node pairs 100%
+2026-01-01 22:04:12.234+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: compare node pairs :: Finished
+2026-01-01 22:04:12.234+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: Finished
+2026-01-01 22:04:12.247+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: Relationships :: Write :: Start
+2026-01-01 22:04:12.250+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: Relationships :: Write 100%
+2026-01-01 22:04:12.250+0000 INFO  [neo4j.BoltWorker-8 [bolt-90 - /172.21.0.1:39214]] Node Similarity :: Relationships :: Write :: Finished
